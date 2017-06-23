@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="quote_user_start">[quote=%1$s]</string>
+    <string name="quote_start">[quote]</string>
+    <string name="quote_end">[/quote]</string>
+
+</resources>

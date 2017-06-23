@@ -1,0 +1,34 @@
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="top10"
+        android:enabled="true"
+        android:icon="@drawable/ic_top_10_48px"
+        android:shortcutShortLabel="@string/shortcut_top10_label">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="ch.redacted.app"
+            android:targetClass="ch.redacted.ui.top10.Top10Activity" />
+    </shortcut>
+
+    <shortcut
+        android:shortcutId="forums"
+        android:enabled="true"
+        android:icon="@drawable/ic_forum_48px"
+        android:shortcutShortLabel="@string/shortcut_forums_label">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="ch.redacted.app"
+            android:targetClass="ch.redacted.ui.forum.category.CategoryActivity" />
+    </shortcut>
+
+    <shortcut
+        android:shortcutId="profile"
+        android:enabled="true"
+        android:icon="@drawable/ic_profile_48px"
+        android:shortcutShortLabel="@string/shortcut_profile_label">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="ch.redacted.app"
+            android:targetClass="ch.redacted.ui.profile.ProfileActivity" />
+    </shortcut>
+</shortcuts>

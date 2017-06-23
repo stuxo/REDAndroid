@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:id="@+id/category_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:foreground="?android:attr/selectableItemBackground"
+    style="@style/CardView.Flat">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/category_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sandbox"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_headline"/>
+
+        <TextView
+            android:id="@+id/category_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/category_name"
+            android:maxLines="3"
+            android:text="Scripts, tools, custom stylesheets and other userSearch projects."
+            />
+
+        <TextView
+            android:id="@+id/category_num_threads_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/category_description"
+            android:text="Threads"/>
+
+
+        <TextView
+            android:id="@+id/category_num_threads"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/category_description"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_toRightOf="@id/category_num_threads_label"
+            android:text="108"
+            />
+
+        <TextView
+            android:id="@+id/category_num_posts_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/category_num_threads_label"
+            android:text="Posts"
+            />
+
+        <TextView
+            android:id="@+id/category_num_posts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/category_num_threads_label"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_toRightOf="@id/category_num_posts_label"
+            android:text="5202"
+            />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

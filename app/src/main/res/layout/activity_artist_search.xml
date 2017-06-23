@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <android.support.v4.widget.DrawerLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/artist_search_view"
+                layout="@layout/artist_search_view"/>
+
+            <TextView
+                android:id="@+id/text_no_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:gravity="center|top"
+                android:text="@string/message_nothing_to_see"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+        <include
+            android:id="@+id/left_drawer"
+            layout="@layout/view_drawer"
+            android:layout_width="@dimen/navigation_drawer_width"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"/>
+
+    </android.support.v4.widget.DrawerLayout>
+</RelativeLayout>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="ch.redacted.app">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <application
+        android:name="ch.redacted.REDApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="ch.redacted.ui.login.LoginActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppNoActionTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <meta-data android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity>
+
+        <activity
+            android:name="ch.redacted.ui.profile.ProfileActivity"
+            android:label="@string/profile"
+            android:theme="@style/AppNoActionTheme.WithStatusBar">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data
+                    android:host="redacted.ch"
+                    android:pathPrefix="/user"
+                    android:scheme="https"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="ch.redacted.ui.announcements.AnnouncementActivity">
+        </activity>
+
+        <activity
+            android:name="ch.redacted.ui.forum.category.CategoryActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data
+                    android:host="redacted.ch"
+                    android:pathPrefix="/forums"
+                    android:scheme="https"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="ch.redacted.ui.forum.threadList.ThreadListActivity"/>
+
+        <activity
+            android:name="ch.redacted.ui.forum.thread.ThreadActivity"
+            android:label="@string/forums"
+            android:theme="@style/AppNoActionTheme"
+            android:windowSoftInputMode="adjustPan"/>
+
+        <activity
+            android:name="ch.redacted.ui.top10.Top10Activity">
+        </activity>
+
+        <activity
+            android:name="ch.redacted.ui.settings.SettingsActivity">
+        </activity>
+
+        <activity
+            android:name="ch.redacted.ui.release.ReleaseActivity"
+            android:label="@string/release"
+            android:theme="@style/AppNoActionTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data
+                    android:host="redacted.ch"
+                    android:pathPrefix="/torrents"
+                    android:scheme="https"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="ch.redacted.ui.search.user.UserSearchActivity"/>
+
+        <activity
+            android:name="ch.redacted.ui.search.request.RequestSearchActivity"/>
+
+        <activity
+            android:name="ch.redacted.ui.search.torrent.TorrentSearchActivity"/>
+
+        <activity
+            android:name="ch.redacted.ui.search.artist.ArtistSearchActivity"/>
+
+        <activity
+            android:name="ch.redacted.ui.bookmark.BookmarkActivity"/>
+
+        <activity
+            android:name="ch.redacted.ui.artist.ArtistActivity"
+            android:label="@string/artist"
+            android:theme="@style/AppNoActionTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data
+                    android:host="redacted.ch"
+                    android:pathPrefix="/artist"
+                    android:scheme="https"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="ch.redacted.ui.request.RequestActivity"
+            android:theme="@style/AppNoActionTheme"/>
+
+        <activity
+            android:name="ch.redacted.ui.inbox.InboxActivity">
+        </activity>
+
+        <activity
+            android:name="ch.redacted.ui.reply.ReplyActivity"/>
+
+        <activity
+            android:name="ch.redacted.ui.inbox.conversation.ConversationActivity">
+        </activity>
+
+        <service
+            android:name="ch.redacted.data.NotificationService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
+
+        <meta-data
+            android:name="ch.redacted.util.GlideConfiguration"
+            android:value="GlideModule"/>
+    </application>
+</manifest>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- X11 Colors, from http://stackoverflow.com/a/7323234/1413807 -->
+<resources>
+
+    <color name="white">#FFFFFF</color>
+    <color name="HoloBlueDarkTransparent">#990099CC</color>
+    <color name="BackgroundAccent">@color/background_material_light</color>
+    <color name="Background">@color/material_grey_100</color>
+    <color name="BackgroundAccentDark">@color/material_grey_300</color>
+    <color name="primary">#616161</color>
+    <color name="primary_dark">#373737</color>
+    <color name="primary_light">#8e8e8e</color>
+    <color name="accent">#b71c1c</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
+    <color name="inverted_text">#FFFFFF</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#BDBDBD</color>
+    <color name="image_view_tint">#8CFFFFFF</color>
+    <color name="donor_heart_red">#F50000</color>
+    <color name="black">#000</color>
+</resources>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.support.v7.preference.PreferenceCategory
+        android:key="pref_general"
+        android:title="@string/preferences">
+
+        <android.support.v7.preference.CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_show_images"
+            android:title="@string/show_images"/>
+
+        <!--<android.support.v7.preference.ListPreference-->
+            <!--android:entries="@array/top_torrent_options"-->
+            <!--android:entryValues="@array/top_torrent_options"-->
+            <!--android:key="@string/pref_top_torrents"-->
+            <!--android:title="@string/top_torrents_label"/>-->
+
+        <!--<android.support.v7.preference.Preference-->
+            <!--android:defaultValue=""-->
+            <!--android:key="@string/key_pref_torrent_download_path"-->
+            <!--android:summary="@string/pref_torrent_download_path_summary"-->
+            <!--android:title="@string/pref_torrent_download_path"/>-->
+
+        <android.support.v7.preference.ListPreference
+            android:entries="@array/default_download_options"
+            android:entryValues="@array/default_download_options"
+            android:key="@string/pref_default_download_method"
+            android:title="@string/default_download_method"/>
+    </android.support.v7.preference.PreferenceCategory>
+
+    <android.support.v7.preference.PreferenceCategory
+        android:key="pref_wm"
+        android:title="@string/pref_wm">
+        <android.support.v7.preference.EditTextPreference
+            android:defaultValue=""
+            android:inputType="textUri"
+            android:key="@string/key_pref_wm_host"
+            android:summary="Begins with http:// or https://, no trailing slash"
+            android:title="@string/pref_wm_host"/>
+        <android.support.v7.preference.EditTextPreference
+            android:defaultValue=""
+            android:inputType="number"
+            android:key="@string/key_pref_wm_port"
+            android:title="@string/pref_wm_port"/>
+        <android.support.v7.preference.EditTextPreference
+            android:defaultValue=""
+            android:inputType="text"
+            android:key="@string/key_pref_wm_user"
+            android:title="@string/pref_wm_user"/>
+        <android.support.v7.preference.EditTextPreference
+            android:defaultValue=""
+            android:inputType="textPassword"
+            android:key="@string/key_pref_wm_password"
+            android:title="@string/pref_wm_password"/>
+    </android.support.v7.preference.PreferenceCategory>
+
+    <android.support.v7.preference.PreferenceCategory
+        android:key="pref_version"
+        android:title="WhatAndroid Version">
+        <android.support.v7.preference.Preference
+            android:defaultValue=""
+            android:key="@string/key_pref_version_name"
+            android:title="@string/app_version_unknown"/>
+    </android.support.v7.preference.PreferenceCategory>
+</android.support.v7.preference.PreferenceScreen>

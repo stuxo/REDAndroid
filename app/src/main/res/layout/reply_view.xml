@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/reply_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/BackgroundAccent"
+    android:orientation="vertical"
+    >
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/replying_to"
+                android:text="Replying to:"
+                />
+
+            <org.sufficientlysecure.htmltextview.HtmlTextView
+                android:id="@+id/quoted_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/default_gap"
+                />
+
+            <EditText
+                android:id="@+id/subject_edit"
+                android:inputType="textCapSentences"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginBottom="@dimen/default_gap"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/accent"/>
+
+            <EditText
+                android:id="@+id/compose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:hint="Compose your reply"
+                android:inputType="textCapSentences|textMultiLine"
+                android:minHeight="200dp"
+                />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

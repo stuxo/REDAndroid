@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="top_torrent_options">
+        <item>10</item>
+        <item>100</item>
+        <item>250</item>
+    </string-array>
+
+    <string-array name="default_download_options">
+        <item>Download .torrent</item>
+        <item>Send to WhatManager</item>
+    </string-array>
+
+</resources>

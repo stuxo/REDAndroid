@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/profile_ranks_card"
+    style="@style/CardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/ranks_root"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="User ranks"
+            android:textColor="@color/accent"
+            android:textSize="@dimen/text_title"
+            android:id="@+id/ranks_title"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"/>
+
+        <TextView
+            android:id="@+id/uploaded_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginLeft="-1dp"
+            android:text="Uploaded"
+            app:layout_constraintTop_toBottomOf="@+id/ranks_title"
+            android:layout_marginStart="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/uploaded_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/uploaded_label"
+            app:layout_constraintLeft_toLeftOf="@+id/guideline"
+            app:layout_constraintRight_toLeftOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/uploaded_label"/>
+
+
+        <TextView
+            android:id="@+id/downloaded_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/downloaded_label"
+            app:layout_constraintLeft_toLeftOf="@+id/guideline"
+            app:layout_constraintRight_toLeftOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/downloaded_label"
+            app:layout_constraintVertical_bias="1.0"/>
+
+        <TextView
+            android:id="@+id/downloaded_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Downloaded"
+            app:layout_anchor="@+id/uploaded_label"
+            app:layout_anchorGravity="bottom"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/uploaded_label"
+            android:layout_marginStart="8dp"/>
+
+        <TextView
+            android:id="@+id/uploads_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/uploads_label"
+            app:layout_constraintLeft_toLeftOf="@+id/guideline"
+            app:layout_constraintRight_toLeftOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/uploads_label"
+            app:layout_constraintVertical_bias="1.0"/>
+
+        <TextView
+            android:id="@+id/uploads_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Uploads"
+            app:layout_anchor="@+id/downloaded_label"
+            app:layout_anchorGravity="bottom"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/downloaded_label"
+            android:layout_marginStart="8dp"/>
+
+        <TextView
+            android:id="@+id/requests_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/requests_label"
+            app:layout_constraintLeft_toLeftOf="@+id/guideline"
+            app:layout_constraintRight_toLeftOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/requests_label"
+            app:layout_constraintVertical_bias="1.0"/>
+
+        <TextView
+            android:id="@+id/requests_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Requests filled"
+            app:layout_anchor="@+id/uploads_label"
+            app:layout_anchorGravity="bottom"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/uploads_label"
+            android:layout_marginStart="8dp"/>
+
+        <TextView
+            android:id="@+id/bounty_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/bounty_label"
+            app:layout_constraintLeft_toLeftOf="@+id/guideline"
+            app:layout_constraintRight_toLeftOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/bounty_label"
+            app:layout_constraintVertical_bias="1.0"/>
+
+        <TextView
+            android:id="@+id/bounty_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Bounty spent"
+            app:layout_anchor="@+id/requests_label"
+            app:layout_anchorGravity="bottom"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/requests_label"
+            android:layout_marginStart="8dp"/>
+
+        <TextView
+            android:id="@+id/posts_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/posts_label"
+            app:layout_constraintLeft_toLeftOf="@+id/guideline"
+            app:layout_constraintRight_toLeftOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/posts_label"
+            app:layout_constraintVertical_bias="1.0"/>
+
+        <TextView
+            android:id="@+id/posts_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Forum posts"
+            app:layout_anchor="@+id/bounty_label"
+            app:layout_anchorGravity="bottom"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bounty_label"
+            android:layout_marginStart="8dp"/>
+
+        <TextView
+            android:id="@+id/artists_added_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/artists_added_label"
+            app:layout_constraintLeft_toLeftOf="@+id/guideline"
+            app:layout_constraintRight_toLeftOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/artists_added_label"
+            app:layout_constraintVertical_bias="1.0"/>
+
+        <TextView
+            android:id="@+id/artists_added_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Artists added"
+            app:layout_anchor="@+id/posts_label"
+            app:layout_anchorGravity="bottom"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/posts_label"
+            android:layout_marginStart="8dp"/>
+
+        <TextView
+            android:id="@+id/overall_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/overall_label"
+            app:layout_constraintLeft_toLeftOf="@+id/guideline"
+            app:layout_constraintRight_toLeftOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/overall_label"
+            app:layout_constraintHorizontal_bias="0.0"/>
+
+        <TextView
+            android:id="@+id/overall_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Overall"
+            app:layout_anchor="@+id/artists_added_label"
+            app:layout_anchorGravity="bottom"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/artists_added_label"
+            android:layout_marginStart="8dp"/>
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>

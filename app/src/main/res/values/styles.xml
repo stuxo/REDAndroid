@@ -1,0 +1,110 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <item name="actionBarStyle">@style/MyActionBar</item>
+        <item name="actionBarTheme">@style/AppTheme.ActionBarTheme</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+    </style>
+
+    <style name="MyActionBar" parent="@style/Widget.AppCompat.ActionBar.Solid">
+        <item name="titleTextStyle">@style/MyTitleTextStyle</item>
+    </style>
+
+    <style name="MyTitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="AppTheme.ActionBarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
+    <style name="AppNoActionTheme" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="AppNoActionTheme.WithStatusBar" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="ExpandedAppBar" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CollapsedAppBar" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="CardView.Elevated" parent="CardView">
+        <item name="cardCornerRadius">4dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="CardView.Flat" parent="CardView">
+        <item name="cardCornerRadius">1dp</item>
+        <item name="cardElevation">1dp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="CardView.Flat.NoRipple" parent="CardView">
+        <item name="cardCornerRadius">1dp</item>
+        <item name="cardElevation">1dp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="TextView.Drawer.Footer" parent="@android:style/TextAppearance.Widget.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:textColor">@color/secondary_text</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">?attr/colorAccent</item>
+        <item name="tabIndicatorHeight">4dp</item>
+        <item name="tabPaddingStart">6dp</item>
+        <item name="tabPaddingEnd">6dp</item>
+        <item name="tabBackground">@color/Background</item>
+        <!--<item name="tabBackground">?attr/selectableItemBackground</item>-->
+        <item name="tabTextAppearance">@style/TabTextAppearance</item>
+        <item name="tabSelectedTextColor">@color/primary</item>
+    </style>
+
+    <!-- for text -->
+    <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+</resources>

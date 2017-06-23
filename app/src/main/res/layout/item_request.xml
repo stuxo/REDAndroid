@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/request_root"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:paddingEnd="16dp"
+              android:paddingLeft="16dp"
+              android:paddingRight="16dp"
+              android:paddingStart="16dp"
+              android:paddingTop="8dp"
+              android:paddingBottom="8dp"
+              android:foreground="?android:attr/selectableItemBackground"
+              android:gravity="center_vertical"
+              android:orientation="horizontal">
+
+    <org.sufficientlysecure.htmltextview.HtmlTextView
+        android:id="@+id/artist_name"
+        android:textSize="@dimen/text_body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/small_gap"
+        android:layout_marginEnd="@dimen/small_gap"/>
+
+    <org.sufficientlysecure.htmltextview.HtmlTextView
+        android:id="@+id/release_name"
+        android:textSize="@dimen/text_body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/small_gap"
+        android:layout_marginEnd="@dimen/small_gap"/>
+
+    <TextView
+        android:id="@+id/year"
+        android:textSize="@dimen/text_body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/small_gap"
+        android:layout_marginEnd="@dimen/small_gap"/>
+
+    <TextView
+        android:id="@+id/bounty"
+        android:textSize="@dimen/text_body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/small_gap"
+        android:layout_marginEnd="@dimen/small_gap"/>
+
+</LinearLayout>

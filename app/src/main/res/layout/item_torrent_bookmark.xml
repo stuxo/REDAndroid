@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/torrent_bookmark_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/album_art"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:scaleType="centerCrop"/>
+
+    <org.sufficientlysecure.htmltextview.HtmlTextView
+        android:id="@id/release_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:text="Art Angels"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/album_art"
+        android:layout_toEndOf="@+id/album_art"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"/>
+
+    <TextView
+        android:id="@id/year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2015"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/release_name"
+        android:layout_alignLeft="@+id/release_name"
+        android:layout_alignStart="@+id/release_name"/>
+
+    <TextView
+        android:id="@id/release_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Album"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/release_name"
+        android:layout_toRightOf="@id/year"
+        android:layout_toEndOf="@id/year"/>
+
+    <TextView
+        android:id="@id/release_tags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="pop, electronic"
+        android:layout_marginTop="8dp"
+        android:textStyle="italic"
+        android:layout_below="@+id/release_type"
+        android:layout_alignLeft="@+id/year"
+        android:layout_alignStart="@+id/year"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true">
+
+        <ImageButton
+            android:id="@+id/remove_bookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_delete_24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"/>
+
+        <ImageButton
+            android:id="@id/download_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_file_download_24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"/>
+    </LinearLayout>
+</RelativeLayout>

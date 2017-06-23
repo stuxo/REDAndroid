@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/sender_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <org.sufficientlysecure.htmltextview.HtmlTextView
+            android:id="@+id/sender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_gap"
+            android:textStyle="italic"/>
+    </LinearLayout>
+
+    <org.sufficientlysecure.htmltextview.HtmlTextView
+        android:id="@+id/body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sender_root"/>
+</RelativeLayout>

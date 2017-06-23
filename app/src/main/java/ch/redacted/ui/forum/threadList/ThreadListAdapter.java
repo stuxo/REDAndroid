@@ -1,0 +1,145 @@
+package ch.redacted.ui.forum.threadList;
+
+import android.os.Build;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import ch.redacted.app.R;
+import ch.redacted.data.model.ForumView;
+
+/**
+ * Created by sxo on 23/12/16.
+ */
+
+public class ThreadListAdapter extends RecyclerView.Adapter<ThreadListAdapter.ForumViewHolder> {
+
+    private List<ForumView.Threads> mItems;
+
+    public ThreadListAdapter.Callback mCallback;
+
+    @Inject
+    public ThreadListAdapter() {
+        this.mItems = new ArrayList<>();
+    }
+
+    @Override
+    public ThreadListAdapter.ForumViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        View view =
+                LayoutInflater.from(parent.getContext()).inflate(R.layout.item_forum, parent, false);
+        return new ForumViewHolder(view);
+    }
+
+    public void setCallback(ThreadListAdapter.Callback callback) {
+        mCallback = callback;
+    }
+
+    @Override
+    public void onBindViewHolder(ForumViewHolder holder, int position) {
+
+        ForumView.Threads thread = mItems.get(position);
+
+        holder.numPosts.setText("" + thread.postCount);
+        holder.title.setText(mItems.get(position).title);
+        if (Build.VERSION.SDK_INT >= 24) {
+            holder.author.setText(Html.fromHtml(thread.authorName, Html.FROM_HTML_MODE_LEGACY));
+            holder.title.setText(Html.fromHtml(thread.title, Html.FROM_HTML_MODE_LEGACY));
+        } else {
+            holder.author.setText(Html.fromHtml(thread.authorName));
+            holder.title.setText(Html.fromHtml(thread.title));
+        }
+
+        if (thread.locked) {
+            holder.imgLocked.setVisibility(View.VISIBLE);
+        } else {
+            holder.imgLocked.setVisibility(View.INVISIBLE);
+        }
+        if (thread.sticky) {
+            holder.imgSticky.setVisibility(View.VISIBLE);
+        } else {
+            holder.imgSticky.setVisibility(View.INVISIBLE);
+        }
+
+        holder.setTopicId(thread.topicId);
+        holder.setLastReadPage(thread.lastReadPage);
+        holder.setLastPostId(thread.lastReadPostId);
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return mItems.size();
+    }
+
+    public void setItems(List<ForumView.Threads> list) {
+        mItems = list;
+    }
+
+
+    class ForumViewHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.thread_root)
+        public CardView cardView;
+
+        @OnClick(R.id.thread_root)
+        public void onThreadClick(View view) {
+            mCallback.onThreadClicked(topicId, lastReadPage, lastPostId);
+        }
+
+        public int lastReadPage;
+
+        public int lastPostId;
+
+        public int topicId;
+
+        public void setTopicId(int topicId) {
+            this.topicId = topicId;
+        }
+
+        public void setLastReadPage(int lastReadPage) {
+            this.lastReadPage = lastReadPage;
+        }
+
+        public void setLastPostId(int lastPostId) {
+            this.lastPostId = lastPostId;
+        }
+
+        @BindView(R.id.thread_author)
+        public TextView author;
+
+        @BindView(R.id.thread_name)
+        public TextView title;
+
+        @BindView(R.id.thread_num_posts)
+        public TextView numPosts;
+
+        @BindView(R.id.img_sticky)
+        public ImageView imgSticky;
+
+        @BindView(R.id.img_locked)
+        public ImageView imgLocked;
+
+        ForumViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
+    }
+
+    interface Callback {
+        void onThreadClicked(int topicId, int lastReadPage, int lastPostId);
+    }
+}

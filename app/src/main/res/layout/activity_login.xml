@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context="ch.redacted.ui.login.LoginActivity">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/redandroid_logo"
+        android:paddingTop="30dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/redacted_logo_3"/>
+
+    <EditText
+        android:id="@+id/username_input"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/logo"
+        android:hint="@string/username"
+        android:inputType="textPersonName">
+        <requestFocus/>
+    </EditText>
+
+    <EditText
+        android:id="@+id/password_input"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/username_input"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif"
+        android:hint="@string/password"
+        android:inputType="textPassword"/>
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/login"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/password_input"
+        android:layout_alignParentRight="true"/>
+</RelativeLayout>

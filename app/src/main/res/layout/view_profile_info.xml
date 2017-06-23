@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      >
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="8dp"
+          >
+
+        <RelativeLayout
+            android:id="@+id/profile_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+          <ImageView
+              android:id="@+id/avatar"
+              android:layout_width="64dp"
+              android:layout_height="64dp"
+              android:layout_centerHorizontal="true"
+              android:src="@drawable/circle"
+              />
+
+          <org.sufficientlysecure.htmltextview.HtmlTextView
+              android:id="@+id/user_name"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@id/avatar"
+              android:layout_centerHorizontal="true"
+              android:layout_marginTop="@dimen/default_gap"
+              android:gravity="center_vertical"
+              android:textColor="@color/inverted_text"
+              android:textSize="@dimen/text_body_big"
+              />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginLeft="@dimen/default_gap"
+            android:layout_marginStart="@dimen/default_gap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+          <TextView
+              android:id="@+id/user_class"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="@color/inverted_text"
+              />
+
+          <TextView
+              android:id="@+id/user_joined"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@id/user_class"
+              android:textColor="@color/inverted_text"
+              />
+
+          <TextView
+              android:id="@+id/user_last_seen"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@id/user_joined"
+              android:textColor="@color/inverted_text"
+              />
+
+          <TextView
+              android:id="@+id/user_ratio"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@id/user_last_seen"
+              android:textColor="@color/inverted_text"
+              />
+        </RelativeLayout>
+      </LinearLayout>
+  </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

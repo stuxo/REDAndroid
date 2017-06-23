@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/CardView.Flat.NoRipple">
+
+    <RelativeLayout
+        android:id="@+id/layout_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        >
+
+        <TextView
+            android:id="@+id/announcement_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_large_headline"/>
+
+        <TextView
+            android:id="@+id/announcement_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/announcement_title"
+            android:layout_marginBottom="@dimen/default_gap"
+            android:textSize="@dimen/text_body_big"/>
+
+        <org.sufficientlysecure.htmltextview.HtmlTextView
+            android:id="@+id/announcement_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/announcement_time"
+            android:textSize="@dimen/text_body"/>
+
+        <Button
+            android:id="@+id/announcement_read_more"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/announcement_body"
+            android:text="@string/show_all"/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
+

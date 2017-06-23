@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:id="@+id/thread_root"
+    style="@style/CardView.Flat"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp">
+
+        <LinearLayout
+            android:id="@+id/thread_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/thread_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="19"
+                android:text="Logchecker and FLAC rescoring - upload your missing logs!"
+                android:textSize="@dimen/text_headline"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/img_sticky"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tint="@color/image_view_tint"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/ic_star_24dp"/>
+
+                <ImageView
+                    android:id="@+id/img_locked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tint="@color/image_view_tint"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/ic_lock_24dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/thread_author_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/thread_header"
+            android:layout_marginEnd="@dimen/default_gap"
+            android:layout_marginRight="@dimen/default_gap"
+            android:text="@string/author"
+            />
+
+        <TextView
+            android:id="@+id/thread_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/thread_header"
+            android:layout_toRightOf="@+id/thread_author_label"
+            android:text="Vika"
+            />
+
+        <TextView
+            android:id="@+id/thread_num_posts_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/thread_author"
+            android:layout_marginEnd="@dimen/default_gap"
+            android:layout_marginRight="@dimen/default_gap"
+            android:text="@string/posts"
+            />
+
+        <TextView
+            android:id="@+id/thread_num_posts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/thread_author"
+            android:layout_toRightOf="@id/thread_author_label"
+            android:text="5202"
+            />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
