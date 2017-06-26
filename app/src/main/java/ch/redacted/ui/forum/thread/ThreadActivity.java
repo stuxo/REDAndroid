@@ -213,8 +213,7 @@ public class ThreadActivity extends BaseActivity implements ThreadMvpView, PostA
         if (requestCode == 0) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                mThreadPresenter.loadPosts(topicId, null, forumNav.getCurrentPageNumber());
-                mPostRecycler.smoothScrollToPosition(mPostRecycler.getAdapter().getItemCount());
+                mThreadPresenter.addPost(data.getStringExtra("body"), forumId, topicId);
             }
             else {
             }
