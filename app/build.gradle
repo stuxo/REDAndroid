@@ -12,7 +12,7 @@ android {
         testInstrumentationRunner "${applicationId}.runner.RxAndroidJUnitRunner"
         versionCode 1001
         // Major -> Millions, Minor -> Thousands, Bugfix -> Hundreds. E.g 1.3.72 == 1,003,072
-        versionName '1.0.0'
+        versionName '1.0.1'
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -32,7 +32,6 @@ android {
 
     buildTypes {
         release {
-            shrinkResources true
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
