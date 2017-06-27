@@ -83,15 +83,9 @@ public class ThreadListActivity extends BaseActivity implements ThreadListMvpVie
     @Override
     public void showThreads(ForumView threads) {
         getSupportActionBar().setTitle(threads.response.forumName);
-        int pages = threads.response.pages;
-        if (pages == 1) {
-            forumNav.setVisibility(View.GONE);
-        }
-
+        forumNav.setPageCount(threads.response.pages);
         mThreadAdapter.setItems(threads.response.threads);
         mThreadAdapter.notifyDataSetChanged();
-
-        forumNav.setPageCount(pages);
     }
 
     @Override

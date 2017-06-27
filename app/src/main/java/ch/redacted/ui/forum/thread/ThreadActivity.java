@@ -161,12 +161,7 @@ public class ThreadActivity extends BaseActivity implements ThreadMvpView, PostA
         mPostAdapter.notifyDataSetChanged();
         mNoContent.setVisibility(View.GONE);
 
-        //todo move this to the forum nav class?
-        int pages = threads.response.pages;
-        if (pages == 1) {
-            forumNav.setVisibility(View.GONE);
-        }
-        forumNav.setPageCount(pages);
+        forumNav.setPageCount(threads.response.pages);
         forumNav.updateCurrentPageNumber(threads.response.currentPage);
     }
 

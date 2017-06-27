@@ -10,6 +10,7 @@
 
     <ch.redacted.ui.view.ForumNavigationView
         android:id="@+id/forum_nav"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

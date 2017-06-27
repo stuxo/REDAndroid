@@ -59,6 +59,9 @@ public class ForumNavigationView extends LinearLayout implements View.OnClickLis
     public void setPageCount(int maxPages) {
         maxPageNumber = maxPages;
         pageCount.setText(String.format("%d", maxPageNumber));
+        if (maxPages > 1) {
+            this.setVisibility(View.VISIBLE);
+        }
         invalidate();
         requestLayout();
     }
