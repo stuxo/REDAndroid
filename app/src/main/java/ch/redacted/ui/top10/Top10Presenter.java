@@ -28,11 +28,11 @@ import ch.redacted.ui.base.BasePresenter;
 		if (mSubscription != null) mSubscription.dispose();
 	}
 
-	public void loadTopTorrents(int limit) {
+	public void loadTopTorrents(String detail, int limit) {
 		checkViewAttached();
 		getMvpView().showProgress(true);
 
-		mSubscription.add(mDataManager.getTopTorrents(limit)
+		mSubscription.add(mDataManager.getTopTorrents(detail, limit)
 			.observeOn(AndroidSchedulers.mainThread())
 			.subscribeOn(Schedulers.io())
 			.subscribeWith(new DisposableSingleObserver<Top10>() {

@@ -216,5 +216,15 @@
     <string name="message">Message</string>
     <string name="compose_message">Compose your message</string>
     <string name="new_message_to">New message:</string>
+    <string name="top_10_day">Today</string>
+    <string name="top_10_week">This week</string>
+    <string name="top_10_month">This month</string>
+    <string name="top_10_year">This year</string>
+    <string name="top_10_all_time">All time</string>
+    <string name="top_10_snatched">Most snatched</string>
+    <string name="top_10_data">Data transferred</string>
+    <string name="top_10_best_seeded">Best seeded</string>
+
+
 
 </resources>
