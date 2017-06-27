@@ -2,6 +2,7 @@ package ch.redacted.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,7 +37,7 @@ public class ForumView
         @SerializedName("lastID")
         public int lastID;
         @SerializedName("lastTime")
-        public String lastTime;
+        public Date lastTime;
         @SerializedName("lastAuthorId")
         public int lastAuthorId;
         @SerializedName("lastAuthorName")

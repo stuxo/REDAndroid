@@ -66,6 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/thread_header"
             android:layout_marginEnd="@dimen/default_gap"
+            android:layout_marginTop="@dimen/default_gap"
             android:layout_marginRight="@dimen/default_gap"
             android:text="@string/author"
             />
@@ -75,18 +76,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/thread_header"
+            android:layout_marginTop="@dimen/default_gap"
             android:layout_toRightOf="@+id/thread_author_label"
             android:text="Vika"
             />
 
         <TextView
-            android:id="@+id/thread_num_posts_label"
+            android:id="@+id/thread_last_post_by"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/thread_author"
             android:layout_marginEnd="@dimen/default_gap"
             android:layout_marginRight="@dimen/default_gap"
-            android:text="@string/posts"
+            android:text="@string/last_post_by"
             />
 
         <TextView

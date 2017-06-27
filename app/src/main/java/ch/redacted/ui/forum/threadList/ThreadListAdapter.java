@@ -4,6 +4,7 @@ import android.os.Build;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.inject.Inject;
 
@@ -53,7 +56,11 @@ public class ThreadListAdapter extends RecyclerView.Adapter<ThreadListAdapter.Fo
 
         ForumView.Threads thread = mItems.get(position);
 
-        holder.numPosts.setText("" + thread.postCount);
+        TimeZone tz = TimeZone.getDefault();
+        int offsetFromUtc = tz.getOffset(new Date().getTime());
+        long now = System.currentTimeMillis() - offsetFromUtc;
+
+        holder.lastPostBy.setText(holder.lastPostBy.getContext().getString(R.string.last_post_by, thread.lastAuthorName, DateUtils.getRelativeTimeSpanString(thread.lastTime.getTime(), now, DateUtils.FORMAT_ABBREV_ALL)));
         holder.title.setText(mItems.get(position).title);
         if (Build.VERSION.SDK_INT >= 24) {
             holder.author.setText(Html.fromHtml(thread.authorName, Html.FROM_HTML_MODE_LEGACY));
@@ -124,8 +131,8 @@ public class ThreadListAdapter extends RecyclerView.Adapter<ThreadListAdapter.Fo
         @BindView(R.id.thread_name)
         public TextView title;
 
-        @BindView(R.id.thread_num_posts)
-        public TextView numPosts;
+        @BindView(R.id.thread_last_post_by)
+        public TextView lastPostBy;
 
         @BindView(R.id.img_sticky)
         public ImageView imgSticky;
