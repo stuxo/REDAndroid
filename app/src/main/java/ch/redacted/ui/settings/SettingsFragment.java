@@ -40,5 +40,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         CheckBoxPreference preference6 = (CheckBoxPreference) findPreference(PreferencesHelper.PREF_LOAD_IMAGES);
         mPreferenceHelper.setLoadImages(preference6.isChecked());
+
+        ListPreference preference7 = (ListPreference) findPreference(PreferencesHelper.PREF_TOP_TORRENT_LIMIT);
+        mPreferenceHelper.setTopTorrentLimit(Integer.parseInt(preference7.getValue()));
     }
 }

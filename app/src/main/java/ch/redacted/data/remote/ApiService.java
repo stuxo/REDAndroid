@@ -79,7 +79,7 @@ public interface ApiService {
     Single<ForumThread> threadPosts(@Query("threadid") int threadId, @Query("postid") Integer postId, @Query("page") Integer page);
 
     @GET("ajax.php?action=top10")
-    Single<Top10> top10(@Query("limit") int limit, @Query("type") String type);
+    Single<Top10> top10(@Query("details") String details, @Query("limit") int limit, @Query("type") String type);
 
     @GET("ajax.php?action=torrentgroup")
     Single<TorrentGroup> release(@Query("id") int id);
