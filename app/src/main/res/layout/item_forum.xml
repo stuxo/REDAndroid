@@ -15,6 +15,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginLeft="16dp"
@@ -23,81 +24,88 @@
         android:layout_marginTop="8dp">
 
         <LinearLayout
+            android:id="@+id/thread_image_indicators"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true">
+
+            <ImageButton
+                android:id="@+id/last_read_button"
+                android:text="@string/go_to_last_read"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                app:srcCompat="@drawable/ic_chevron_right_black_24px"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                />
+
+            <ImageView
+                android:id="@+id/img_sticky"
+                android:layout_width="36dp"
+                android:layout_height="wrap_content"
+                android:tint="@color/image_view_tint"
+                android:visibility="visible"
+                android:paddingBottom="8dp"
+                app:srcCompat="@drawable/ic_star_24dp"/>
+
+            <ImageView
+                android:id="@+id/img_locked"
+                android:layout_width="36dp"
+                android:layout_height="wrap_content"
+                android:tint="@color/image_view_tint"
+                android:visibility="visible"
+                app:srcCompat="@drawable/ic_lock_24dp"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/thread_header"
+            android:layout_toLeftOf="@id/thread_image_indicators"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/thread_name"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="19"
                 android:text="Logchecker and FLAC rescoring - upload your missing logs!"
                 android:textSize="@dimen/text_headline"/>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/img_sticky"
+                <TextView
+                    android:id="@+id/thread_author_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:tint="@color/image_view_tint"
-                    android:visibility="gone"
-                    app:srcCompat="@drawable/ic_star_24dp"/>
+                    android:layout_marginEnd="@dimen/default_gap"
+                    android:layout_marginTop="@dimen/default_gap"
+                    android:layout_marginRight="@dimen/default_gap"
+                    android:text="@string/author"
+                    />
 
-                <ImageView
-                    android:id="@+id/img_locked"
+                <TextView
+                    android:id="@+id/thread_author"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:tint="@color/image_view_tint"
-                    android:visibility="gone"
-                    app:srcCompat="@drawable/ic_lock_24dp"/>
-            </LinearLayout>
+                    android:layout_marginTop="@dimen/default_gap"
+                    android:layout_toRightOf="@+id/thread_author_label"
+                    android:text="Vika"
+                    />
+
+                <TextView
+                    android:id="@+id/thread_last_post_by"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/thread_author"
+                    android:layout_marginEnd="@dimen/default_gap"
+                    android:layout_marginRight="@dimen/default_gap"
+                    android:text="@string/last_post_by"
+                    />
+            </RelativeLayout>
         </LinearLayout>
 
-
-        <TextView
-            android:id="@+id/thread_author_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/thread_header"
-            android:layout_marginEnd="@dimen/default_gap"
-            android:layout_marginTop="@dimen/default_gap"
-            android:layout_marginRight="@dimen/default_gap"
-            android:text="@string/author"
-            />
-
-        <TextView
-            android:id="@+id/thread_author"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/thread_header"
-            android:layout_marginTop="@dimen/default_gap"
-            android:layout_toRightOf="@+id/thread_author_label"
-            android:text="Vika"
-            />
-
-        <TextView
-            android:id="@+id/thread_last_post_by"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/thread_author"
-            android:layout_marginEnd="@dimen/default_gap"
-            android:layout_marginRight="@dimen/default_gap"
-            android:text="@string/last_post_by"
-            />
-
-        <TextView
-            android:id="@+id/thread_num_posts"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/thread_author"
-            android:layout_toRightOf="@id/thread_author_label"
-            android:text="5202"
-            />
     </RelativeLayout>
 </android.support.v7.widget.CardView>

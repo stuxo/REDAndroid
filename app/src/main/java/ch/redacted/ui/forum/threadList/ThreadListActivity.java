@@ -107,11 +107,10 @@ public class ThreadListActivity extends BaseActivity implements ThreadListMvpVie
     }
 
     @Override
-    public void onThreadClicked(int topicId, int lastReadPage, int lastPostId) {
+    public void onThreadClicked(int topicId, int lastReadPage) {
         Intent intent = new Intent(this, ThreadActivity.class);
         intent.putExtra("topicId", topicId);
         intent.putExtra("lastReadPage", lastReadPage);
-        intent.putExtra("lastPostId", lastPostId);
         intent.putExtra("forumId", forumId);
         startActivity(intent);
     }

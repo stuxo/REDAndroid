@@ -70,6 +70,10 @@ public class ThreadListAdapter extends RecyclerView.Adapter<ThreadListAdapter.Fo
             holder.title.setText(Html.fromHtml(thread.title));
         }
 
+        if (thread.lastReadPage > 1){
+            holder.setLastReadPage(thread.lastReadPage);
+        }
+
         if (thread.locked) {
             holder.imgLocked.setVisibility(View.VISIBLE);
         } else {
@@ -82,9 +86,6 @@ public class ThreadListAdapter extends RecyclerView.Adapter<ThreadListAdapter.Fo
         }
 
         holder.setTopicId(thread.topicId);
-        holder.setLastReadPage(thread.lastReadPage);
-        holder.setLastPostId(thread.lastReadPostId);
-
     }
 
     @Override
@@ -103,13 +104,16 @@ public class ThreadListAdapter extends RecyclerView.Adapter<ThreadListAdapter.Fo
         public CardView cardView;
 
         @OnClick(R.id.thread_root)
-        public void onThreadClick(View view) {
-            mCallback.onThreadClicked(topicId, lastReadPage, lastPostId);
+        public void onThreadClick() {
+            mCallback.onThreadClicked(topicId, 1);
+        }
+
+        @OnClick(R.id.last_read_button)
+        public void onLastReadClick() {
+            mCallback.onThreadClicked(topicId, lastReadPage);
         }
 
         public int lastReadPage;
-
-        public int lastPostId;
 
         public int topicId;
 
@@ -119,10 +123,6 @@ public class ThreadListAdapter extends RecyclerView.Adapter<ThreadListAdapter.Fo
 
         public void setLastReadPage(int lastReadPage) {
             this.lastReadPage = lastReadPage;
-        }
-
-        public void setLastPostId(int lastPostId) {
-            this.lastPostId = lastPostId;
         }
 
         @BindView(R.id.thread_author)
@@ -147,6 +147,6 @@ public class ThreadListAdapter extends RecyclerView.Adapter<ThreadListAdapter.Fo
     }
 
     interface Callback {
-        void onThreadClicked(int topicId, int lastReadPage, int lastPostId);
+        void onThreadClicked(int topicId, int lastReadPage);
     }
 }

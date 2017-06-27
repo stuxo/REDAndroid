@@ -123,12 +123,7 @@ public class ThreadActivity extends BaseActivity implements ThreadMvpView, PostA
             }
         });
 
-        if (forumId > 0 && topicId > 0 && lastPostId > 0){
-            mThreadPresenter.loadPosts(topicId, lastPostId, null);
-            mPostRecycler.smoothScrollToPosition(mPostRecycler.getAdapter().getItemCount());
-        } else {
-            mThreadPresenter.loadPosts(topicId, null, null);
-        }
+        mThreadPresenter.loadPosts(topicId, null, lastPageId);
     }
 
     @Override
