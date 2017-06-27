@@ -90,6 +90,15 @@ public class ThreadActivity extends BaseActivity implements ThreadMvpView, PostA
 
         mThreadPresenter.attachView(this);
         mPostRecycler.setHasFixedSize(true);
+        mPostRecycler.addOnScrollListener(new RecyclerView.OnScrollListener(){
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy){
+                if (dy > 0)
+                    fab.hide();
+                else if (dy < 0)
+                    fab.show();
+            }
+        });
         mPostAdapter.setCallback(this);
         mPostRecycler.setAdapter(mPostAdapter);
         mPostRecycler.setLayoutManager(new LinearLayoutManager(this));
@@ -197,7 +206,6 @@ public class ThreadActivity extends BaseActivity implements ThreadMvpView, PostA
         intent.putExtra("user", quotedUser);
         intent.putExtra("type", TYPE_POST);
         startActivityForResult(intent, 0);
-        fab.hide();
     }
 
     @Override
@@ -217,7 +225,6 @@ public class ThreadActivity extends BaseActivity implements ThreadMvpView, PostA
             }
             else {
             }
-            fab.show();
         }
     }
 }
