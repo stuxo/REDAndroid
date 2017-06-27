@@ -70,7 +70,8 @@ public class FailedMockApiService implements ApiService {
 		return null;
 	}
 
-	@Override public Single<Top10> top10(@Query("limit") int limit, @Query("type") String type) {
+	@Override
+	public Single<Top10> top10(@Query("details") String details, @Query("limit") int limit, @Query("type") String type) {
 		return null;
 	}
 
