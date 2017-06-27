@@ -58,11 +58,12 @@ public class Top10Activity extends BaseDrawerActivity implements Top10MvpView, T
 		mTop10Recycler.setLayoutManager(new LinearLayoutManager(this));
 
 		mTop10Adapter.setCallback(this);
+
 		mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 			@Override
 			public void onTabSelected(TabLayout.Tab tab) {
 				currentTab = tab.getPosition();
-				mTop10Presenter.loadTopTorrents(details[currentTab], 10);
+				mTop10Presenter.loadTopTorrents(details[currentTab]);
 			}
 
 			@Override
@@ -80,10 +81,10 @@ public class Top10Activity extends BaseDrawerActivity implements Top10MvpView, T
 		mSwipeRefreshContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			@Override
 			public void onRefresh() {
-				mTop10Presenter.loadTopTorrents(details[currentTab], 10);
+				mTop10Presenter.loadTopTorrents(details[currentTab]);
 			}
 		});
-		mTop10Presenter.loadTopTorrents(details[currentTab], 10);
+		mTop10Presenter.loadTopTorrents(details[currentTab]);
 		super.onCreateDrawer();
 	}
 

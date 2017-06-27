@@ -148,8 +148,8 @@ public class DataManager {
         return mApiService.threadPosts(threadId, postId, page);
     }
 
-    public Single<Top10> getTopTorrents(String details, int limit) {
-        return mApiService.top10(details, limit, "torrents");
+    public Single<Top10> getTopTorrents(String details) {
+        return mApiService.top10(details, getPreferencesHelper().getTopTorrentLimit(), "torrents");
     }
 
     public Single<ResponseBody> addPost(String text, int forumId, int topicId) {

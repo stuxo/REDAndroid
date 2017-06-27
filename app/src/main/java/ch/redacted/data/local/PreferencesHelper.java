@@ -29,6 +29,7 @@ import ch.redacted.injection.ApplicationContext;
 
 	public static final String PREF_DEFAULT_DOWNLOAD_KEY = "pref_default_download_method";
 	public static final String PREF_WM_SESSION_KEY = "pref_wm_session";
+	public static final String PREF_TOP_TORRENT_LIMIT = "pref_top_torrents";
 
 	private final SharedPreferences mPref;
 	private final SharedPreferences mCookiePreference;
@@ -128,5 +129,13 @@ import ch.redacted.injection.ApplicationContext;
 
 	public void setLoadImages(boolean loadImages) {
 		mPref.edit().putBoolean(PREF_LOAD_IMAGES, loadImages).apply();
+	}
+
+	public int getTopTorrentLimit() {
+		return mPref.getInt(PREF_TOP_TORRENT_LIMIT, 10);
+	}
+
+	public void setTopTorrentLimit(int limit) {
+		mPref.edit().putInt(PREF_TOP_TORRENT_LIMIT, limit).apply();
 	}
 }
