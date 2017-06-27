@@ -10,11 +10,11 @@
             android:key="@string/pref_show_images"
             android:title="@string/show_images"/>
 
-        <!--<android.support.v7.preference.ListPreference-->
-            <!--android:entries="@array/top_torrent_options"-->
-            <!--android:entryValues="@array/top_torrent_options"-->
-            <!--android:key="@string/pref_top_torrents"-->
-            <!--android:title="@string/top_torrents_label"/>-->
+        <android.support.v7.preference.ListPreference
+            android:entries="@array/top_torrent_options"
+            android:entryValues="@array/top_torrent_options"
+            android:key="@string/pref_top_torrents"
+            android:title="@string/top_torrents_label"/>
 
         <!--<android.support.v7.preference.Preference-->
             <!--android:defaultValue=""-->

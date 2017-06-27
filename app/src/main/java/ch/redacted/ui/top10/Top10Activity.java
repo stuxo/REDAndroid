@@ -5,6 +5,7 @@ import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -28,10 +29,16 @@ public class Top10Activity extends BaseDrawerActivity implements Top10MvpView, T
 	@Inject Top10Presenter mTop10Presenter;
 	@Inject Top10Adapter mTop10Adapter;
 
+	private String[] details = {"day", "week", /*"month",*/"year", "overall", "snatched", "data", "seeded"};
+
 	@BindView(R.id.recycler_view) RecyclerView mTop10Recycler;
 	@BindView(R.id.swipe_refresh_container) SwipeRefreshLayout mSwipeRefreshContainer;
 	@BindView(R.id.text_no_content) TextView mNoContent;
+	@BindView(R.id.tab_layout) TabLayout mTabLayout;
+
 	private ImageView img;
+
+	private int currentTab = 0;
 
 	/**
 	 * Android activity lifecycle methods
@@ -40,9 +47,8 @@ public class Top10Activity extends BaseDrawerActivity implements Top10MvpView, T
 	@Override protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		activityComponent().inject(this);
-		setContentView(R.layout.activity_list);
+		setContentView(R.layout.activity_top_10);
 		ButterKnife.bind(this);
-
 		getSupportActionBar().setTitle(getString(R.string.top10));
 		img = ImageHelper.getRippy(mSwipeRefreshContainer);
 
@@ -53,14 +59,32 @@ public class Top10Activity extends BaseDrawerActivity implements Top10MvpView, T
 
 		mTop10Adapter.setCallback(this);
 
+		mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+			@Override
+			public void onTabSelected(TabLayout.Tab tab) {
+				currentTab = tab.getPosition();
+				mTop10Presenter.loadTopTorrents(details[currentTab]);
+			}
+
+			@Override
+			public void onTabUnselected(TabLayout.Tab tab) {
+
+			}
+
+			@Override
+			public void onTabReselected(TabLayout.Tab tab) {
+
+			}
+		});
+
 		mSwipeRefreshContainer.setColorSchemeResources(R.color.accent);
 		mSwipeRefreshContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			@Override
 			public void onRefresh() {
-				mTop10Presenter.loadTopTorrents(10);
+				mTop10Presenter.loadTopTorrents(details[currentTab]);
 			}
 		});
-		mTop10Presenter.loadTopTorrents(10);
+		mTop10Presenter.loadTopTorrents(details[currentTab]);
 		super.onCreateDrawer();
 	}
 
