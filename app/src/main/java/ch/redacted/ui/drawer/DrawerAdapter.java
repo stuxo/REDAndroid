@@ -2,6 +2,7 @@ package ch.redacted.ui.drawer;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.content.res.AppCompatResources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,34 +52,35 @@ public class DrawerAdapter extends BaseAdapter {
 
         switch (position){
             case 0:
-                holder.icon.setImageDrawable(ContextCompat.getDrawable(convertView.getContext(), R.drawable.ic_announcement_48px));
+                holder.icon.setImageDrawable(
+                    AppCompatResources.getDrawable(convertView.getContext(), R.drawable.ic_announcement_48px));
                 break;
             case 1:
-                holder.icon.setImageDrawable(ContextCompat.getDrawable(convertView.getContext(), R.drawable.ic_profile_48px));
+                holder.icon.setImageDrawable(AppCompatResources.getDrawable(convertView.getContext(), R.drawable.ic_profile_48px));
                 break;
             case 2:
-                holder.icon.setImageDrawable(ContextCompat.getDrawable(convertView.getContext(), R.drawable.ic_top_10_48px));
+                holder.icon.setImageDrawable(AppCompatResources.getDrawable(convertView.getContext(), R.drawable.ic_top_10_48px));
                 break;
             case 3:
-                holder.icon.setImageDrawable(ContextCompat.getDrawable(convertView.getContext(), R.drawable.ic_torrents_48px));
+                holder.icon.setImageDrawable(AppCompatResources.getDrawable(convertView.getContext(), R.drawable.ic_torrents_48px));
                 break;
             case 4:
-                holder.icon.setImageDrawable(ContextCompat.getDrawable(convertView.getContext(), R.drawable.ic_requests_48px));
+                holder.icon.setImageDrawable(AppCompatResources.getDrawable(convertView.getContext(), R.drawable.ic_requests_48px));
                 break;
             case 5:
-                holder.icon.setImageDrawable(ContextCompat.getDrawable(convertView.getContext(), R.drawable.ic_forum_48px));
+                holder.icon.setImageDrawable(AppCompatResources.getDrawable(convertView.getContext(), R.drawable.ic_forum_48px));
                 break;
             case 6:
-                holder.icon.setImageDrawable(ContextCompat.getDrawable(convertView.getContext(), R.drawable.ic_users_48px));
+                holder.icon.setImageDrawable(AppCompatResources.getDrawable(convertView.getContext(), R.drawable.ic_users_48px));
                 break;
             case 7:
-                holder.icon.setImageDrawable(ContextCompat.getDrawable(convertView.getContext(), R.drawable.ic_artists_48px));
+                holder.icon.setImageDrawable(AppCompatResources.getDrawable(convertView.getContext(), R.drawable.ic_artists_48px));
                 break;
             case 8:
-                holder.icon.setImageDrawable(ContextCompat.getDrawable(convertView.getContext(), R.drawable.ic_bookmark_24dp));
+                holder.icon.setImageDrawable(AppCompatResources.getDrawable(convertView.getContext(), R.drawable.ic_bookmark_24dp));
                 break;
             case 9:
-                holder.icon.setImageDrawable(ContextCompat.getDrawable(convertView.getContext(), R.drawable.ic_inbox_48dp));
+                holder.icon.setImageDrawable(AppCompatResources.getDrawable(convertView.getContext(), R.drawable.ic_inbox_48dp));
                 break;
         }
 
