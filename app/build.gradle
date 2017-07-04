@@ -117,6 +117,8 @@ dependencies {
     annotationProcessor 'com.squareup:javapoet:1.7.0'
     // https://github.com/rharter/auto-value-parcel/issues/64
 
+    compile 'com.firebase:firebase-jobdispatcher:0.7.0'
+
     compile  "com.google.dagger:dagger:$DAGGER_VERSION"
     provided 'org.glassfish:javax.annotation:10.0-b28' //Required by Dagger2
     annotationProcessor daggerCompiler
