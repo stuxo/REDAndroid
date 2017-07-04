@@ -124,7 +124,6 @@ public class DataManager {
         });
     }
 
-    //TODO This should create an observable and call onNext rather than just adding all and returning
     public Single<List<Object>> getCategories() {
         return mApiService.forumCategories().flatMap(new Function<ForumCategory, SingleSource<? extends List<Object>>>() {
             @Override public SingleSource<? extends List<Object>> apply(ForumCategory forumCategory) {

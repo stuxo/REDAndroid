@@ -57,8 +57,6 @@ import ch.redacted.injection.module.ApplicationModule;
 
 public class REDApplication extends Application {
 
-	//TODO: Developers put your local Gazelle install IP here instead of testing on the live site
-	//I recommend setting up with Vagrant: https://github.com/dr4g0nnn/VagrantGazelle
 	public static final String DEFAULT_SITE = "https://redacted.ch";
 //		public static final String DEFAULT_SITE = "https://pthdev.pw";
 	ApplicationComponent mApplicationComponent;
@@ -67,18 +65,7 @@ public class REDApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		startNotificationService();
-
-//		if (BuildConfig.DEBUG) {
         Stetho.initializeWithDefaults(this);
-//		}
-//		initSoup(DEFAULT_SITE);
-//		if (SettingsActivity.lightThemeEnabled(getApplicationContext())) {
-//			AppCompatDelegate.setDefaultNightMode(
-//					AppCompatDelegate.MODE_NIGHT_NO);
-//		} else {
-//			AppCompatDelegate.setDefaultNightMode(
-//					AppCompatDelegate.MODE_NIGHT_YES);
-//		}
 	}
 
 	@Override
