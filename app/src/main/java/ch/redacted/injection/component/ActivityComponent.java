@@ -1,6 +1,7 @@
 package ch.redacted.injection.component;
 
 import ch.redacted.ui.reply.ReplyActivity;
+import ch.redacted.ui.subscriptions.SubscriptionsActivity;
 import dagger.Subcomponent;
 import ch.redacted.injection.PerActivity;
 import ch.redacted.injection.module.ActivityModule;
@@ -47,4 +48,5 @@ public interface ActivityComponent {
     void inject(InboxActivity inboxActivity);
     void inject(ConversationActivity conversationActivity);
     void inject(ReplyActivity replyActivity);
+    void inject(SubscriptionsActivity subscriptionActivity);
 }

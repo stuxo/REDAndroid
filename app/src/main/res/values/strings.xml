@@ -224,7 +224,9 @@
     <string name="top_10_snatched">Most snatched</string>
     <string name="top_10_data">Data transferred</string>
     <string name="top_10_best_seeded">Best seeded</string>
-
+    <string name="no_unread_subscriptions">No unread subscriptions</string>
+    <string name="unread">Unread</string>
+    <string name="read">Read</string>
 
 
 </resources>

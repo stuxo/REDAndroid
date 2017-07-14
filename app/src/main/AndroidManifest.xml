@@ -141,6 +141,10 @@
             android:name="ch.redacted.ui.inbox.conversation.ConversationActivity">
         </activity>
 
+        <activity
+            android:name="ch.redacted.ui.subscriptions.SubscriptionsActivity">
+        </activity>
+
         <service
             android:name="ch.redacted.data.NotificationService"
             android:exported="true"
