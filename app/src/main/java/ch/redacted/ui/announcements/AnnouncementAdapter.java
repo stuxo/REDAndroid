@@ -51,15 +51,23 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
         Announcement.Announcements announcement = mAnnouncements.get(position);
         holder.title.setText(announcement.title);
 
+        holder.showFullPost = false;
+
         holder.time.setText(DateUtils.getRelativeTimeSpanString(
                 announcement.newsTime.getTime(), new Date().getTime(),
                 DateUtils.FORMAT_ABBREV_ALL));
 
+        holder.fullText = announcement.body;
         holder.body.setLinkTextColor(ContextCompat.getColor(holder.body.getContext(), R.color.primary));
-        holder.body.setHtml(announcement.body,
-                new HtmlHttpImageGetter(holder.body));
+        if (announcement.body.length() > 25000) {
+            holder.body.setText(holder.body.getContext().getString(R.string.post_too_long));
+        } else {
+            holder.body.setHtml(announcement.body,
+                    new HtmlHttpImageGetter(holder.body));
+        }
 
         holder.body.setMaxLines(COLLAPSED_POST_LINES);
+
     }
 
     @Override
@@ -85,14 +93,16 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
         @BindView(R.id.announcement_body)
         HtmlTextView body;
 
+        public String fullText;
+
         @BindView(R.id.announcement_read_more)
         Button readMore;
 
         boolean showFullPost = false;
 
         @OnClick(R.id.announcement_read_more)
-        void readMoreClick(View view) {
-            toggleView(view);
+        void readMoreClick() {
+            toggleView();
         }
 
         AnnouncementHolder(View itemView) {
@@ -100,14 +110,15 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
             ButterKnife.bind(this, itemView);
         }
 
-        private void toggleView(View view) {
+        private void toggleView() {
+            showFullPost = !showFullPost;
             if (showFullPost) {
-                showFullPost = false;
                 body.setLines(COLLAPSED_POST_LINES);
-                readMore.setText(view.getContext().getString(R.string.show_all));
+                body.setHtml(fullText,
+                        new HtmlHttpImageGetter(body));
+                readMore.setText(readMore.getContext().getString(R.string.show_all));
             } else {
-                showFullPost = true;
-                readMore.setText(view.getContext().getString(R.string.show_less));
+                readMore.setText(readMore.getContext().getString(R.string.show_less));
                 body.setMaxLines(Integer.MAX_VALUE);
             }
         }
