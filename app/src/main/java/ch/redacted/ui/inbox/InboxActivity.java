@@ -38,8 +38,6 @@ public class InboxActivity extends BaseDrawerActivity implements InboxMvpView, C
     @BindView(R.id.recycler_view) RecyclerView mInboxRecyclerView;
     @BindView(R.id.swipe_refresh_container) SwipeRefreshLayout mSwipeRefreshContainer;
     @BindView(R.id.bottom_navigation) BottomNavigationView bottomNavigationView;
-    @BindView(R.id.compose_view) ViewGroup composeView;
-
     @BindView(R.id.username) EditText recipient;
     @BindView(R.id.message_subject) EditText messageSubject;
     @BindView(R.id.message_body) EditText messageBody;
@@ -92,7 +90,6 @@ public class InboxActivity extends BaseDrawerActivity implements InboxMvpView, C
                         switch (item.getItemId()) {
                             case R.id.action_inbox:
                                 mInboxRecyclerView.setVisibility(View.VISIBLE);
-                                composeView.setVisibility(View.GONE);
                                 if (!type.equals(INBOX)) {
                                     type = INBOX;
                                     mInboxPresenter.loadInbox(type);
@@ -100,7 +97,6 @@ public class InboxActivity extends BaseDrawerActivity implements InboxMvpView, C
                                 break;
                             case R.id.action_sentbox:
                                 mInboxRecyclerView.setVisibility(View.VISIBLE);
-                                composeView.setVisibility(View.GONE);
                                 if (!type.equals(SENTBOX)) {
                                     type = SENTBOX;
                                     mInboxPresenter.loadInbox(type);

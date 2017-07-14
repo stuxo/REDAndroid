@@ -63,12 +63,6 @@
             android:visibility="gone"
             />
 
-        <include
-            layout="@layout/compose_view"
-            android:id="@+id/compose_view"
-            android:visibility="gone"
-            />
-
       </FrameLayout>
 
       <include
