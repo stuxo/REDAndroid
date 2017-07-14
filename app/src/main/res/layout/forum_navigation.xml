@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clickable="true"
     android:gravity="center"
+    android:longClickable="true"
     android:orientation="horizontal"
     android:weightSum="8"
     >
@@ -24,31 +27,12 @@
         android:layout_weight="1"
         app:srcCompat="@drawable/ic_chevron_left_black_24px"/>
 
-    <LinearLayout
+    <Button
+        android:id="@+id/current_page"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_weight="3">
-
-        <TextView
-            android:id="@+id/current_page"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
-
-        <TextView
-            android:id="@+id/page_divider"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="/"/>
-
-        <TextView
-            android:id="@+id/page_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
-    </LinearLayout>
+        android:layout_gravity="center"/>
 
     <ImageButton
         android:id="@+id/next_page"
