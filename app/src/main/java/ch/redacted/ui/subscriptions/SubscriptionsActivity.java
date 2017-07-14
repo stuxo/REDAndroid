@@ -15,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,6 @@ import ch.redacted.app.R;
 import ch.redacted.data.model.Subscription;
 import ch.redacted.ui.base.BaseDrawerActivity;
 import ch.redacted.ui.forum.thread.ThreadActivity;
-import ch.redacted.ui.inbox.conversation.ConversationActivity;
 import ch.redacted.util.ImageHelper;
 
 public class SubscriptionsActivity extends BaseDrawerActivity implements SubscriptionsMvpView, SubscriptionAdapter.Callback {
@@ -41,7 +41,7 @@ public class SubscriptionsActivity extends BaseDrawerActivity implements Subscri
     @BindView(R.id.recycler_view) RecyclerView mSubscriptionRecyclerView;
     @BindView(R.id.swipe_refresh_container) SwipeRefreshLayout mSwipeRefreshContainer;
     @BindView(R.id.bottom_navigation) BottomNavigationView bottomNavigationView;
-
+    @BindView(R.id.text_no_content) TextView mNoContentView;
     @BindView(R.id.snackbar_anchor) CoordinatorLayout snackbarAnchor;
 
     ImageView img;
@@ -56,7 +56,7 @@ public class SubscriptionsActivity extends BaseDrawerActivity implements Subscri
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityComponent().inject(this);
-        setContentView(R.layout.activity_messages);
+        setContentView(R.layout.activity_subscriptions);
         ButterKnife.bind(this);
         mSubscriptionPresenter.attachView(this);
 
@@ -85,14 +85,14 @@ public class SubscriptionsActivity extends BaseDrawerActivity implements Subscri
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         switch (item.getItemId()) {
-                            case R.id.action_inbox:
+                            case R.id.action_unread:
                                 mSubscriptionRecyclerView.setVisibility(View.VISIBLE);
                                 if (!type.equals(UNREAD)) {
                                     type = UNREAD;
                                     mSubscriptionPresenter.loadSubscriptions(type);
                                 }
                                 break;
-                            case R.id.action_sentbox:
+                            case R.id.action_read:
                                 mSubscriptionRecyclerView.setVisibility(View.VISIBLE);
                                 if (!type.equals(READ)) {
                                     type = READ;
@@ -114,7 +114,7 @@ public class SubscriptionsActivity extends BaseDrawerActivity implements Subscri
     @Override
     public void showSubscriptionsEmpty() {
         mSubscriptionsAdapter.setSubscriptions(new ArrayList<Subscription.Threads>());
-        //todo hide recyclerview, show empty message
+        mNoContentView.setVisibility(View.VISIBLE);
     }
 
     private void animate() {
@@ -145,6 +145,7 @@ public class SubscriptionsActivity extends BaseDrawerActivity implements Subscri
 
     @Override
     public void showSubscriptions(List<Subscription.Threads> threads) {
+        mNoContentView.setVisibility(View.GONE);
         mSubscriptionsAdapter.setSubscriptions(threads);
     }
 
