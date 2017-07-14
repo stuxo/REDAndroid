@@ -201,8 +201,8 @@ public class DataManager {
         return mApiService.artist(id, false);
     }
 
-    public Single<Subscription> loadSubscriptions() {
-        return mApiService.subscriptions(false);
+    public Single<Subscription> loadSubscriptions(boolean read) {
+        return mApiService.subscriptions(read ? 0 : 1); //1 means show unread, 0 means read
     }
 
     public Single<Response<ResponseBody>> downloadRelease(final int id) {

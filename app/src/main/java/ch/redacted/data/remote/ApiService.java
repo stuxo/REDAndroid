@@ -116,7 +116,7 @@ public interface ApiService {
     Single<ResponseBody> toggleBookmark(@Query("action") String action, @Query("type") String type, @Query("auth") String auth, @Query("id") int id);
 
     @GET("ajax.php?action=subscriptions")
-    Single<Subscription> subscriptions(@Query("showunread") boolean showUnread);
+    Single<Subscription> subscriptions(@Query("showunread") int showUnread);
 
     @GET("ajax.php?action=request")
     Single<ch.redacted.data.model.Request> request(@Query("id") int id);

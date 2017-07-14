@@ -92,7 +92,7 @@ public class NotificationService extends JobService {
 
         if (index.response.notifications.newSubscriptions){
             REDApplication.get(getApplicationContext()).getComponent().dataManager().
-                loadSubscriptions().observeOn(AndroidSchedulers.mainThread())
+                loadSubscriptions(false).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new DisposableSingleObserver<Subscription>() {
                     @Override

@@ -41,7 +41,7 @@ import retrofit2.HttpException;
 			.subscribeWith(new DisposableSingleObserver<ForumThread>() {
 				@Override
 				public void onSuccess(ForumThread item) {
-					if (item.response.posts.size() == 0){
+					if (item.response == null || item.response.posts.size() == 0){
 						getMvpView().showPostsEmpty();
 						getMvpView().showProgress(false);
 					} else {

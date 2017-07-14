@@ -14,8 +14,7 @@
       app:itemIconTint="@color/white"
       app:itemTextColor="@color/white"
       android:background="@color/primary"
-
-      app:menu="@menu/bottom_navigation_inbox"
+      app:menu="@menu/bottom_navigation_subscriptions"
       />
 
   <android.support.design.widget.CoordinatorLayout
@@ -59,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/message_nothing_to_see"
+            android:text="@string/no_unread_subscriptions"
             android:visibility="gone"
             />
 

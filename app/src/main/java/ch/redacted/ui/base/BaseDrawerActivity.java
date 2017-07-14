@@ -43,6 +43,7 @@ import ch.redacted.ui.search.request.RequestSearchActivity;
 import ch.redacted.ui.search.torrent.TorrentSearchActivity;
 import ch.redacted.ui.search.user.UserSearchActivity;
 import ch.redacted.ui.settings.SettingsActivity;
+import ch.redacted.ui.subscriptions.SubscriptionsActivity;
 import ch.redacted.ui.top10.Top10Activity;
 import ch.redacted.ui.profile.ProfileActivity;
 import ch.redacted.util.Calculator;
@@ -153,6 +154,9 @@ public class BaseDrawerActivity extends BaseActivity implements DrawerMvpView {
                         break;
                     case Inbox:
                         pendingIntent = new Intent(BaseDrawerActivity.this, InboxActivity.class);
+                        break;
+                    case Subscriptions:
+                        pendingIntent = new Intent(BaseDrawerActivity.this, SubscriptionsActivity.class);
                         break;
                 }
 

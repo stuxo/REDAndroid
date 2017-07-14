@@ -82,6 +82,9 @@ public class DrawerAdapter extends BaseAdapter {
             case 9:
                 holder.icon.setImageDrawable(AppCompatResources.getDrawable(convertView.getContext(), R.drawable.ic_inbox_48dp));
                 break;
+            case 10:
+                holder.icon.setImageDrawable(ContextCompat.getDrawable(convertView.getContext(), R.drawable.ic_star_24dp));
+                break;
         }
 
         return convertView;

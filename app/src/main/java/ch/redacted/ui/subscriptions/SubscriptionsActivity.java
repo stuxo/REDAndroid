@@ -1,4 +1,4 @@
-package ch.redacted.ui.inbox;
+package ch.redacted.ui.subscriptions;
 
 import android.content.Intent;
 import android.graphics.drawable.Animatable;
@@ -14,10 +14,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -25,31 +25,28 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ch.redacted.app.R;
-import ch.redacted.data.model.Conversations;
+import ch.redacted.data.model.Subscription;
 import ch.redacted.ui.base.BaseDrawerActivity;
-import ch.redacted.ui.inbox.conversation.ConversationActivity;
+import ch.redacted.ui.forum.thread.ThreadActivity;
 import ch.redacted.util.ImageHelper;
 
-public class InboxActivity extends BaseDrawerActivity implements InboxMvpView, ConversationAdapter.Callback {
+public class SubscriptionsActivity extends BaseDrawerActivity implements SubscriptionsMvpView, SubscriptionAdapter.Callback {
 
-    @Inject InboxPresenter mInboxPresenter;
-    @Inject ConversationAdapter mInboxAdapter;
+    private static final String UNREAD = "unread";
+    private static final String READ = "read";
 
-    @BindView(R.id.recycler_view) RecyclerView mInboxRecyclerView;
+    @Inject SubscriptionsPresenter mSubscriptionPresenter;
+    @Inject SubscriptionAdapter mSubscriptionsAdapter;
+
+    @BindView(R.id.recycler_view) RecyclerView mSubscriptionRecyclerView;
     @BindView(R.id.swipe_refresh_container) SwipeRefreshLayout mSwipeRefreshContainer;
     @BindView(R.id.bottom_navigation) BottomNavigationView bottomNavigationView;
-    @BindView(R.id.username) EditText recipient;
-    @BindView(R.id.message_subject) EditText messageSubject;
-    @BindView(R.id.message_body) EditText messageBody;
-
+    @BindView(R.id.text_no_content) TextView mNoContentView;
     @BindView(R.id.snackbar_anchor) CoordinatorLayout snackbarAnchor;
-
-    private static final String INBOX = "inbox";
-    private static final String SENTBOX = "sentbox";
 
     ImageView img;
 
-    String type = "inbox";
+    String type = "unread";
 
     /**
      * Android activity lifecycle methods
@@ -59,28 +56,28 @@ public class InboxActivity extends BaseDrawerActivity implements InboxMvpView, C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityComponent().inject(this);
-        setContentView(R.layout.activity_messages);
+        setContentView(R.layout.activity_subscriptions);
         ButterKnife.bind(this);
-        mInboxPresenter.attachView(this);
+        mSubscriptionPresenter.attachView(this);
 
         img = ImageHelper.getRippy(mSwipeRefreshContainer);
 
         super.onCreateDrawer();
 
-        mInboxAdapter.setCallback(this);
-        mInboxRecyclerView.setHasFixedSize(true);
-        mInboxRecyclerView.setAdapter(mInboxAdapter);
-        mInboxRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mInboxRecyclerView.setNestedScrollingEnabled(false);
-        mInboxRecyclerView.addItemDecoration(new DividerItemDecoration(this,
+        mSubscriptionsAdapter.setCallback(this);
+        mSubscriptionRecyclerView.setHasFixedSize(true);
+        mSubscriptionRecyclerView.setAdapter(mSubscriptionsAdapter);
+        mSubscriptionRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mSubscriptionRecyclerView.setNestedScrollingEnabled(false);
+        mSubscriptionRecyclerView.addItemDecoration(new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL));
-        mInboxPresenter.loadInbox(type);
+        mSubscriptionPresenter.loadSubscriptions(type);
         mSwipeRefreshContainer.setColorSchemeResources(R.color.accent);
 
         mSwipeRefreshContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mInboxPresenter.loadInbox(type);
+                mSubscriptionPresenter.loadSubscriptions(type);
             }
         });
 
@@ -88,18 +85,18 @@ public class InboxActivity extends BaseDrawerActivity implements InboxMvpView, C
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         switch (item.getItemId()) {
-                            case R.id.action_inbox:
-                                mInboxRecyclerView.setVisibility(View.VISIBLE);
-                                if (!type.equals(INBOX)) {
-                                    type = INBOX;
-                                    mInboxPresenter.loadInbox(type);
+                            case R.id.action_unread:
+                                mSubscriptionRecyclerView.setVisibility(View.VISIBLE);
+                                if (!type.equals(UNREAD)) {
+                                    type = UNREAD;
+                                    mSubscriptionPresenter.loadSubscriptions(type);
                                 }
                                 break;
-                            case R.id.action_sentbox:
-                                mInboxRecyclerView.setVisibility(View.VISIBLE);
-                                if (!type.equals(SENTBOX)) {
-                                    type = SENTBOX;
-                                    mInboxPresenter.loadInbox(type);
+                            case R.id.action_read:
+                                mSubscriptionRecyclerView.setVisibility(View.VISIBLE);
+                                if (!type.equals(READ)) {
+                                    type = READ;
+                                    mSubscriptionPresenter.loadSubscriptions(type);
                                 }
                                 break;
                         }
@@ -111,18 +108,13 @@ public class InboxActivity extends BaseDrawerActivity implements InboxMvpView, C
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-        mInboxPresenter.detachView();
+        mSubscriptionPresenter.detachView();
     }
 
     @Override
-    public void showInbox(List<Conversations.Messages> messages) {
-        mInboxAdapter.setMessages(messages);
-    }
-
-    @Override
-    public void showInboxEmpty() {
-        mInboxAdapter.setMessages(null);
+    public void showSubscriptionsEmpty() {
+        mSubscriptionsAdapter.setSubscriptions(new ArrayList<Subscription.Threads>());
+        mNoContentView.setVisibility(View.VISIBLE);
     }
 
     private void animate() {
@@ -152,9 +144,17 @@ public class InboxActivity extends BaseDrawerActivity implements InboxMvpView, C
     }
 
     @Override
-    public void onItemClicked(int id) {
-        Intent intent = new Intent(this, ConversationActivity.class);
-        intent.putExtra("id", id);
+    public void showSubscriptions(List<Subscription.Threads> threads) {
+        mNoContentView.setVisibility(View.GONE);
+        mSubscriptionsAdapter.setSubscriptions(threads);
+    }
+
+
+    @Override
+    public void onSubscriptionClicked(int topicId, int lastReadPage) {
+        Intent intent = new Intent(this, ThreadActivity.class);
+        intent.putExtra("topicId", topicId);
+        intent.putExtra("lastPostId", lastReadPage);
         startActivity(intent);
     }
 }
