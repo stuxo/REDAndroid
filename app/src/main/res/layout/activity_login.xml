@@ -20,7 +20,7 @@
         android:contentDescription="@string/redandroid_logo"
         android:paddingTop="30dp"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/redacted_logo_3"/>
+        app:srcCompat="@drawable/redacted_logo_1"/>
 
     <EditText
         android:id="@+id/username_input"

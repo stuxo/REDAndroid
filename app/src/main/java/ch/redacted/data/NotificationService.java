@@ -1,33 +1,16 @@
 package ch.redacted.data;
 
-/*
- * Copyright 2014 Google Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.job.JobParameters;
-import android.app.job.JobService;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
+
+import com.firebase.jobdispatcher.JobParameters;
+import com.firebase.jobdispatcher.JobService;
 
 import ch.redacted.app.R;
 import ch.redacted.ui.inbox.conversation.ConversationActivity;
@@ -46,7 +29,6 @@ import ch.redacted.ui.forum.thread.ThreadActivity;
  * ultimately land on this service's "onStartJob" method. It runs jobs for a specific amount of time
  * and finishes them. It keeps the activity updated with changes via a Messenger.
  */
-@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class NotificationService extends JobService {
 
     private static final String TAG = NotificationService.class.getSimpleName();
@@ -61,16 +43,6 @@ public class NotificationService extends JobService {
     public void onDestroy() {
         super.onDestroy();
         Log.i(TAG, "Service destroyed");
-    }
-
-    /**
-     * When the app's MainActivity is created, it starts this service. This is so that the
-     * activity and this service can communicate back and forth. See "setUiCallback()"
-     */
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-//        mActivityMessenger = intent.getParcelableExtra(MESSENGER_INTENT_KEY);
-        return START_NOT_STICKY;
     }
 
     @Override
@@ -231,9 +203,6 @@ public class NotificationService extends JobService {
 
     @Override
     public boolean onStopJob(JobParameters params) {
-        // Stop tracking these job parameters, as we've 'finished' executing.
-        Log.i(TAG, "on stop job: " + params.getJobId());
-
         // Return false to drop the job.
         return false;
     }

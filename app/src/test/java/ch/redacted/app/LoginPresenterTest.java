@@ -47,7 +47,6 @@ public class LoginPresenterTest {
 
     @Test
     public void loginSuccess() {
-        //TODO: fully create a profile
         //Profile profile = TestDataFactory.makeProfile();
         //when(mMockDataManager.getProfile())
         //        .thenReturn(Observable.just(profile).toSingle());

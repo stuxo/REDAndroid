@@ -12,6 +12,10 @@ import android.os.Build;
 
 import com.facebook.stetho.Stetho;
 
+import com.firebase.jobdispatcher.FirebaseJobDispatcher;
+import com.firebase.jobdispatcher.GooglePlayDriver;
+import com.firebase.jobdispatcher.Job;
+import com.firebase.jobdispatcher.Trigger;
 import org.acra.ACRA;
 import org.acra.ReportField;
 import org.acra.ReportingInteractionMode;
@@ -53,8 +57,6 @@ import ch.redacted.injection.module.ApplicationModule;
 
 public class REDApplication extends Application {
 
-	//TODO: Developers put your local Gazelle install IP here instead of testing on the live site
-	//I recommend setting up with Vagrant: https://github.com/dr4g0nnn/VagrantGazelle
 	public static final String DEFAULT_SITE = "https://redacted.ch";
 //		public static final String DEFAULT_SITE = "https://pthdev.pw";
 	ApplicationComponent mApplicationComponent;
@@ -63,18 +65,7 @@ public class REDApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		startNotificationService();
-
-//		if (BuildConfig.DEBUG) {
         Stetho.initializeWithDefaults(this);
-//		}
-//		initSoup(DEFAULT_SITE);
-//		if (SettingsActivity.lightThemeEnabled(getApplicationContext())) {
-//			AppCompatDelegate.setDefaultNightMode(
-//					AppCompatDelegate.MODE_NIGHT_NO);
-//		} else {
-//			AppCompatDelegate.setDefaultNightMode(
-//					AppCompatDelegate.MODE_NIGHT_YES);
-//		}
 	}
 
 	@Override
@@ -117,14 +108,17 @@ public class REDApplication extends Application {
 		}
 	}
 
-	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 	private void startNotificationService() {
 
-		JobScheduler jobScheduler = (JobScheduler) getApplicationContext().getSystemService(JOB_SCHEDULER_SERVICE);
-		ComponentName componentName = new ComponentName(getApplicationContext(), NotificationService.class);
-		//poll every hour for now
-		JobInfo jobInfo = new JobInfo.Builder(1, componentName).setRequiresCharging(false).setRequiresDeviceIdle(false).setPeriodic(1000 * 60 * 60).build();
-		jobScheduler.schedule(jobInfo);
+		FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(this));
+		Job job = dispatcher.newJobBuilder()
+			.setService(NotificationService.class)
+			.setTag("notification-polling-job")
+			.setRecurring(true)
+			.setReplaceCurrent(true)
+			.setTrigger(Trigger.executionWindow(3540, 3600)) //trigger every 59 - 60 minutes
+			.build();
+		dispatcher.mustSchedule(job);
 	}
 
 	public static REDApplication get(Context context) {
