@@ -125,7 +125,11 @@ public class ThreadActivity extends BaseActivity implements ThreadMvpView, PostA
             }
         });
 
-        mThreadPresenter.loadPosts(topicId, null, lastPageId);
+        if (lastPostId > 0) {
+            mThreadPresenter.loadPosts(topicId, lastPostId, null);
+        } else {
+            mThreadPresenter.loadPosts(topicId, null, lastPageId);
+        }
     }
 
     @Override

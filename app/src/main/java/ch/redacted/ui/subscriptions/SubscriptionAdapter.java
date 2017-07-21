@@ -62,7 +62,7 @@ public class SubscriptionAdapter extends RecyclerView.Adapter<SubscriptionAdapte
             holder.title.setText(Html.fromHtml(thread.threadTitle));
         }
 
-        if (thread.lastPostId > 1){
+        if (thread.lastPostId > 1) {
             holder.setLastPostId(thread.lastPostId);
         }
 
@@ -73,6 +73,7 @@ public class SubscriptionAdapter extends RecyclerView.Adapter<SubscriptionAdapte
         }
 
         holder.setTopicId(thread.threadId);
+        holder.setPostId(thread.postId);
     }
 
     @Override
@@ -92,17 +93,19 @@ public class SubscriptionAdapter extends RecyclerView.Adapter<SubscriptionAdapte
 
         @OnClick(R.id.subscription_root)
         public void onSubscriptionClicked() {
-            mCallback.onSubscriptionClicked(topicId, lastPostId);
+            mCallback.onSubscriptionClicked(topicId, lastPostId, postId);
         }
 
         @OnClick(R.id.last_read_button)
         public void onLastReadClick() {
-            mCallback.onSubscriptionClicked(topicId, lastPostId);
+            mCallback.onSubscriptionClicked(topicId, lastPostId, postId);
         }
 
         public int lastPostId;
 
         public int topicId;
+
+        public int postId;
 
         public void setTopicId(int topicId) {
             this.topicId = topicId;
@@ -126,9 +129,13 @@ public class SubscriptionAdapter extends RecyclerView.Adapter<SubscriptionAdapte
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+
+        public void setPostId(int postId) {
+            this.postId = postId;
+        }
     }
 
     interface Callback {
-        void onSubscriptionClicked(int topicId, int lastReadPage);
+        void onSubscriptionClicked(int topicId, int lastReadPage, int postId);
     }
 }

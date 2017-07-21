@@ -154,10 +154,10 @@ public class SubscriptionsActivity extends BaseDrawerActivity implements Subscri
 
 
     @Override
-    public void onSubscriptionClicked(int topicId, int lastReadPage) {
+    public void onSubscriptionClicked(int topicId, int lastPostId, int postId) {
         Intent intent = new Intent(this, ThreadActivity.class);
         intent.putExtra("topicId", topicId);
-        intent.putExtra("lastPostId", lastReadPage);
+        intent.putExtra("lastPostId", lastPostId);
         startActivity(intent);
     }
 }
