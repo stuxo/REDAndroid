@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.support.v7.preference.CheckBoxPreference;
 import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 
 import ch.redacted.REDApplication;
+import ch.redacted.app.BuildConfig;
 import ch.redacted.app.R;
 import ch.redacted.data.local.PreferencesHelper;
 
@@ -18,6 +20,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     public void onCreatePreferences(Bundle bundle, String s) {
         addPreferencesFromResource(R.xml.preferences);
         mPreferenceHelper = ((REDApplication) getActivity().getApplication()).getComponent().preferencesHelper();
+        Preference versionPreference = findPreference("app_version_unknown");
+        versionPreference.setTitle(BuildConfig.VERSION_NAME);
     }
 
     @Override
