@@ -1,13 +1,12 @@
 package ch.redacted.ui.announcements;
 
-import android.graphics.drawable.Animatable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,11 +26,9 @@ public class AnnouncementActivity extends BaseDrawerActivity implements Announce
     @Inject AnnouncementPresenter mAnnouncementPresenter;
     @Inject AnnouncementAdapter mAnnouncementAdapter;
 
-
     @BindView(R.id.recycler_view) RecyclerView mAnnouncementRecycler;
     @BindView(R.id.swipe_refresh_container) SwipeRefreshLayout mSwipeRefreshContainer;
     @BindView(R.id.text_no_content) TextView mNoAnnouncements;
-    private ActionBarDrawerToggle mDrawerToggle;
     private ImageView img;
 
     /**
@@ -69,10 +66,9 @@ public class AnnouncementActivity extends BaseDrawerActivity implements Announce
     }
 
     private void animate() {
-        Drawable drawable = img.getDrawable();
-        if (drawable instanceof Animatable) {
-            ((Animatable) drawable).start();
-        }
+        Animation rotation = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        rotation.setRepeatCount(Animation.INFINITE);
+        img.startAnimation(rotation);
     }
 
     /*****
