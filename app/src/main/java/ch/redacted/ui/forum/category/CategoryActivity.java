@@ -8,6 +8,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -68,10 +70,9 @@ public class CategoryActivity extends BaseDrawerActivity implements CategoryMvpV
 	}
 
 	private void animate() {
-		Drawable drawable = img.getDrawable();
-		if (drawable instanceof Animatable) {
-			((Animatable) drawable).start();
-		}
+		Animation rotation = AnimationUtils.loadAnimation(this, R.anim.rotate);
+		rotation.setRepeatCount(Animation.INFINITE);
+		img.startAnimation(rotation);
 	}
 
 	/***** MVP View methods implementation *****/

@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Technology"
-            android:textSize="@dimen/text_headline"
+            android:textSize="@dimen/text_large_body"
             android:textStyle="bold"/>
 
         <TextView
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Logchecker and FLAC rescoring - upload your missing logs!"
-            android:textSize="@dimen/text_headline"/>
+            android:textSize="@dimen/text_large_body"/>
 
     </LinearLayout>
 </RelativeLayout>

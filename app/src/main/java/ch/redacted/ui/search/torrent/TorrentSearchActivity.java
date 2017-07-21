@@ -12,6 +12,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -100,10 +102,9 @@ public class TorrentSearchActivity extends BaseDrawerActivity implements Torrent
     }
 
     private void animate() {
-        Drawable drawable = img.getDrawable();
-        if (drawable instanceof Animatable) {
-            ((Animatable) drawable).start();
-        }
+        Animation rotation = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        rotation.setRepeatCount(Animation.INFINITE);
+        img.startAnimation(rotation);
     }
 
     /*****

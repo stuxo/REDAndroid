@@ -15,6 +15,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -126,10 +128,9 @@ public class InboxActivity extends BaseDrawerActivity implements InboxMvpView, C
     }
 
     private void animate() {
-        Drawable drawable = img.getDrawable();
-        if (drawable instanceof Animatable) {
-            ((Animatable) drawable).start();
-        }
+        Animation rotation = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        rotation.setRepeatCount(Animation.INFINITE);
+        img.startAnimation(rotation);
     }
 
     /*****
@@ -139,7 +140,9 @@ public class InboxActivity extends BaseDrawerActivity implements InboxMvpView, C
     @Override
     public void showLoadingProgress(boolean show) {
         mSwipeRefreshContainer.setRefreshing(show);
-        animate();
+        if (show) {
+            animate();
+        }
     }
 
     @Override

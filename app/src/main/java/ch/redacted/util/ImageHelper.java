@@ -20,7 +20,7 @@ public class ImageHelper {
 		temp = temp.replaceAll("onclick=\".*?\"", "");
 		temp = temp.replaceAll("class=\".*?\"", "");
 
-		return temp.replace("alt", "src");
+		return temp.replace("alt=\"", "src=\"");
 	}
 
     public static ImageView getRippy(SwipeRefreshLayout swipeRefreshContainer) {
@@ -30,12 +30,20 @@ public class ImageHelper {
 			f = swipeRefreshContainer.getClass().getDeclaredField("mCircleView");
 			f.setAccessible(true);
 			img = (ImageView)f.get(swipeRefreshContainer);
-			img.setImageResource(R.drawable.rippy);
+			img.setImageResource(R.drawable.ic_rippy);
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		} catch (NoSuchFieldException e) {
 			e.printStackTrace();
 		}
 		return img;
+	}
+
+	public static String getFirstImageLink(String body) {
+		try {
+			return body.substring(body.indexOf("alt=") + 5, body.indexOf("src=") - 2);
+		} catch (IndexOutOfBoundsException e) {
+			return "";
+		}
 	}
 }

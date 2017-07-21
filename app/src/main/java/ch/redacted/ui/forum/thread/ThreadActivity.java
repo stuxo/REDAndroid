@@ -12,6 +12,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -123,7 +125,11 @@ public class ThreadActivity extends BaseActivity implements ThreadMvpView, PostA
             }
         });
 
-        mThreadPresenter.loadPosts(topicId, null, lastPageId);
+        if (lastPostId > 0) {
+            mThreadPresenter.loadPosts(topicId, lastPostId, null);
+        } else {
+            mThreadPresenter.loadPosts(topicId, null, lastPageId);
+        }
     }
 
     @Override
@@ -133,10 +139,9 @@ public class ThreadActivity extends BaseActivity implements ThreadMvpView, PostA
     }
 
     private void animate() {
-        Drawable drawable = img.getDrawable();
-        if (drawable instanceof Animatable) {
-            ((Animatable) drawable).start();
-        }
+        Animation rotation = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        rotation.setRepeatCount(Animation.INFINITE);
+        img.startAnimation(rotation);
     }
 
     /*****
