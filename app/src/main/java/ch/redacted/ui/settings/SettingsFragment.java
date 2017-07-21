@@ -20,7 +20,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     public void onCreatePreferences(Bundle bundle, String s) {
         addPreferencesFromResource(R.xml.preferences);
         mPreferenceHelper = ((REDApplication) getActivity().getApplication()).getComponent().preferencesHelper();
-        Preference versionPreference = findPreference("app_version_unknown");
+        Preference versionPreference = findPreference("pref_verion_name");
         versionPreference.setTitle(BuildConfig.VERSION_NAME);
     }
 

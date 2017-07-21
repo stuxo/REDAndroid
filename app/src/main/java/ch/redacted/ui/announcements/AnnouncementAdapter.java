@@ -7,8 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import org.sufficientlysecure.htmltextview.HtmlHttpImageGetter;
 import org.sufficientlysecure.htmltextview.HtmlTextView;
@@ -22,8 +25,10 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ch.redacted.REDApplication;
 import ch.redacted.app.R;
 import ch.redacted.data.model.Announcement;
+import ch.redacted.util.ImageHelper;
 
 /**
  * Created by sxo on 23/12/16.
@@ -56,6 +61,13 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
         holder.time.setText(DateUtils.getRelativeTimeSpanString(
                 announcement.newsTime.getTime(), new Date().getTime(),
                 DateUtils.FORMAT_ABBREV_ALL));
+
+        if (REDApplication.get(holder.announcementImage.getContext()).getComponent().dataManager().getPreferencesHelper().getLoadImages()) {
+            String firstImageUrl = ImageHelper.getFirstImageLink(announcement.body);
+            if (firstImageUrl.length() > 0) {
+                Glide.with(holder.announcementImage.getContext()).load(firstImageUrl).asBitmap().fitCenter().into(holder.announcementImage);
+            }
+        }
 
         holder.fullText = announcement.body;
         holder.body.setLinkTextColor(ContextCompat.getColor(holder.body.getContext(), R.color.primary));
@@ -92,6 +104,9 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
 
         @BindView(R.id.announcement_body)
         HtmlTextView body;
+
+        @BindView(R.id.announcement_image)
+        ImageView announcementImage;
 
         public String fullText;
 

@@ -38,4 +38,12 @@ public class ImageHelper {
 		}
 		return img;
 	}
+
+	public static String getFirstImageLink(String body) {
+		try {
+			return body.substring(body.indexOf("alt=") + 5, body.indexOf("src=") - 2);
+		} catch (IndexOutOfBoundsException e) {
+			return "";
+		}
+	}
 }
