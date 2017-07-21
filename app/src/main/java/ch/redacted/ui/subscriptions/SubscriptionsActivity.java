@@ -132,7 +132,9 @@ public class SubscriptionsActivity extends BaseDrawerActivity implements Subscri
     @Override
     public void showLoadingProgress(boolean show) {
         mSwipeRefreshContainer.setRefreshing(show);
-        animate();
+        if (show) {
+            animate();
+        }
     }
 
     @Override

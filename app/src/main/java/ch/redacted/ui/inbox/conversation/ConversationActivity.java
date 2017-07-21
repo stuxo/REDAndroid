@@ -10,6 +10,9 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import ch.redacted.ui.reply.ReplyActivity;
 import java.util.List;
@@ -21,6 +24,7 @@ import butterknife.ButterKnife;
 import ch.redacted.app.R;
 import ch.redacted.data.model.Conversation;
 import ch.redacted.ui.base.BaseActivity;
+import ch.redacted.util.ImageHelper;
 
 import static ch.redacted.ui.reply.ReplyActivity.TYPE_MESSAGE;
 
@@ -39,6 +43,7 @@ public class ConversationActivity extends BaseActivity implements ConversationMv
     private String mLastMessage;
     private int mConversationId;
     private String mUser;
+    private ImageView img;
 
     /**
      * Android activity lifecycle methods
@@ -63,6 +68,8 @@ public class ConversationActivity extends BaseActivity implements ConversationMv
                 startActivityForResult(intent, 0);
             }
         });
+
+        img = ImageHelper.getRippy(mSwipeRefreshContainer);
 
         mConversationRecycler.setHasFixedSize(true);
         mConversationRecycler.setAdapter(mMessageAdapter);
@@ -90,6 +97,10 @@ public class ConversationActivity extends BaseActivity implements ConversationMv
         mConversationPresenter.detachView();
     }
 
+    /*****
+     * MVP View methods implementation
+     *****/
+
     @Override
     public void showMessages(List<Conversation.Messages> messages) {
         mMessageAdapter.setMessages(messages);
@@ -101,13 +112,18 @@ public class ConversationActivity extends BaseActivity implements ConversationMv
         mMessageAdapter.setMessages(null);
     }
 
-    /*****
-     * MVP View methods implementation
-     *****/
+    private void animate() {
+        Animation rotation = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        rotation.setRepeatCount(Animation.INFINITE);
+        img.startAnimation(rotation);
+    }
 
     @Override
     public void showLoadingProgress(boolean show) {
         mSwipeRefreshContainer.setRefreshing(show);
+        if (show) {
+            animate();
+        }
     }
 
     @Override
