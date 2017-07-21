@@ -20,7 +20,7 @@ public class ImageHelper {
 		temp = temp.replaceAll("onclick=\".*?\"", "");
 		temp = temp.replaceAll("class=\".*?\"", "");
 
-		return temp.replace("alt", "src");
+		return temp.replace("alt=\"", "src=\"");
 	}
 
     public static ImageView getRippy(SwipeRefreshLayout swipeRefreshContainer) {
