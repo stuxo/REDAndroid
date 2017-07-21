@@ -10,9 +10,9 @@ android {
         minSdkVersion 16
         targetSdkVersion 25
         testInstrumentationRunner "${applicationId}.runner.RxAndroidJUnitRunner"
-        versionCode 1050
+        versionCode 1060
         // Major -> Millions, Minor -> Thousands, Bugfix -> Hundreds. E.g 1.3.72 == 1,003,072
-        versionName '1.0.5'
+        versionName '1.0.6'
         vectorDrawables.useSupportLibrary = true
     }
 
