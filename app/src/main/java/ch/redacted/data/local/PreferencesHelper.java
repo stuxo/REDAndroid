@@ -33,6 +33,9 @@ import ch.redacted.injection.ApplicationContext;
 
 	private final SharedPreferences mPref;
 	private final SharedPreferences mCookiePreference;
+	public static final String PREF_PYWA_PASSWORD_KEY = "pref_pywa_password";
+	public static final String PREF_PYWA_HOST_KEY = "pref_pywa_host";
+	public static final String PREF_PYWA_PORT_KEY ="pref_pywa_port";
 
 	@Inject public PreferencesHelper(@ApplicationContext Context context) {
 		mPref = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
@@ -123,6 +126,26 @@ import ch.redacted.injection.ApplicationContext;
 		mPref.edit().putString(PREF_WM_SESSION_KEY, session).apply();
 	}
 
+	public String getPywaPassword() {
+		return mPref.getString(PREF_PYWA_PASSWORD_KEY, "");
+	}
+
+	public void setPywaPort(String port) {
+		mPref.edit().putString(PREF_PYWA_PORT_KEY, port).apply();
+	}
+
+	public void setPywaHost(String url) {
+		mPref.edit().putString(PREF_PYWA_HOST_KEY, url).apply();
+	}
+
+	public void setPywaPassword(String pass) {
+		mPref.edit().putString(PREF_PYWA_PASSWORD_KEY, pass).apply();
+	}
+
+	public String getPywaHost(){
+		return String.format("%s:%s", mPref.getString(PREF_PYWA_HOST_KEY, ""), mPref.getString(PREF_PYWA_PORT_KEY, ""));
+	}
+	
 	public boolean getLoadImages() {
 		return mPref.getBoolean(PREF_LOAD_IMAGES, true);
 	}

@@ -138,21 +138,39 @@ public class ReleasePresenter extends BasePresenter<ReleaseMvpView> {
         String downloadMethod = mDataManager.getPreferencesHelper().getDownloadMethod();
 
         if (downloadMethod.equals("Send to WhatManager")) {
-
+            getMvpView().showMessage("Sent download request");
             mSubscription.add(mDataManager.downloadWmRelease(id, context)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(new DisposableSingleObserver<Response>() {
                     @Override public void onSuccess(Response value) {
-                        getMvpView().showSendToWmComplete();
+                        getMvpView().showSendToServerComplete();
                     }
 
                     @Override public void onError(Throwable error) {
                         getMvpView().showError("Could not download file: " + error.getMessage());
                     }
                 }));
-        }
-        else {
+        } else if (downloadMethod.equals("Send to PyWhatAuto")) {
+            getMvpView().showMessage("Sent download request");
+            mSubscription.add(mDataManager.downloadPywaRelease(id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(new DisposableSingleObserver<Response>() {
+                    @Override public void onSuccess(Response value) {
+                        //fml... really?
+                        if (value.body().toString().contains("Incorrect password")){
+                            getMvpView().showError("Could not download file: " + value.body().toString());
+                        } else {
+                            getMvpView().showSendToServerComplete();
+                        }
+                    }
+
+                    @Override public void onError(Throwable error) {
+                        getMvpView().showError("Could not download file: " + error.getMessage());
+                    }
+                }));
+        } else {
             mSubscription.add(mDataManager.downloadRelease(id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

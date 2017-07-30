@@ -3,6 +3,7 @@ package ch.redacted.data;
 import android.content.Context;
 import android.os.Environment;
 
+import ch.redacted.data.remote.PyWhatAutoService;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -245,6 +246,15 @@ public class DataManager {
                 }
             });
     }
+
+    public Single<Response<ResponseBody>> downloadPywaRelease(final int id) {
+
+        final PyWhatAutoService pywa =
+            PyWhatAutoService.Creator.newPywaService(mPreferencesHelper.getPywaHost());
+
+        return pywa.addTorrent(mPreferencesHelper.getPywaPassword(), "redacted", id);
+    }
+
 
     public Single<Request> getRequest(int id) {
         return mApiService.request(id);

@@ -36,6 +36,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         EditTextPreference preference3 = (EditTextPreference) findPreference(PreferencesHelper.PREF_WM_PORT_KEY);
         mPreferenceHelper.setWmPort(preference3.getText());
 
+        //todo rename these to something useful, ugh
+
+        //todo error checking on url input
+
+        //todo return an error if host or url is null
         EditTextPreference preference4 = (EditTextPreference) findPreference(PreferencesHelper.PREF_WM_USER_KEY);
         mPreferenceHelper.setWmUser(preference4.getText());
 
@@ -47,5 +52,17 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         ListPreference preference7 = (ListPreference) findPreference(PreferencesHelper.PREF_TOP_TORRENT_LIMIT);
         mPreferenceHelper.setTopTorrentLimit(Integer.parseInt(preference7.getValue()));
+
+        EditTextPreference preference8 = (EditTextPreference) findPreference(PreferencesHelper.PREF_PYWA_HOST_KEY);
+        mPreferenceHelper.setPywaHost(preference8.getText());
+
+        EditTextPreference preference9 = (EditTextPreference) findPreference(
+            PreferencesHelper.PREF_PYWA_PASSWORD_KEY);
+        mPreferenceHelper.setPywaPassword(preference9.getText());
+
+        EditTextPreference preference10 = (EditTextPreference) findPreference(
+            PreferencesHelper.PREF_PYWA_PORT_KEY);
+        mPreferenceHelper.setPywaPort(preference10.getText());
+
     }
 }

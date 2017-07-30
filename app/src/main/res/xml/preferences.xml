@@ -57,6 +57,27 @@
     </android.support.v7.preference.PreferenceCategory>
 
     <android.support.v7.preference.PreferenceCategory
+        android:key="pref_pywa"
+        android:title="@string/pref_pywa">
+        <android.support.v7.preference.EditTextPreference
+            android:defaultValue=""
+            android:inputType="textUri"
+            android:key="@string/key_pref_pywa_host"
+            android:summary="Begins with http:// or https://, no trailing slash"
+            android:title="@string/pref_pywa_host"/>
+        <android.support.v7.preference.EditTextPreference
+            android:defaultValue=""
+            android:inputType="number"
+            android:key="@string/key_pref_pywa_port"
+            android:title="@string/pref_pywa_port"/>
+        <android.support.v7.preference.EditTextPreference
+            android:defaultValue=""
+            android:inputType="textPassword"
+            android:key="@string/key_pref_pywa_password"
+            android:title="@string/pref_pywa_password"/>
+    </android.support.v7.preference.PreferenceCategory>
+
+    <android.support.v7.preference.PreferenceCategory
         android:key="pref_version"
         android:title="REDAndroid Version">
         <android.support.v7.preference.Preference

@@ -9,6 +9,7 @@
     <string-array name="default_download_options">
         <item>Download .torrent</item>
         <item>Send to WhatManager</item>
+        <item>Send to PyWhatAuto</item>
     </string-array>
 
 </resources>
