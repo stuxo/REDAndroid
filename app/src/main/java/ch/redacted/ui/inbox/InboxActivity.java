@@ -1,8 +1,6 @@
 package ch.redacted.ui.inbox;
 
 import android.content.Intent;
-import android.graphics.drawable.Animatable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -14,10 +12,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.EditText;
 import android.widget.ImageView;
 
 import java.util.List;
@@ -40,9 +36,6 @@ public class InboxActivity extends BaseDrawerActivity implements InboxMvpView, C
     @BindView(R.id.recycler_view) RecyclerView mInboxRecyclerView;
     @BindView(R.id.swipe_refresh_container) SwipeRefreshLayout mSwipeRefreshContainer;
     @BindView(R.id.bottom_navigation) BottomNavigationView bottomNavigationView;
-    @BindView(R.id.username) EditText recipient;
-    @BindView(R.id.message_subject) EditText messageSubject;
-    @BindView(R.id.message_body) EditText messageBody;
 
     @BindView(R.id.snackbar_anchor) CoordinatorLayout snackbarAnchor;
 
