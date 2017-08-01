@@ -15,7 +15,9 @@ public interface ReleaseMvpView extends MvpView {
 
     void showDownloadComplete();
 
-    void showSendToWmComplete();
+    void showSendToServerComplete();
 
     void showTorrents(Object torrent);
+
+	void showMessage(String message);
 }

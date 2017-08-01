@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -174,8 +175,8 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
     }
 
     @Override
-    public void showSendToWmComplete() {
-        Toast.makeText(this, "Sent to WhatManager", Toast.LENGTH_LONG).show();
+    public void showSendToServerComplete() {
+        Toast.makeText(this, "Sent to Server successfully", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -242,6 +243,10 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
     public void showTorrents(Object torrent) {
         mTorrents.add(torrent);
         mTorrentsAdapter.notifyDataSetChanged();
+    }
+
+    @Override public void showMessage(String message) {
+        Snackbar.make(getCurrentFocus(), message, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
