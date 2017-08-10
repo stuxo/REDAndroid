@@ -72,6 +72,15 @@ public class ConversationActivity extends BaseActivity implements ConversationMv
         img = ImageHelper.getRippy(mSwipeRefreshContainer);
 
         mConversationRecycler.setHasFixedSize(true);
+        mConversationRecycler.addOnScrollListener(new RecyclerView.OnScrollListener(){
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy){
+                if (dy > 0)
+                    fab.hide();
+                else if (dy < 0)
+                    fab.show();
+            }
+        });
         mConversationRecycler.setAdapter(mMessageAdapter);
         mConversationRecycler.setLayoutManager(new LinearLayoutManager(this));
         mConversationRecycler.setNestedScrollingEnabled(false);
