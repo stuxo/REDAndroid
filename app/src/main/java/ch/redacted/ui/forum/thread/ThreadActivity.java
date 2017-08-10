@@ -194,12 +194,13 @@ public class ThreadActivity extends BaseActivity implements ThreadMvpView, PostA
     }
 
     @Override
-    public void onQuoteClicked(String bbBody, String quoteText, String quotedUser) {
+    public void onQuoteClicked(String bbBody, String quoteText, String quotedUser, int postId) {
         Intent intent = new Intent(this, ReplyActivity.class);
         intent.putExtra("quote", quoteText);
-        intent.putExtra("bbcody", quoteText);
+        intent.putExtra("bbcode", bbBody);
         intent.putExtra("user", quotedUser);
         intent.putExtra("type", TYPE_POST);
+        intent.putExtra("postId", postId);
         startActivityForResult(intent, 0);
     }
 

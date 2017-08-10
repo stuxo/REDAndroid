@@ -72,6 +72,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ForumViewHolde
         holder.setBbBody(post.bbBody);
         holder.setHtmlBody(post.body);
         holder.setUserId(post.author.authorId);
+        holder.setPostId(post.postId);
         holder.time.setText(DateUtils.getRelativeTimeSpanString(post.addedTime.getTime(), now, DateUtils.FORMAT_ABBREV_ALL));
         holder.author.setHtml(post.author.authorName);
         holder.postBody.setLinkTextColor(ContextCompat.getColor(holder.postBody.getContext(), R.color.primary));
@@ -132,6 +133,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ForumViewHolde
 
         private int userId;
 
+        private int postId;
+
         @BindView(R.id.post_time) public TextView time;
 
         @BindView(R.id.post_author) public HtmlTextView author;
@@ -141,7 +144,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ForumViewHolde
         @BindView(R.id.profile_image) public ImageView avatar;
 
         @OnClick(R.id.quote_post) public void onQuoteClick(){
-            mCallback.onQuoteClicked(bbBody, htmlBody, authorName);
+            mCallback.onQuoteClicked(bbBody, htmlBody, authorName, postId);
         }
 
         @OnClick(R.id.user_root) public void onUserClick(){
@@ -168,10 +171,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ForumViewHolde
         public void setHtmlBody(String htmlBody) {
             this.htmlBody = htmlBody;
         }
+
+        public void setPostId(int postId) {
+            this.postId = postId;
+        }
     }
 
     interface Callback {
-        void onQuoteClicked(String bbBody, String quoteText, String quotedUser);
+        void onQuoteClicked(String bbBody, String quoteText, String quotedUser, int postId);
 
         void onProfileClicked(int userId);
     }

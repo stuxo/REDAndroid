@@ -68,8 +68,9 @@ public class ReplyActivity extends BaseActivity implements ReplyMvpView {
         type = getIntent().getExtras().getInt("type");
         bbcode = getIntent().getExtras().getString("bbcode");
         String user = getIntent().getStringExtra("user");
+        int postId = getIntent().getIntExtra("postId", 0);
 
-        if (type == TYPE_NEW_MESSAGE){
+        if (type == TYPE_NEW_MESSAGE) {
             replyingTo.setVisibility(View.GONE);
             subjectEdit.setVisibility(View.VISIBLE);
             messageText.setHint(R.string.compose_message);
@@ -83,8 +84,9 @@ public class ReplyActivity extends BaseActivity implements ReplyMvpView {
             } else if (type == TYPE_THREAD) {
                 replyingTo.setHtml(quote);
             } else if (type == TYPE_POST) {
-                messageText.setText(bbcode);
+                messageText.setText(String.format(Locale.getDefault(), "[quote=%s|%d]%s[/quote]", user, postId, bbcode));
                 replyingTo.setHtml(String.format(Locale.getDefault(), "<i>%s said: </i>%s", user, quote));
+                messageText.append("");
             }
         }
     }
