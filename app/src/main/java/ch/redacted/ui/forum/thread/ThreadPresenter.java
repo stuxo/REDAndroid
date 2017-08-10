@@ -31,7 +31,7 @@ import retrofit2.HttpException;
 		if (mSubscription != null) mSubscription.dispose();
 	}
 
-	public void loadPosts(int threadId, Integer postId, Integer page) {
+	public void loadPosts(int threadId, Integer postId, Integer page, final boolean scrollToTop) {
 		checkViewAttached();
 		getMvpView().showProgress(true);
 
@@ -45,7 +45,7 @@ import retrofit2.HttpException;
 						getMvpView().showPostsEmpty();
 						getMvpView().showProgress(false);
 					} else {
-						getMvpView().showPosts(item);
+						getMvpView().showPosts(item, scrollToTop);
 						getMvpView().showProgress(false);
 					}
 				}

@@ -5,7 +5,7 @@ import ch.redacted.ui.base.MvpView;
 
 public interface ThreadMvpView extends MvpView {
 
-    void showPosts(ForumThread threads);
+    void showPosts(ForumThread threads, boolean scrollToTop);
 
     void showPostsEmpty();
 

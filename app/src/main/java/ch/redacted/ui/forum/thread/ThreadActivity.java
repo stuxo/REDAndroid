@@ -114,21 +114,21 @@ public class ThreadActivity extends BaseActivity implements ThreadMvpView, PostA
         mSwipeRefreshContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mThreadPresenter.loadPosts(topicId, null, forumNav.getCurrentPageNumber());
+                mThreadPresenter.loadPosts(topicId, null, forumNav.getCurrentPageNumber(), false);
             }
         });
 
         forumNav.setNavigationEventListener(new ForumNavigationView.OnNavigationEventListener() {
             @Override
             public void onNavigationChanged() {
-                mThreadPresenter.loadPosts(topicId, null, forumNav.getCurrentPageNumber());
+                mThreadPresenter.loadPosts(topicId, null, forumNav.getCurrentPageNumber(), true);
             }
         });
 
         if (lastPostId > 0) {
-            mThreadPresenter.loadPosts(topicId, lastPostId, null);
+            mThreadPresenter.loadPosts(topicId, lastPostId, null, false);
         } else {
-            mThreadPresenter.loadPosts(topicId, null, lastPageId);
+            mThreadPresenter.loadPosts(topicId, null, lastPageId, false);
         }
     }
 
@@ -149,12 +149,16 @@ public class ThreadActivity extends BaseActivity implements ThreadMvpView, PostA
      *****/
 
     @Override
-    public void showPosts(ForumThread threads) {
+    public void showPosts(ForumThread threads, boolean scrollToTop) {
         threadTitle = threads.response.threadTitle;
         if (Build.VERSION.SDK_INT >= 24) {
             toolbarLayout.setTitle(Html.fromHtml(threads.response.threadTitle, Html.FROM_HTML_MODE_LEGACY));
         } else {
             toolbarLayout.setTitle(Html.fromHtml(threads.response.threadTitle));
+        }
+
+        if (scrollToTop){
+            mPostRecycler.scrollToPosition(0);
         }
 
         mPostAdapter.setItems(threads.response.posts);
@@ -185,7 +189,7 @@ public class ThreadActivity extends BaseActivity implements ThreadMvpView, PostA
 
     @Override
     public void showPostSuccessful() {
-        mThreadPresenter.loadPosts(topicId, null, forumNav.getCurrentPageNumber());
+        mThreadPresenter.loadPosts(topicId, null, forumNav.getCurrentPageNumber(), false);
     }
 
     @Override
