@@ -13,7 +13,7 @@ public class Calculator {
 
     public static String getBuffer(Profile profile) {
         //TODO this ratio value should be dynamic
-        double minRatio = 1.05;
+        double minRatio = 0.65;
         double dl = bytesToGibiBytesDouble(profile.response.stats.downloaded);
         double ul = bytesToGibiBytesDouble(profile.response.stats.uploaded);
 
