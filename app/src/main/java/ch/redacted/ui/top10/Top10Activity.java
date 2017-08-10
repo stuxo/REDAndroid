@@ -31,7 +31,7 @@ public class Top10Activity extends BaseDrawerActivity implements Top10MvpView, T
 	@Inject Top10Presenter mTop10Presenter;
 	@Inject Top10Adapter mTop10Adapter;
 
-	private String[] details = {"day", "week", /*"month",*/"year", "overall", "snatched", "data", "seeded"};
+	private String[] details = {"day", "week", /*"month","year",*/ "overall", "snatched", "data", "seeded"};
 
 	@BindView(R.id.recycler_view) RecyclerView mTop10Recycler;
 	@BindView(R.id.swipe_refresh_container) SwipeRefreshLayout mSwipeRefreshContainer;

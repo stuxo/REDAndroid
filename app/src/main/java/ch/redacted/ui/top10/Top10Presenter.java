@@ -37,7 +37,7 @@ import ch.redacted.ui.base.BasePresenter;
 			.subscribeOn(Schedulers.io())
 			.subscribeWith(new DisposableSingleObserver<Top10>() {
 				@Override public void onSuccess(Top10 items) {
-					if (items.response.size() == 0) {
+					if (items.response == null || items.response.size() == 0) {
 						getMvpView().showTop10Empty();
 						getMvpView().showProgress(false);
 					} else {
