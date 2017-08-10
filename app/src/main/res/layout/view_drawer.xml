@@ -56,7 +56,7 @@
 
             <TextView
                 android:id="@+id/user_buffer_label"
-                android:layout_width="84dp"
+                android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:text="@string/buffer"
                 android:textColor="@color/white"
@@ -86,7 +86,7 @@
 
             <TextView
                 android:id="@+id/user_ratio_label"
-                android:layout_width="84dp"
+                android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:text="@string/ratio"
                 android:textColor="@color/white"
@@ -119,7 +119,7 @@
 
             <TextView
                 android:id="@+id/user_upload_label"
-                android:layout_width="84dp"
+                android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:text="@string/uploaded_label"
                 android:textColor="@color/white"
@@ -152,7 +152,7 @@
 
             <TextView
                 android:id="@+id/user_download_label"
-                android:layout_width="84dp"
+                android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:text="@string/downloaded_label"
                 android:textColor="@color/white"
@@ -191,12 +191,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:minHeight="60dp"
-        android:orientation="vertical"
-        android:paddingBottom="10dp">
+        android:orientation="vertical">
 
         <TextView
+            android:height="48dp"
             android:id="@+id/settings"
+            android:gravity="center_vertical"
+            android:textSize="14sp"
             style="@style/TextView.Drawer.Footer"
             android:text="@string/drawer_settings"/>
 

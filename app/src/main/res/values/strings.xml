@@ -191,8 +191,8 @@
     <string name="artist_search">Artist search term</string>
     <string name="release_title">%1$d - %2$s</string>
 
-    <string name="uploaded_label">Uploaded:</string>
-    <string name="downloaded_label">Downloaded:</string>
+    <string name="uploaded_label">Up:</string>
+    <string name="downloaded_label">Down:</string>
     <string name="joined_when">Joined: %1$s</string>
     <string name="last_seen_when">Last seen: %1$s</string>
     <string name="user_ratio">Ratio: %1$.2f / %2$.4f</string>
