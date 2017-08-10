@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/conversation_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingBottom="8dp"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="8dp">
+    android:focusable="true"
+    android:clickable="true"
+    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:layout_marginTop="8dp">
 
     <org.sufficientlysecure.htmltextview.HtmlTextView
         android:id="@+id/subject"
@@ -19,14 +21,16 @@
 
     <org.sufficientlysecure.htmltextview.HtmlTextView
         android:id="@+id/sender"
-        android:layout_width="match_parent"
+        android:layout_below="@id/subject"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"/>
 
     <TextView
+        android:layout_below="@id/sender"
         android:id="@+id/date"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"/>
 
-</LinearLayout>
+</RelativeLayout>
