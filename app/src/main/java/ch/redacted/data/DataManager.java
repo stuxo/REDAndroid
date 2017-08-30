@@ -1,9 +1,19 @@
 package ch.redacted.data;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Environment;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
+import android.webkit.MimeTypeMap;
 
+import ch.redacted.REDApplication;
+import ch.redacted.app.R;
 import ch.redacted.data.remote.PyWhatAutoService;
+import ch.redacted.ui.inbox.conversation.ConversationActivity;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -206,30 +216,32 @@ public class DataManager {
         return mApiService.subscriptions(read ? 0 : 1); //1 means show unread, 0 means read
     }
 
-    public Single<Response<ResponseBody>> downloadRelease(final int id) {
+    public Single<File> downloadRelease(final int id) {
 
         return mApiService.file(id, mPreferencesHelper.getAuth(), mPreferencesHelper.getPass())
-            .doOnSuccess(new Consumer<Response<ResponseBody>>() {
-                @Override public void accept(Response<ResponseBody> response) {
-                    String header = response.headers().get("Content-Disposition");
-                    String fileName = header.replace("attachment; filename=", "").replace("\"", "");
-                    //todo allow users to select directory
-                    File file = new File(Environment.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_DOWNLOADS).getAbsoluteFile(),
-                        fileName.replaceAll("\"", ""));
+                .flatMap(new Function<Response<ResponseBody>, SingleSource<? extends File>>() {
+                    @Override
+                    public SingleSource<? extends File> apply(Response<ResponseBody> response) throws Exception {
+                        String header = response.headers().get("Content-Disposition");
+                        String fileName = header.replace("attachment; filename=", "").replace("\"", "");
+                        //todo allow users to select directory
+                        File file = new File(Environment.getExternalStoragePublicDirectory(
+                                Environment.DIRECTORY_DOWNLOADS).getAbsoluteFile(),
+                                fileName.replaceAll("\"", ""));
 
-                    BufferedSink sink;
-                    try {
-                        sink = Okio.buffer(Okio.sink(file));
-                        sink.writeAll(response.body().source());
-                        sink.close();
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        BufferedSink sink;
+                        try {
+                            sink = Okio.buffer(Okio.sink(file));
+                            sink.writeAll(response.body().source());
+                            sink.close();
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        return Single.just(file);
                     }
-                }
-            });
+                });
     }
 
     public Single<Response<ResponseBody>> downloadWmRelease(final int id, Context context) {

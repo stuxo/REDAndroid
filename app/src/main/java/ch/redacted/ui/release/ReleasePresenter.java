@@ -2,6 +2,7 @@ package ch.redacted.ui.release;
 
 import android.content.Context;
 
+import java.io.File;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -174,9 +175,9 @@ public class ReleasePresenter extends BasePresenter<ReleaseMvpView> {
             mSubscription.add(mDataManager.downloadRelease(id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribeWith(new DisposableSingleObserver<Response>() {
-                    @Override public void onSuccess(Response value) {
-                        getMvpView().showDownloadComplete();
+                .subscribeWith(new DisposableSingleObserver<File>() {
+                    @Override public void onSuccess(File file) {
+                        getMvpView().showDownloadComplete(file);
                     }
 
                     @Override public void onError(Throwable error) {
