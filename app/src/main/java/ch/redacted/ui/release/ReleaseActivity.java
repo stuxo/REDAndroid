@@ -1,19 +1,26 @@
 package ch.redacted.ui.release;
 
 import android.Manifest;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
+import android.support.v4.content.FileProvider;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.transition.TransitionInflater;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -24,16 +31,15 @@ import com.bumptech.glide.Glide;
 
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
-import ch.redacted.data.model.Artist;
-import ch.redacted.ui.artist.TorrentGroupAdapter;
+import ch.redacted.app.BuildConfig;
+import ch.redacted.ui.inbox.conversation.ConversationActivity;
 import io.reactivex.functions.Consumer;
 import ch.redacted.REDApplication;
 import org.sufficientlysecure.htmltextview.HtmlTextView;
 
-import java.math.BigDecimal;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 
 import javax.inject.Inject;
 
@@ -170,8 +176,26 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
     }
 
     @Override
-    public void showDownloadComplete() {
-        Toast.makeText(this, "Download Complete", Toast.LENGTH_LONG).show();
+    public void showDownloadComplete(File file) {
+
+        Uri uri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", file);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        intent.setDataAndType(uri, "application/x-bittorrent");
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.ic_rippy)
+                        .setContentTitle("Download complete")
+                        .setContentText(file.getName());
+
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        mBuilder.setOngoing(false);
+
+        mBuilder.setContentIntent(contentIntent);
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.notify(file.hashCode(), mBuilder.build());
     }
 
     @Override
@@ -253,7 +277,7 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
     public void onDownloadClicked(final int id) {
         final Context context = this;
         new RxPermissions(this)
-                .request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
                 .subscribe(new Consumer<Boolean>() {
                     @Override
                     public void accept(Boolean granted) throws Exception {

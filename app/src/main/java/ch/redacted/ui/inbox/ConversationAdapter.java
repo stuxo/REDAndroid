@@ -93,7 +93,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         @BindView(R.id.date)
         public TextView date;
 
-        @OnClick(R.id.conversation_root)
+        @OnClick({R.id.conversation_root, R.id.subject, R.id.sender, R.id.date})
         public void onConversationClicked(){
             mCallback.onItemClicked(id);
         }

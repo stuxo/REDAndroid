@@ -235,4 +235,5 @@
     <string name="unread">Unread</string>
     <string name="read">Read</string>
     <string name="post_too_long">Post is too long to show here, tap show all to view</string>
+    <string name="open_file_with">Open file with</string>
 </resources>

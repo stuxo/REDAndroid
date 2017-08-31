@@ -1,6 +1,7 @@
 package ch.redacted.ui.forum.threadList;
 
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -72,6 +73,14 @@ public class ThreadListAdapter extends RecyclerView.Adapter<ThreadListAdapter.Fo
 
         if (thread.lastReadPage > 1){
             holder.setLastReadPage(thread.lastReadPage);
+        } else {
+            holder.setLastReadPage(0);
+        }
+
+        if (thread.read){
+            holder.cardView.setCardBackgroundColor(ContextCompat.getColor(holder.cardView.getContext(), R.color.BackgroundAccentDark));
+        } else {
+            holder.cardView.setCardBackgroundColor(ContextCompat.getColor(holder.cardView.getContext(), R.color.Background));
         }
 
         if (thread.locked) {
