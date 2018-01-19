@@ -344,5 +344,13 @@ public class DataManager {
             }
         });
     }
+
+    public Single<ResponseBody> removeForumSub(int topicId) {
+        return mApiService.toggleForumSubscription(topicId, mPreferencesHelper.getAuth());
+    }
+
+    public Single<ResponseBody> addForumSub(int topicId) {
+        return mApiService.toggleForumSubscription(topicId, mPreferencesHelper.getAuth());
+    }
 }
 

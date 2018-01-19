@@ -22,4 +22,6 @@
     <dimen name="small_gap">4dp</dimen>
     <dimen name="icon_left_margin">36dp</dimen>
     <dimen name="minimum_list_item_height">48dp</dimen>
+
+    <dimen name="standard_55">56dp</dimen>
 </resources>

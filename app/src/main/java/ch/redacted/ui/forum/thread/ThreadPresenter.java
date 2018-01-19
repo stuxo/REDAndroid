@@ -47,6 +47,7 @@ import retrofit2.HttpException;
 					} else {
 						getMvpView().showPosts(item, scrollToTop);
 						getMvpView().showProgress(false);
+						getMvpView().showSubscribed(item.response.subscribed);
 					}
 				}
 
@@ -87,6 +88,58 @@ import retrofit2.HttpException;
 					}
 				}));
 	}
+
+    public void toggleSubscribe(int topicId, boolean isSubscribed) {
+		checkViewAttached();
+//		getMvpView().sho(true);
+
+		if (isSubscribed){
+			mSubscription.add(mDataManager.removeForumSub(topicId)
+					.observeOn(AndroidSchedulers.mainThread())
+					.subscribeOn(Schedulers.io())
+					.subscribeWith(new DisposableSingleObserver<ResponseBody>() {
+						@Override
+						public void onSuccess(ResponseBody response) {
+							getMvpView().showSubscribed(false);
+//							getMvpView().showLoadingProgress(false);
+						}
+
+						@Override
+						public void onError(Throwable error) {
+							if (error instanceof HttpException) {
+								HttpException httpException = ((HttpException) error);
+								if (httpException.code() == 302) {
+									getMvpView().showSubscribed(false);
+								}
+							}
+//							getMvpView().showError(error.getMessage());
+//							getMvpView().showLoadingProgress(false);
+						}
+					}));
+		} else {
+			mSubscription.add(mDataManager.addForumSub(topicId)
+					.observeOn(AndroidSchedulers.mainThread())
+					.subscribeOn(Schedulers.io())
+					.subscribeWith(new DisposableSingleObserver<ResponseBody>() {
+						@Override
+						public void onSuccess(ResponseBody response) {
+							getMvpView().showSubscribed(true);
+//							getMvpView().showLoadingProgress(false);
+						}
+
+						@Override
+						public void onError(Throwable error) {
+							if (error instanceof HttpException) {
+								HttpException httpException = ((HttpException) error);
+								if (httpException.code() == 302) {
+									getMvpView().showSubscribed(true);
+								}
+							}
+//							getMvpView().showError(error.getMessage());
+//							getMvpView().showLoadingProgress(false);
+						}
+					}));
+		}    }
 }
 
 

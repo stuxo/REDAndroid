@@ -140,6 +140,9 @@ public interface ApiService {
     @POST("inbox.php")
     Single<ResponseBody> sendMessage(@Field("action") String action, @Field("toid") String toId, @Field("convid") String convId, @Field("subject") String subject, @Field("auth") String auth, @Field("body") String body);
 
+    @POST("userhistory.php?action=thread_subscribe")
+    Single<ResponseBody> toggleForumSubscription(@Query("topicid") int threadId, @Query("auth") String auth);
+
     /********
      * Helper class that sets up a new services
      *******/

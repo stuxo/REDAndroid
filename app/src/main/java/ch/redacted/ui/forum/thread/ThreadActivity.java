@@ -17,6 +17,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import butterknife.OnClick;
 import ch.redacted.ui.reply.ReplyActivity;
 import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout;
 
@@ -49,6 +50,7 @@ public class ThreadActivity extends BaseActivity implements ThreadMvpView, PostA
     @BindView(R.id.text_no_content) TextView mNoContent;
     @BindView(R.id.forum_nav) ForumNavigationView forumNav;
     @BindView(R.id.fab) FloatingActionButton fab;
+    @BindView(R.id.fab_subscribe) FloatingActionButton fabSubscribe;
 
     private int topicId = 0;
     private int lastPageId = 1;
@@ -59,10 +61,17 @@ public class ThreadActivity extends BaseActivity implements ThreadMvpView, PostA
     private CollapsingToolbarLayout toolbarLayout;
     private ImageView img;
     private String threadTitle;
+    private boolean isSubscribed;
 
     /**
      * Android activity lifecycle methods
      */
+
+
+    @OnClick(R.id.fab_subscribe)
+    public void OnBookMarkToggle(View v) {
+        mThreadPresenter.toggleSubscribe(topicId, isSubscribed);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,14 +80,14 @@ public class ThreadActivity extends BaseActivity implements ThreadMvpView, PostA
         setContentView(R.layout.activity_forum);
         ButterKnife.bind(this);
 
-        toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+        toolbarLayout = findViewById(R.id.toolbar_layout);
         toolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
         toolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         img = ImageHelper.getRippy(mSwipeRefreshContainer);
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,16 +98,20 @@ public class ThreadActivity extends BaseActivity implements ThreadMvpView, PostA
                 fab.hide();
             }
         });
+        fabSubscribe.animate().translationY(-getResources().getDimension(R.dimen.standard_55));
 
         mThreadPresenter.attachView(this);
         mPostRecycler.setHasFixedSize(true);
         mPostRecycler.addOnScrollListener(new RecyclerView.OnScrollListener(){
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy){
-                if (dy > 0)
+                if (dy > 0) {
+                    fabSubscribe.hide();
                     fab.hide();
-                else if (dy < 0)
+                } else if (dy < 0) {
+                    fabSubscribe.show();
                     fab.show();
+                }
             }
         });
         mPostAdapter.setCallback(this);
@@ -129,6 +142,16 @@ public class ThreadActivity extends BaseActivity implements ThreadMvpView, PostA
             mThreadPresenter.loadPosts(topicId, lastPostId, null, false);
         } else {
             mThreadPresenter.loadPosts(topicId, null, lastPageId, false);
+        }
+    }
+
+    @Override
+    public void showSubscribed(boolean subscribed) {
+        isSubscribed = subscribed;
+        if (isSubscribed) {
+            fabSubscribe.setImageResource(R.drawable.ic_notifications_active_48px);
+        } else {
+            fabSubscribe.setImageResource(R.drawable.ic_notifications_disabled_48px);
         }
     }
 

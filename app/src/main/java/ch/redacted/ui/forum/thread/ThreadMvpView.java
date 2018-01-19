@@ -5,6 +5,8 @@ import ch.redacted.ui.base.MvpView;
 
 public interface ThreadMvpView extends MvpView {
 
+    void showSubscribed(boolean subscribed);
+
     void showPosts(ForumThread threads, boolean scrollToTop);
 
     void showPostsEmpty();
