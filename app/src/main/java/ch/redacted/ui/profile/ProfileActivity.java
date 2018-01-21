@@ -356,7 +356,8 @@ public class ProfileActivity extends BaseActivity
 
 		userLastSeen.setText(getString(R.string.last_seen_when,
 			DateUtils.getRelativeTimeSpanString(lastSeen.getTime(),
-				now, DateUtils.FORMAT_ABBREV_RELATIVE)));
+				now, DateUtils.FORMAT_ABBREV_RELATIVE))
+				.replace("0 minutes ago", "just now"));
 	}
 
 	@Override public void showLastSeenParanoid() {
