@@ -1,5 +1,7 @@
 package ch.redacted.ui.search.user;
 
+import android.content.ContentProvider;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
@@ -14,6 +16,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -90,6 +93,8 @@ public class UserSearchActivity extends BaseDrawerActivity implements UserSearch
             @Override
             public void onRefresh() {
                 mSearchPresenter.loadUsers(searchTerm.getText().toString());
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(userSearchView.getWindowToken(), 0);
             }
         });
 
