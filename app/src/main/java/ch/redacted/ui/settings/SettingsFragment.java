@@ -1,5 +1,6 @@
 package ch.redacted.ui.settings;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.preference.CheckBoxPreference;
@@ -12,6 +13,8 @@ import ch.redacted.REDApplication;
 import ch.redacted.app.BuildConfig;
 import ch.redacted.app.R;
 import ch.redacted.data.local.PreferencesHelper;
+import com.tbruyelle.rxpermissions2.RxPermissions;
+import io.reactivex.functions.Consumer;
 import net.rdrei.android.dirchooser.DirectoryChooserActivity;
 import net.rdrei.android.dirchooser.DirectoryChooserConfig;
 
@@ -30,15 +33,26 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         downloadLocation.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override public boolean onPreferenceClick(Preference preference) {
-                final Intent chooserIntent = new Intent(getActivity(), DirectoryChooserActivity.class);
 
-                final DirectoryChooserConfig config = DirectoryChooserConfig.builder()
-                    .allowReadOnlyDirectory(true)
-                    .allowNewDirectoryNameModification(false)
-                    .build();
+                new RxPermissions(getActivity())
+                    .request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
+                    .subscribe(new Consumer<Boolean>() {
+                        @Override
+                        public void accept(Boolean granted) throws Exception {
+                            if (granted) {
+                                final Intent chooserIntent = new Intent(getActivity(), DirectoryChooserActivity.class);
 
-                chooserIntent.putExtra(DirectoryChooserActivity.EXTRA_CONFIG, config);
-                getActivity().startActivityForResult(chooserIntent, 0);
+                                final DirectoryChooserConfig config = DirectoryChooserConfig.builder()
+                                    .allowReadOnlyDirectory(true)
+                                    .newDirectoryName("NewDir")
+                                    .allowNewDirectoryNameModification(false)
+                                    .build();
+
+                                chooserIntent.putExtra(DirectoryChooserActivity.EXTRA_CONFIG, config);
+                                getActivity().startActivityForResult(chooserIntent, 0);
+                            }
+                        }
+                    });
                 return false;
             }
         });
