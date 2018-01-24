@@ -1,5 +1,6 @@
 package ch.redacted.ui.search.request;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
@@ -14,6 +15,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -82,6 +84,8 @@ public class RequestSearchActivity extends BaseDrawerActivity implements Request
                 }
                 if (keyEvent.getAction() != KeyEvent.KEYCODE_SEARCH) {
                     mSearchPresenter.loadRequests(searchTerm.getText().toString());
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(requestSearchView.getWindowToken(), 0);
                 }
 
                 return false;
