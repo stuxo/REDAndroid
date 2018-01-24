@@ -1,11 +1,13 @@
 package ch.redacted.ui.search.artist;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -56,6 +58,8 @@ public class ArtistSearchActivity extends BaseDrawerActivity implements ArtistSe
                 }
                 if (keyEvent.getAction() != KeyEvent.KEYCODE_SEARCH) {
                     mSearchPresenter.loadArtists(searchTerm.getText().toString());
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(artistSearchView.getWindowToken(), 0);
                 }
 
                 return false;

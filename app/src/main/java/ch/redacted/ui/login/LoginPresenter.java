@@ -50,6 +50,7 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
                             loginWithCookie();
                         } else {
                             getMvpView().showError("Login Failed");
+                            getMvpView().showLoadingProgress(false);
                         }
                     }
 
