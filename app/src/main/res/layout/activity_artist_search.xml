@@ -25,7 +25,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="4dp"
                 android:gravity="center|top"
-                android:text="@string/message_nothing_to_see"
+                android:text="@string/no_search_results"
                 android:visibility="gone"/>
 
         </LinearLayout>
