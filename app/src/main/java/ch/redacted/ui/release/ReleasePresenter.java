@@ -135,8 +135,6 @@ public class ReleasePresenter extends BasePresenter<ReleaseMvpView> {
 
     public void downloadRelease(int id, Context context) {
         checkViewAttached();
-        getMvpView().showLoadingProgress(true);
-
         String downloadMethod = mDataManager.getPreferencesHelper().getDownloadMethod();
 
         if (downloadMethod.equals("Send to WhatManager")) {
