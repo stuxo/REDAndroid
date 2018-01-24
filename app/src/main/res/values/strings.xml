@@ -237,4 +237,7 @@
     <string name="read">Read</string>
     <string name="post_too_long">Post is too long to show here, tap show all to view</string>
     <string name="open_file_with">Open file with</string>
+    <string name="key_pref_default_download_location">pref_default_download_location</string>
+    <string name="label_default_download_location">Default Download Location</string>
+
 </resources>

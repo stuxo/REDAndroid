@@ -218,6 +218,13 @@ public class DataManager {
 
     public Single<File> downloadRelease(final int id) {
 
+        String path = mPreferencesHelper.getDefaultDownloadLocation();
+        if (path == null){
+            path = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DOWNLOADS).getAbsoluteFile().getPath();
+        }
+    
+        final String finalPath = path;
         return mApiService.file(id, mPreferencesHelper.getAuth(), mPreferencesHelper.getPass())
                 .flatMap(new Function<Response<ResponseBody>, SingleSource<? extends File>>() {
                     @Override
@@ -225,8 +232,7 @@ public class DataManager {
                         String header = response.headers().get("Content-Disposition");
                         String fileName = header.replace("attachment; filename=", "").replace("\"", "");
                         //todo allow users to select directory
-                        File file = new File(Environment.getExternalStoragePublicDirectory(
-                                Environment.DIRECTORY_DOWNLOADS).getAbsoluteFile(),
+                        File file = new File(finalPath,
                                 fileName.replaceAll("\"", ""));
 
                         BufferedSink sink;

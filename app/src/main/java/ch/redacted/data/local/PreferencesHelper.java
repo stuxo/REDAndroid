@@ -22,6 +22,8 @@ import ch.redacted.injection.ApplicationContext;
 	public static final String PREF_WM_HOST_KEY = "pref_wm_host";
 	public static final String PREF_WM_PASSWORD_KEY = "pref_wm_password";
 	public static final String PREF_WM_PORT_KEY = "pref_wm_port";
+	public static final String PREF_DEFAULT_DOWNLOAD_LOCATION = "pref_default_download_location";
+
 	public static final String PREF_WM_USER_KEY = "pref_wm_user";
 
 	public static final String PREF_LOAD_IMAGES = "pref_load_images";
@@ -160,5 +162,13 @@ import ch.redacted.injection.ApplicationContext;
 
 	public void setTopTorrentLimit(int limit) {
 		mPref.edit().putInt(PREF_TOP_TORRENT_LIMIT, limit).apply();
+	}
+
+	public void setDefaultDownloadLocation(String location) {
+		mPref.edit().putString(PREF_DEFAULT_DOWNLOAD_LOCATION, location).apply();
+	}
+
+	public String getDefaultDownloadLocation() {
+		return mPref.getString(PREF_DEFAULT_DOWNLOAD_LOCATION, null);
 	}
 }

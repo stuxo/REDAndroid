@@ -1,5 +1,6 @@
 package ch.redacted.ui.settings;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.preference.CheckBoxPreference;
 import android.support.v7.preference.EditTextPreference;
@@ -11,6 +12,8 @@ import ch.redacted.REDApplication;
 import ch.redacted.app.BuildConfig;
 import ch.redacted.app.R;
 import ch.redacted.data.local.PreferencesHelper;
+import net.rdrei.android.dirchooser.DirectoryChooserActivity;
+import net.rdrei.android.dirchooser.DirectoryChooserConfig;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 
@@ -22,6 +25,24 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         mPreferenceHelper = ((REDApplication) getActivity().getApplication()).getComponent().preferencesHelper();
         Preference versionPreference = findPreference("pref_verion_name");
         versionPreference.setTitle(BuildConfig.VERSION_NAME);
+
+        Preference downloadLocation = findPreference(PreferencesHelper.PREF_DEFAULT_DOWNLOAD_LOCATION);
+
+        downloadLocation.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override public boolean onPreferenceClick(Preference preference) {
+                final Intent chooserIntent = new Intent(getActivity(), DirectoryChooserActivity.class);
+
+                final DirectoryChooserConfig config = DirectoryChooserConfig.builder()
+                    .allowReadOnlyDirectory(true)
+                    .allowNewDirectoryNameModification(false)
+                    .build();
+
+                chooserIntent.putExtra(DirectoryChooserActivity.EXTRA_CONFIG, config);
+                getActivity().startActivityForResult(chooserIntent, 0);
+                return false;
+            }
+        });
+
     }
 
     @Override
@@ -37,7 +58,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         mPreferenceHelper.setWmPort(preference3.getText());
 
         //todo rename these to something useful, ugh
-
         //todo error checking on url input
 
         //todo return an error if host or url is null
