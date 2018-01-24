@@ -54,6 +54,7 @@ public class ReleasePresenter extends BasePresenter<ReleaseMvpView> {
                     public void onSuccess(TorrentGroup torrentGroup) {
                         getMvpView().showRelease(torrentGroup);
                         flattenTorrents(torrentGroup.response.torrents);
+                        getMvpView().showLoadingProgress(false);
                     }
 
                     @Override

@@ -20,7 +20,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.transition.TransitionInflater;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -32,7 +31,6 @@ import com.bumptech.glide.Glide;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import ch.redacted.app.BuildConfig;
-import ch.redacted.ui.inbox.conversation.ConversationActivity;
 import io.reactivex.functions.Consumer;
 import ch.redacted.REDApplication;
 import org.sufficientlysecure.htmltextview.HtmlTextView;
