@@ -1,5 +1,6 @@
 package ch.redacted.ui.search.torrent;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
@@ -10,6 +11,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.inputmethod.InputMethodManager;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -79,6 +81,8 @@ public class TorrentSearchActivity extends BaseDrawerActivity implements Torrent
                 }
                 if (keyEvent.getAction() != KeyEvent.KEYCODE_SEARCH) {
                     mSearchPresenter.loadTorrents(searchTerm.getText().toString());
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(torrentSearchView.getWindowToken(), 0);
                 }
 
                 return false;
