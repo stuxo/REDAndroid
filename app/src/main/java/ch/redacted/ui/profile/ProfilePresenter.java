@@ -51,6 +51,7 @@ public class ProfilePresenter extends BasePresenter<ProfileMvpView> {
         checkViewAttached();
         getMvpView().showLoadingProgress(true);
 
+        mSubscription = new CompositeDisposable();
         //if this isn't the logged in user, don't ever cache
         if (id != mPreferenceHelper.getUserId()) {
             useCache = false;
@@ -72,10 +73,10 @@ public class ProfilePresenter extends BasePresenter<ProfileMvpView> {
                 id = mPreferenceHelper.getUserId();
             }
             final int finalId = id;
-            mDataManager.getProfile(id)
+            mSubscription.add(mDataManager.getProfile(id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new DisposableSingleObserver<Profile>() {
+                .subscribeWith(new DisposableSingleObserver<Profile>() {
                     @Override public void onSuccess(Profile profile) {
                         checkParanoia(profile);
                         getMvpView().showLoadingProgress(false);
@@ -93,7 +94,7 @@ public class ProfilePresenter extends BasePresenter<ProfileMvpView> {
                         getMvpView().showError(error.getMessage());
                         getMvpView().showLoadingProgress(false);
                     }
-                });
+                }));
         }
     }
 
