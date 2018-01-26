@@ -1,21 +1,14 @@
 package ch.redacted.ui.inbox;
 
-import io.reactivex.Single;
-import io.reactivex.SingleObserver;
-import io.reactivex.SingleSource;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
-import javax.inject.Inject;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.observers.DisposableSingleObserver;
-import io.reactivex.schedulers.Schedulers;
 import ch.redacted.data.DataManager;
 import ch.redacted.data.model.Conversations;
 import ch.redacted.injection.ConfigPersistent;
 import ch.redacted.ui.base.BasePresenter;
-import retrofit2.HttpException;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableSingleObserver;
+import io.reactivex.schedulers.Schedulers;
+import javax.inject.Inject;
 
 @ConfigPersistent
 public class InboxPresenter extends BasePresenter<InboxMvpView> {

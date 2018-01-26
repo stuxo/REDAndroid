@@ -25,10 +25,8 @@ import butterknife.ButterKnife;
 import ch.redacted.app.R;
 import ch.redacted.data.model.Recents;
 import ch.redacted.ui.base.BaseActivity;
-import ch.redacted.ui.inbox.conversation.ConversationActivity;
 import ch.redacted.ui.release.ReleaseActivity;
 import ch.redacted.ui.reply.ReplyActivity;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import java.util.Date;
@@ -40,7 +38,6 @@ import org.sufficientlysecure.htmltextview.HtmlHttpImageGetter;
 import org.sufficientlysecure.htmltextview.HtmlTextView;
 
 import static android.view.View.GONE;
-import static ch.redacted.ui.reply.ReplyActivity.TYPE_MESSAGE;
 
 public class ProfileActivity extends BaseActivity
 	implements ProfileMvpView, RecentsAdapter.Callback {
