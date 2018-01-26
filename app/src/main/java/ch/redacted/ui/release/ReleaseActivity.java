@@ -159,7 +159,7 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
 
     @Override
     public void showError(String message) {
-
+        Snackbar.make(getCurrentFocus(), message, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -197,7 +197,7 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
 
     @Override
     public void showSendToServerComplete() {
-        Toast.makeText(this, "Sent to Server successfully", Toast.LENGTH_LONG).show();
+        Snackbar.make(getCurrentFocus(), "Sent to Server successfully", Snackbar.LENGTH_LONG).show();
     }
 
     @Override

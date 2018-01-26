@@ -252,17 +252,21 @@ public class DataManager {
 
     public Single<Response<ResponseBody>> downloadWmRelease(final int id, Context context) {
 
-        final WhatManagerService wm =
-            WhatManagerService.Creator.newWMApiService(mPreferencesHelper.getWmHost(), context);
-
-        return wm.login(mPreferencesHelper.getWmUser(), mPreferencesHelper.getWmPassword())
-            .flatMap(new Function<Response<ResponseBody>, Single<Response<ResponseBody>>>() {
-                @Override
-                public Single<Response<ResponseBody>> apply(Response<ResponseBody> response)
-                    throws Exception {
-                    return wm.addTorrent(id);
-                }
-            });
+        try {
+            //todo: gross, we are pushing context all the way down here.
+            final WhatManagerService wm =
+                WhatManagerService.Creator.newWMApiService(mPreferencesHelper.getWmHost(), context);
+            return wm.login(mPreferencesHelper.getWmUser(), mPreferencesHelper.getWmPassword())
+                .flatMap(new Function<Response<ResponseBody>, Single<Response<ResponseBody>>>() {
+                    @Override
+                    public Single<Response<ResponseBody>> apply(Response<ResponseBody> response)
+                        throws Exception {
+                        return wm.addTorrent(id);
+                    }
+                });
+        } catch (IllegalArgumentException e) {
+            return Single.error(new Exception("WM is not configured correctly"));
+        }
     }
 
     public Single<Response<ResponseBody>> downloadPywaRelease(final int id) {
