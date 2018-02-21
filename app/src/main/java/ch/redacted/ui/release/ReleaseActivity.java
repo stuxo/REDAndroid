@@ -30,6 +30,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -52,6 +53,7 @@ import butterknife.OnClick;
 import ch.redacted.REDApplication;
 import ch.redacted.app.BuildConfig;
 import ch.redacted.app.R;
+import ch.redacted.data.model.TorrentComments;
 import ch.redacted.data.model.TorrentGroup;
 import ch.redacted.ui.artist.ArtistActivity;
 import ch.redacted.ui.base.BaseActivity;
@@ -144,6 +146,7 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
         mTorrentsRecyclerView.setAdapter(mTorrentsAdapter);
         mTorrentsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mReleasePresenter.loadRelease(RELEASE_ID);
+        mReleasePresenter.fetchComments(RELEASE_ID);
     }
 
     @Override
@@ -293,6 +296,12 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
 
     @Override public void showMessage(String message) {
         Snackbar.make(getCurrentFocus(), message, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showComments(TorrentComments comments) {
+        comments.response.page = 0;
+        Toast.makeText(this, comments.status, Toast.LENGTH_LONG).show();
     }
 
     @Override

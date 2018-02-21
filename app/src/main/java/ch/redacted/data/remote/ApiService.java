@@ -6,6 +6,7 @@ import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import ch.redacted.data.model.TorrentComments;
 import io.reactivex.Single;
 
 import java.io.IOException;
@@ -85,7 +86,7 @@ public interface ApiService {
     Single<TorrentGroup> release(@Query("id") int id);
 
     @GET("ajax.php?action=tcomments")
-    Single<TorrentGroup> torrentComments(@Query("id") int id);
+    Single<TorrentComments> torrentComments(@Query("id") int id);
 
     @GET("ajax.php?action=inbox")
     Single<Conversations> inbox(@Query("sort") String sort, @Query("type") String type);

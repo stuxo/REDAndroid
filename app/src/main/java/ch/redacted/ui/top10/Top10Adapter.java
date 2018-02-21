@@ -78,7 +78,7 @@ public class Top10Adapter extends RecyclerView.Adapter<Top10Adapter.Top10Holder>
         holder.releaseSeeders.setText(String.format(Locale.getDefault(), "%d", results.seeders));
         holder.releaseLeechers.setText(String.format(Locale.getDefault(), "%d", results.leechers));
         if (REDApplication.get(holder.image.getContext()).getComponent().dataManager().getPreferencesHelper().getLoadImages()) {
-            RequestOptions options = new RequestOptions().fitCenter().diskCacheStrategy(DiskCacheStrategy.ALL);
+            RequestOptions options = new RequestOptions().fitCenter().skipMemoryCache(true);
             Glide.with(holder.image.getContext()).load(results.wikiImage).apply(options).into(holder.image);
         }
         else {

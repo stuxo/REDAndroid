@@ -2,6 +2,7 @@ package ch.redacted.ui.release;
 
 import java.io.File;
 
+import ch.redacted.data.model.TorrentComments;
 import ch.redacted.data.model.TorrentGroup;
 import ch.redacted.ui.base.MvpView;
 
@@ -22,4 +23,6 @@ public interface ReleaseMvpView extends MvpView {
     void showTorrents(Object torrent);
 
 	void showMessage(String message);
+
+    void showComments(TorrentComments comments);
 }

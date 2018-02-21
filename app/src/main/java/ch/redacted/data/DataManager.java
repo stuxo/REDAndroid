@@ -12,6 +12,7 @@ import android.webkit.MimeTypeMap;
 
 import ch.redacted.REDApplication;
 import ch.redacted.app.R;
+import ch.redacted.data.model.TorrentComments;
 import ch.redacted.data.remote.PyWhatAutoService;
 import ch.redacted.ui.inbox.conversation.ConversationActivity;
 import io.reactivex.Observable;
@@ -361,6 +362,10 @@ public class DataManager {
 
     public Single<ResponseBody> addForumSub(int topicId) {
         return mApiService.toggleForumSubscription(topicId, mPreferencesHelper.getAuth());
+    }
+
+    public Single<TorrentComments> fetchTorrentComments(int id) {
+        return mApiService.torrentComments(id);
     }
 }
 
