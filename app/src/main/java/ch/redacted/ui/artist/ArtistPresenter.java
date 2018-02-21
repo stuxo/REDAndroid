@@ -1,5 +1,7 @@
 package ch.redacted.ui.artist;
 
+import io.reactivex.Observable;
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableSingleObserver;
@@ -118,26 +120,30 @@ public class ArtistPresenter extends BasePresenter<ArtistMvpView> {
     }
 
     public void loadTorrents(List<Artist.Torrentgroup> torrentgroup) {
-        TreeMap<Integer, List<Artist.Torrentgroup>> treeMap = new TreeMap<>();
-        List<Object> flattenedMap = new ArrayList<>();
-        for (Artist.Torrentgroup group : torrentgroup){
-            if (!treeMap.containsKey(group.releaseType)) {
-                List<Artist.Torrentgroup> list = new ArrayList<>();
-                list.add(group);
+        Observable.fromCallable(() -> {
+            TreeMap<Integer, List<Artist.Torrentgroup>> treeMap = new TreeMap<>();
+            List<Object> flattenedMap = new ArrayList<>();
+            for (Artist.Torrentgroup group : torrentgroup){
+                if (!treeMap.containsKey(group.releaseType)) {
+                    List<Artist.Torrentgroup> list = new ArrayList<>();
+                    list.add(group);
 
-                treeMap.put(group.releaseType, list);
-            } else {
-                treeMap.get(group.releaseType).add(group);
+                    treeMap.put(group.releaseType, list);
+                } else {
+                    treeMap.get(group.releaseType).add(group);
+                }
             }
-        }
 
-        for (int key : treeMap.keySet()) {
-            flattenedMap.add(key);
-            for (Artist.Torrentgroup group: treeMap.get(key)) {
-                flattenedMap.add(group);
+            for (int key : treeMap.keySet()) {
+                flattenedMap.add(key);
+                for (Artist.Torrentgroup group: treeMap.get(key)) {
+                    flattenedMap.add(group);
+                }
             }
-        }
 
-        getMvpView().showTorrents(flattenedMap);
+           return flattenedMap;
+        }).subscribeOn(Schedulers.computation())
+                .subscribe(flattenedMap -> getMvpView().showTorrents(flattenedMap));
+
     }
 }
