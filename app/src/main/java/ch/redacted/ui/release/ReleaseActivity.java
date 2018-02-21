@@ -5,6 +5,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,7 +15,9 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -27,6 +31,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import ch.redacted.app.BuildConfig;
@@ -200,10 +206,24 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
         Snackbar.make(getCurrentFocus(), "Sent to Server successfully", Snackbar.LENGTH_LONG).show();
     }
 
+
     @Override
     public void showRelease(TorrentGroup torrentGroup) {
         if (REDApplication.get(this).getComponent().dataManager().getPreferencesHelper().getLoadImages()) {
-            Glide.with(this).load(torrentGroup.response.group.wikiImage).asBitmap().fitCenter().into(releaseImage);
+            Glide.with(this).load(torrentGroup.response.group.wikiImage).asBitmap().fitCenter().into(
+                    new BitmapImageViewTarget(releaseImage) {
+                @Override
+                public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
+                    super.onResourceReady(bitmap, anim);
+                    Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+                        public void onGenerated(Palette p) {
+                            bookmarkFab.setBackgroundTintList(ColorStateList.valueOf(p.getVibrantColor(ContextCompat.getColor(ReleaseActivity.this, R.color.accent))));
+                            releaseArtist.setTextColor(ColorStateList.valueOf(p.getVibrantColor(ContextCompat.getColor(ReleaseActivity.this, R.color.accent))));
+                            mReadMore.setTextColor(ColorStateList.valueOf(p.getVibrantColor(ContextCompat.getColor(ReleaseActivity.this, R.color.accent))));
+                        }
+                    });
+                }
+            });
         } else {
             releaseImage.setVisibility(View.GONE);
         }
