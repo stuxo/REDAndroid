@@ -65,7 +65,7 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
         if (REDApplication.get(holder.announcementImage.getContext()).getComponent().dataManager().getPreferencesHelper().getLoadImages()) {
             String firstImageUrl = ImageHelper.getFirstImageLink(announcement.body);
             if (firstImageUrl.length() > 0) {
-                ImageHelper.loadImage(holder.announcementImage.getContext(), firstImageUrl, holder.announcementImage, true, false);
+                ImageHelper.loadImage(holder.announcementImage.getContext(), firstImageUrl, holder.announcementImage, false, true);
             }
         }
 
