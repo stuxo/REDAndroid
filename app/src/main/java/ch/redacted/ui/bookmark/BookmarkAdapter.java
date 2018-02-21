@@ -53,13 +53,9 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.Bookma
     @Override public void onBindViewHolder(final BookmarkHolder holder, int position) {
         TorrentBookmark.Bookmarks results = mItems.get(position);
         holder.setId(results.id);
-        holder.root.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View view) {
-                mCallback.onItemClicked(holder.id);
-            }
-        });
+        holder.root.setOnClickListener(view -> mCallback.onItemClicked(holder.id));
 
-        ImageHelper.loadImage(holder.image.getContext(), results.image,  holder.image, false, true,);
+        ImageHelper.loadImage(holder.image.getContext(), results.image,  holder.image, false, true);
         holder.releaseName.setHtml(results.name);
         holder.releaseYear.setText(String.format(Locale.getDefault(), "%d", results.year));
         holder.releaseTags.setText(Tags.PrettyTags(3, results.tagList.split(" ")));
