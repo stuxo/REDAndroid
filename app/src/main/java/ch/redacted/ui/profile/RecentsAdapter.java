@@ -6,9 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-
-import ch.redacted.REDApplication;
 import org.sufficientlysecure.htmltextview.HtmlTextView;
 
 import java.util.ArrayList;
@@ -19,8 +16,10 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ch.redacted.REDApplication;
 import ch.redacted.app.R;
 import ch.redacted.data.model.Recents;
+import ch.redacted.util.ImageHelper;
 
 /**
  * Created by sxo on 19/01/17.
@@ -49,7 +48,7 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.RecentsV
         holder.artist.setHtml(release.getArtists().get(0).name);
         holder.releaseName.setHtml(release.name);
         if (REDApplication.get(holder.artwork.getContext()).getComponent().dataManager().getPreferencesHelper().getLoadImages()) {
-            Glide.with(holder.artwork.getContext()).load(release.wikiImage).asBitmap().fitCenter().into(holder.artwork);
+            ImageHelper.loadImage(holder.artwork.getContext(), release.wikiImage, holder.artwork, false, true);
         }
         else {
             holder.artwork.setVisibility(View.GONE);

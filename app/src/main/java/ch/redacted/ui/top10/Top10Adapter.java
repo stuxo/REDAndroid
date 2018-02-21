@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -76,7 +78,8 @@ public class Top10Adapter extends RecyclerView.Adapter<Top10Adapter.Top10Holder>
         holder.releaseSeeders.setText(String.format(Locale.getDefault(), "%d", results.seeders));
         holder.releaseLeechers.setText(String.format(Locale.getDefault(), "%d", results.leechers));
         if (REDApplication.get(holder.image.getContext()).getComponent().dataManager().getPreferencesHelper().getLoadImages()) {
-            Glide.with(holder.image.getContext()).load(results.wikiImage).asBitmap().fitCenter().into(holder.image);
+            RequestOptions options = new RequestOptions().fitCenter().diskCacheStrategy(DiskCacheStrategy.ALL);
+            Glide.with(holder.image.getContext()).load(results.wikiImage).apply(options).into(holder.image);
         }
         else {
             holder.image.setVisibility(View.GONE);
