@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:maxWidth="256dp"
+    android:layout_margin="@dimen/small_gap"
+    card_view:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/small_gap">
+
+        <org.sufficientlysecure.htmltextview.HtmlTextView
+            android:id="@+id/post_author"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/small_gap"
+            android:layout_marginEnd="@dimen/small_gap"
+            android:layout_marginRight="@dimen/small_gap"/>
+
+        <TextView
+            android:id="@+id/post_time"
+            style="@style/Base.TextAppearance.AppCompat.Caption"
+            android:layout_width="wrap_content"
+            android:layout_alignBaseline="@id/post_author"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/post_author"
+            android:layout_toRightOf="@id/post_author"
+            />
+
+        <org.sufficientlysecure.htmltextview.HtmlTextView
+            android:id="@+id/post_body"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:maxWidth="256dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/post_author"
+            />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

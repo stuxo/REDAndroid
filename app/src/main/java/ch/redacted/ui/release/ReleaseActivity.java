@@ -30,7 +30,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -57,9 +56,9 @@ import ch.redacted.data.model.TorrentComments;
 import ch.redacted.data.model.TorrentGroup;
 import ch.redacted.ui.artist.ArtistActivity;
 import ch.redacted.ui.base.BaseActivity;
+import ch.redacted.ui.comments.CommentsAdapter;
 import ch.redacted.util.ReleaseTypes;
 import ch.redacted.util.Tags;
-import io.reactivex.functions.Consumer;
 
 public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, TorrentsAdapter.Callback {
 
@@ -71,6 +70,8 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
 
     @Inject ReleasePresenter mReleasePresenter;
     @Inject TorrentsAdapter mTorrentsAdapter;
+    @Inject CommentsAdapter mCommentsAdapter;
+
     @BindView(R.id.release_image) ImageView releaseImage;
     @BindView(R.id.release_title) HtmlTextView releaseTitle;
     @BindView(R.id.release_artist) Button releaseArtist;
@@ -78,6 +79,7 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
     @BindView(R.id.release_tags) TextView releaseTags;
     @BindView(R.id.release_description) HtmlTextView releaseDescription;
     @BindView(R.id.recycler_view) RecyclerView mTorrentsRecyclerView;
+    @BindView(R.id.comments_recycler) RecyclerView mCommentsRecycler;
     @BindView(R.id.toolbar_layout) CollapsingToolbarLayout mToolbarLayout;
     @BindView(R.id.app_bar) AppBarLayout mAppBarLayout;
     @BindView(R.id.read_more_button) Button mReadMore;
@@ -145,6 +147,13 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
         mTorrentsAdapter.setCallback(this);
         mTorrentsRecyclerView.setAdapter(mTorrentsAdapter);
         mTorrentsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        LinearLayoutManager lm = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true);
+        lm.setStackFromEnd(true);
+        mCommentsRecycler.setLayoutManager(lm);
+        mCommentsRecycler.setAdapter(mCommentsAdapter);
+        mTorrentsRecyclerView.setNestedScrollingEnabled(false);
+
         mReleasePresenter.loadRelease(RELEASE_ID);
         mReleasePresenter.fetchComments(RELEASE_ID);
     }
@@ -211,7 +220,6 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
     public void showSendToServerComplete() {
         Snackbar.make(getCurrentFocus(), "Sent to Server successfully", Snackbar.LENGTH_LONG).show();
     }
-
 
     @Override
     public void showRelease(TorrentGroup torrentGroup) {
@@ -299,9 +307,8 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
     }
 
     @Override
-    public void showComments(TorrentComments comments) {
-        comments.response.page = 0;
-        Toast.makeText(this, comments.status, Toast.LENGTH_LONG).show();
+    public void showComments(List<TorrentComments.Comments> comments) {
+        mCommentsAdapter.setComments(comments);
     }
 
     @Override
@@ -309,12 +316,9 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
         final Context context = this;
         new RxPermissions(this)
                 .request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
-                .subscribe(new Consumer<Boolean>() {
-                    @Override
-                    public void accept(Boolean granted) throws Exception {
-                        if (granted) {
-                            mReleasePresenter.downloadRelease(id, context);
-                        }
+                .subscribe(granted -> {
+                    if (granted) {
+                        mReleasePresenter.downloadRelease(id, context);
                     }
                 });
     }

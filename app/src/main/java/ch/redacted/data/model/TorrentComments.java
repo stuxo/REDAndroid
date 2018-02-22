@@ -2,6 +2,7 @@ package ch.redacted.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,7 +39,7 @@ public class TorrentComments {
         @SerializedName("postId")
         public int postId;
         @SerializedName("addedTime")
-        public String addedTime;
+        public Date addedTime;
         @SerializedName("bbBody")
         public String bbBody;
         @SerializedName("body")

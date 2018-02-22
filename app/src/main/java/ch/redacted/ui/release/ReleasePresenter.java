@@ -138,7 +138,7 @@ public class ReleasePresenter extends BasePresenter<ReleaseMvpView> {
         mSubscription.add(mDataManager.fetchTorrentComments(id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(comments -> getMvpView().showComments(comments)));
+                .subscribe(comments -> getMvpView().showComments(comments.response.comments)));
     }
 
     public void downloadRelease(int id, Context context) {
