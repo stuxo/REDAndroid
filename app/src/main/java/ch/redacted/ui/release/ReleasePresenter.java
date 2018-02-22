@@ -133,9 +133,9 @@ public class ReleasePresenter extends BasePresenter<ReleaseMvpView> {
         }
     }
 
-    public void fetchComments(int id) {
+    public void fetchComments(int id, int page) {
         checkViewAttached();
-        mSubscription.add(mDataManager.fetchTorrentComments(id)
+        mSubscription.add(mDataManager.fetchTorrentComments(id, page)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(comments -> getMvpView().showComments(comments.response.comments)));

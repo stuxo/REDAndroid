@@ -364,8 +364,8 @@ public class DataManager {
         return mApiService.toggleForumSubscription(topicId, mPreferencesHelper.getAuth());
     }
 
-    public Single<TorrentComments> fetchTorrentComments(int id) {
-        return mApiService.torrentComments(id);
+    public Single<TorrentComments> fetchTorrentComments(int id, int page) {
+        return mApiService.torrentComments(id, page);
     }
 }
 

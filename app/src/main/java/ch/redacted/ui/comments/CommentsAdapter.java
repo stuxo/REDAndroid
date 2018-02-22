@@ -59,17 +59,18 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return mComments.size();
     }
 
-    public void setComments(List<TorrentComments.Comments> list) {
-        mComments = list;
-        notifyDataSetChanged();
-    }
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View defaultView =
                 LayoutInflater.from(parent.getContext()).inflate(R.layout.item_comment, parent, false);
         return new CommentViewHolder(defaultView);
+    }
+
+    public void addComments(List<TorrentComments.Comments> comments) {
+        int originalSize = mComments.size();
+        mComments.addAll(comments);
+        notifyItemRangeInserted(originalSize, comments.size());
     }
 
     class CommentViewHolder extends RecyclerView.ViewHolder {

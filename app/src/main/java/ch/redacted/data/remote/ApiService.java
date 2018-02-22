@@ -86,7 +86,7 @@ public interface ApiService {
     Single<TorrentGroup> release(@Query("id") int id);
 
     @GET("ajax.php?action=tcomments")
-    Single<TorrentComments> torrentComments(@Query("id") int id);
+    Single<TorrentComments> torrentComments(@Query("id") int id, @Query("page") int page);
 
     @GET("ajax.php?action=inbox")
     Single<Conversations> inbox(@Query("sort") String sort, @Query("type") String type);

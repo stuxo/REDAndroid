@@ -71,6 +71,7 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
     @Inject ReleasePresenter mReleasePresenter;
     @Inject TorrentsAdapter mTorrentsAdapter;
     @Inject CommentsAdapter mCommentsAdapter;
+    private EndlessRecyclerViewScrollListener scrollListener;
 
     @BindView(R.id.release_image) ImageView releaseImage;
     @BindView(R.id.release_title) HtmlTextView releaseTitle;
@@ -148,14 +149,23 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
         mTorrentsRecyclerView.setAdapter(mTorrentsAdapter);
         mTorrentsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        LinearLayoutManager lm = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true);
-        lm.setStackFromEnd(true);
+        LinearLayoutManager lm = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+//        lm.setStackFromEnd(true);
+        scrollListener = new EndlessRecyclerViewScrollListener(lm) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                mReleasePresenter.fetchComments(RELEASE_ID, page);
+            }
+        };
+
+        mCommentsRecycler.addOnScrollListener(scrollListener);
+
         mCommentsRecycler.setLayoutManager(lm);
         mCommentsRecycler.setAdapter(mCommentsAdapter);
         mTorrentsRecyclerView.setNestedScrollingEnabled(false);
 
         mReleasePresenter.loadRelease(RELEASE_ID);
-        mReleasePresenter.fetchComments(RELEASE_ID);
+        mReleasePresenter.fetchComments(RELEASE_ID, 0);
     }
 
     @Override
@@ -308,7 +318,7 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
 
     @Override
     public void showComments(List<TorrentComments.Comments> comments) {
-        mCommentsAdapter.setComments(comments);
+        mCommentsAdapter.addComments(comments);
     }
 
     @Override
