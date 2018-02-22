@@ -20,6 +20,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -66,6 +67,7 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
     private int ARTIST_ID = 0;
 
     private boolean showAllDesc = false;
+    private boolean showComments = false;
     private boolean isBookmarked;
 
     @Inject ReleasePresenter mReleasePresenter;
@@ -84,24 +86,39 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
     @BindView(R.id.toolbar_layout) CollapsingToolbarLayout mToolbarLayout;
     @BindView(R.id.app_bar) AppBarLayout mAppBarLayout;
     @BindView(R.id.read_more_button) Button mReadMore;
+    @BindView(R.id.show_comments) Button mShowComments;
     @BindView(R.id.fab) FloatingActionButton bookmarkFab;
     @BindView(R.id.progressBar) ProgressBar loadingProgress;
+    @BindView(R.id.nested_scroll_view) NestedScrollView nestedScrollView;
+
     private List<Object> mTorrents;
 
     @OnClick(R.id.release_artist)
-    public void OnArtistClick(View v) {
+    public void onArtistClick(View v) {
         Intent intent = new Intent(this, ArtistActivity.class);
         intent.putExtra("id", ARTIST_ID);
         startActivity(intent);
     }
 
     @OnClick(R.id.fab)
-    public void OnBookMarkToggle(View v) {
+    public void onBookMarkToggle(View v) {
         mReleasePresenter.toggleBookmark(RELEASE_ID, isBookmarked);
     }
 
+    @OnClick(R.id.show_comments)
+    public void onShowCommentsClicked(View v) {
+        showComments = !showComments;
+        if (showComments) {
+            mShowComments.setText(getString(R.string.hide_comments));
+            mCommentsRecycler.setVisibility(View.VISIBLE);
+        } else {
+            mShowComments.setText(getString(R.string.show_comments));
+            mCommentsRecycler.setVisibility(View.GONE);
+        }
+    }
+
     @OnClick(R.id.read_more_button)
-    public void OnReadMoreClick(View v) {
+    public void onReadMoreClick(View v) {
         showAllDesc = !showAllDesc;
 
         if (showAllDesc) {
@@ -150,7 +167,6 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
         mTorrentsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         LinearLayoutManager lm = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-//        lm.setStackFromEnd(true);
         scrollListener = new EndlessRecyclerViewScrollListener(lm) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
@@ -159,7 +175,6 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
         };
 
         mCommentsRecycler.addOnScrollListener(scrollListener);
-
         mCommentsRecycler.setLayoutManager(lm);
         mCommentsRecycler.setAdapter(mCommentsAdapter);
         mTorrentsRecyclerView.setNestedScrollingEnabled(false);

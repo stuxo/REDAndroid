@@ -60,6 +60,7 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
+        android:id="@+id/nested_scroll_view"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"        >
 
@@ -133,13 +134,23 @@
                     android:layout_gravity="center_horizontal"
                     android:text="@string/show_description"/>
 
-            </LinearLayout>
+                <Button
+                    android:id="@+id/show_comments"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/show_comments"/>
 
-            <!--comments-->
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/comments_recycler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                <!--comments-->
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/comments_recycler"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"/>
+
+
+            </LinearLayout>
 
             <!--torrents-->
             <android.support.v7.widget.RecyclerView
