@@ -44,6 +44,7 @@ import org.sufficientlysecure.htmltextview.HtmlTextView;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -72,8 +73,6 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
 
     @Inject ReleasePresenter mReleasePresenter;
     @Inject TorrentsAdapter mTorrentsAdapter;
-    @Inject CommentsAdapter mCommentsAdapter;
-    private EndlessRecyclerViewScrollListener scrollListener;
 
     @BindView(R.id.release_image) ImageView releaseImage;
     @BindView(R.id.release_title) HtmlTextView releaseTitle;
@@ -82,7 +81,6 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
     @BindView(R.id.release_tags) TextView releaseTags;
     @BindView(R.id.release_description) HtmlTextView releaseDescription;
     @BindView(R.id.recycler_view) RecyclerView mTorrentsRecyclerView;
-    @BindView(R.id.comments_recycler) RecyclerView mCommentsRecycler;
     @BindView(R.id.toolbar_layout) CollapsingToolbarLayout mToolbarLayout;
     @BindView(R.id.app_bar) AppBarLayout mAppBarLayout;
     @BindView(R.id.read_more_button) Button mReadMore;
@@ -90,6 +88,7 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
     @BindView(R.id.fab) FloatingActionButton bookmarkFab;
     @BindView(R.id.progressBar) ProgressBar loadingProgress;
     @BindView(R.id.nested_scroll_view) NestedScrollView nestedScrollView;
+    @BindView(R.id.comments) TextView numComments;
 
     private List<Object> mTorrents;
 
@@ -110,10 +109,8 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
         showComments = !showComments;
         if (showComments) {
             mShowComments.setText(getString(R.string.hide_comments));
-            mCommentsRecycler.setVisibility(View.VISIBLE);
         } else {
             mShowComments.setText(getString(R.string.show_comments));
-            mCommentsRecycler.setVisibility(View.GONE);
         }
     }
 
@@ -167,16 +164,7 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
         mTorrentsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         LinearLayoutManager lm = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        scrollListener = new EndlessRecyclerViewScrollListener(lm) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                mReleasePresenter.fetchComments(RELEASE_ID, page);
-            }
-        };
 
-        mCommentsRecycler.addOnScrollListener(scrollListener);
-        mCommentsRecycler.setLayoutManager(lm);
-        mCommentsRecycler.setAdapter(mCommentsAdapter);
         mTorrentsRecyclerView.setNestedScrollingEnabled(false);
 
         mReleasePresenter.loadRelease(RELEASE_ID);
@@ -256,11 +244,12 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
                     super.onResourceReady(resource, transition);
                     Palette.from(((BitmapDrawable) resource).getBitmap()).generate(new Palette.PaletteAsyncListener() {
                         public void onGenerated(Palette p) {
-                            bookmarkFab.setBackgroundTintList(ColorStateList.valueOf(p.getVibrantColor(ContextCompat.getColor(ReleaseActivity.this, R.color.accent))));
-                            releaseArtist.setTextColor(ColorStateList.valueOf(p.getVibrantColor(ContextCompat.getColor(ReleaseActivity.this, R.color.accent))));
-                            mReadMore.setTextColor(ColorStateList.valueOf(p.getVibrantColor(ContextCompat.getColor(ReleaseActivity.this, R.color.accent))));
+                            if (p != null) {
+                                bookmarkFab.setBackgroundTintList(ColorStateList.valueOf(p.getVibrantColor(ContextCompat.getColor(ReleaseActivity.this, R.color.accent))));
+                                releaseArtist.setTextColor(ColorStateList.valueOf(p.getVibrantColor(ContextCompat.getColor(ReleaseActivity.this, R.color.accent))));
+                                mReadMore.setTextColor(ColorStateList.valueOf(p.getVibrantColor(ContextCompat.getColor(ReleaseActivity.this, R.color.accent))));
+                            }
                         }
-
                     });
                 }
             });
@@ -333,7 +322,12 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
 
     @Override
     public void showComments(List<TorrentComments.Comments> comments) {
-        mCommentsAdapter.addComments(comments);
+        numComments.setText(String.format(Locale.getDefault(),"%d %s", comments.size(), getResources().getQuantityText(R.plurals.comments, comments.size())));
+    }
+
+    @Override
+    public void showCommentsEmpty() {
+        numComments.setVisibility(View.GONE);
     }
 
     @Override

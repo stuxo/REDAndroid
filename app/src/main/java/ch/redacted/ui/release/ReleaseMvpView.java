@@ -26,4 +26,6 @@ public interface ReleaseMvpView extends MvpView {
 	void showMessage(String message);
 
     void showComments(List<TorrentComments.Comments> comments);
+
+    void showCommentsEmpty();
 }

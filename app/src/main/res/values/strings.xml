@@ -239,8 +239,8 @@
     <string name="open_file_with">Open file with</string>
     <string name="key_pref_default_download_location">pref_default_download_location</string>
     <string name="label_default_download_location">Default Download Location</string>
-    <string name="comments">Comments</string>
     <string name="show_comments">Show comments</string>
     <string name="hide_comments">Hide comments</string>
+    <string name="comments">comments</string>
 
 </resources>
