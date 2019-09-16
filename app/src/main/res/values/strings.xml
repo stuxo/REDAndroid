@@ -242,5 +242,5 @@
     <string name="show_comments">Show comments</string>
     <string name="hide_comments">Hide comments</string>
     <string name="comments">comments</string>
-
+    <string name="apiKey">API Key</string>
 </resources>

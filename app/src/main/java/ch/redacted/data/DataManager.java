@@ -1,28 +1,8 @@
 package ch.redacted.data;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Environment;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
-import android.webkit.MimeTypeMap;
 
-import ch.redacted.REDApplication;
-import ch.redacted.app.R;
-import ch.redacted.data.model.TorrentComments;
-import ch.redacted.data.remote.PyWhatAutoService;
-import ch.redacted.ui.inbox.conversation.ConversationActivity;
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Single;
-import io.reactivex.SingleSource;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -37,23 +17,33 @@ import ch.redacted.data.local.PreferencesHelper;
 import ch.redacted.data.model.Announcement;
 import ch.redacted.data.model.Artist;
 import ch.redacted.data.model.Conversation;
+import ch.redacted.data.model.Conversations;
 import ch.redacted.data.model.ForumCategory;
 import ch.redacted.data.model.ForumThread;
 import ch.redacted.data.model.ForumView;
-import ch.redacted.data.model.Conversations;
 import ch.redacted.data.model.Index;
 import ch.redacted.data.model.Profile;
 import ch.redacted.data.model.Recents;
 import ch.redacted.data.model.Request;
 import ch.redacted.data.model.RequestSearch;
 import ch.redacted.data.model.Subscription;
-import ch.redacted.data.model.TorrentBookmark;
-import ch.redacted.data.model.TorrentGroup;
 import ch.redacted.data.model.Top10;
+import ch.redacted.data.model.TorrentBookmark;
+import ch.redacted.data.model.TorrentComments;
+import ch.redacted.data.model.TorrentGroup;
 import ch.redacted.data.model.TorrentSearch;
 import ch.redacted.data.model.UserSearch;
 import ch.redacted.data.remote.ApiService;
+import ch.redacted.data.remote.PyWhatAutoService;
 import ch.redacted.data.remote.WhatManagerService;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Single;
+import io.reactivex.SingleSource;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 import okio.BufferedSink;
 import okio.Okio;
@@ -366,6 +356,10 @@ public class DataManager {
 
     public Single<TorrentComments> fetchTorrentComments(int id, int page) {
         return mApiService.torrentComments(id, page);
+    }
+
+    public Single<Index> loginWithApiKey() {
+        return loadIndex();
     }
 }
 

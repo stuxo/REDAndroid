@@ -25,13 +25,17 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
 	@Inject LoginPresenter mLoginPresenter;
 	@BindView(R.id.username_input) public TextView username;
 	@BindView(R.id.password_input) public TextView password;
+	@BindView(R.id.api_key_input) public TextView apiKey;
 	@BindView(R.id.logo) public ImageView logo;
-
 
 	ProgressDialog alertDialog;
 
 	@OnClick(R.id.login_button) public void submit(View view) {
-		mLoginPresenter.login(username.getText().toString(), password.getText().toString());
+		if (apiKey.getText().length() > 0){
+			mLoginPresenter.loginWithApiKey(apiKey.getText().toString());
+		} else if (username.getText().length() > 0 && password.getText().length() > 0) {
+			mLoginPresenter.login(username.getText().toString(), password.getText().toString());
+		}
 	}
 
 	/**
@@ -68,7 +72,9 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
 
 		mLoginPresenter.attachView(this);
 
-		if (mLoginPresenter.hasCookie()) {
+		if (mLoginPresenter.hasApiKey()) {
+			mLoginPresenter.loginWithApiKey(mLoginPresenter.getApiKey());
+		} else if (mLoginPresenter.hasCookie()) {
 			mLoginPresenter.loginWithCookie();
 		}
 	}

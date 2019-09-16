@@ -1,16 +1,16 @@
 package ch.redacted.ui.login;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.observers.DisposableSingleObserver;
-import io.reactivex.schedulers.Schedulers;
 import javax.inject.Inject;
 
-import ch.redacted.ui.base.BasePresenter;
 import ch.redacted.data.DataManager;
 import ch.redacted.data.local.PreferencesHelper;
 import ch.redacted.data.model.Index;
 import ch.redacted.injection.ConfigPersistent;
+import ch.redacted.ui.base.BasePresenter;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableSingleObserver;
+import io.reactivex.schedulers.Schedulers;
 
 @ConfigPersistent
 public class LoginPresenter extends BasePresenter<LoginMvpView> {
@@ -86,5 +86,34 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
 
     public boolean hasCookie() {
         return mPreferenceHelper.getCookies().size() > 0;
+    }
+
+    public boolean hasApiKey() {
+        return !mPreferenceHelper.getApiKey().isEmpty();
+    }
+
+    public String getApiKey() {
+        return mPreferenceHelper.getApiKey();
+    }
+
+    public void loginWithApiKey(String key) {
+        getMvpView().showLoadingProgress(true);
+        mPreferenceHelper.setApiKey(key);
+        mSubscription.add(mDataManager.loginWithApiKey()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(new DisposableSingleObserver<Index>() {
+                    @Override
+                    public void onSuccess(Index value) {
+                        getMvpView().showLoginSuccess();
+                        getMvpView().showLoadingProgress(false);
+                    }
+
+                    @Override
+                    public void onError(Throwable error) {
+                        getMvpView().showError(error.getMessage());
+                        getMvpView().showLoadingProgress(false);
+                    }
+                }));
     }
 }

@@ -1,26 +1,19 @@
 buildscript {
-  repositories {
-    jcenter()
-    maven { url 'https://maven.fabric.io/public' }
-    google()
-  }
-  dependencies {
-    classpath 'com.android.tools.build:gradle:3.0.1'
-    //noinspection GradleDynamicVersion
-  }
+    repositories {
+        jcenter()
+        maven { url 'https://maven.fabric.io/public' }
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.4.2'
+        //noinspection GradleDynamicVersion
+    }
 }
-
 allprojects {
-  repositories {
-    jcenter()
-    maven { url 'https://maven.fabric.io/public' }
-    maven { url 'http://guardian.github.com/maven/repo-releases' }
-    maven { url "https://jitpack.io" }
-    google()
-  }
-}
-
-task wrapper(type: Wrapper) {
-  gradleVersion = '3.1'
-  distributionUrl = distributionUrl.replace("bin", "all")
+    repositories {
+        jcenter()
+        maven { url 'https://maven.fabric.io/public' }
+        maven { url "https://jitpack.io" }
+        google()
+    }
 }

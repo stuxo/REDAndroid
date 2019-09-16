@@ -44,12 +44,21 @@
         android:hint="@string/password"
         android:inputType="textPassword"/>
 
+    <EditText
+        android:id="@+id/api_key_input"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password_input"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif"
+        android:hint="@string/apiKey"/>
+
     <Button
         android:id="@+id/login_button"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="@string/login"
         android:layout_marginTop="8dp"
-        android:layout_below="@id/password_input"
+        android:layout_below="@id/api_key_input"
         android:layout_alignParentRight="true"/>
 </RelativeLayout>

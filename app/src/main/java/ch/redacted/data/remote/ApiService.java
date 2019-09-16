@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import ch.redacted.data.model.TorrentComments;
+import ch.redacted.data.remote.interceptors.AddApiKeyInterceptor;
 import io.reactivex.Single;
 
 import java.io.IOException;
@@ -168,6 +169,7 @@ public interface ApiService {
                     })
                     .followRedirects(false)
                     .addInterceptor(new AddCookiesInterceptor(applicationContext))
+                    .addInterceptor(new AddApiKeyInterceptor(applicationContext))
                     .addInterceptor(new ReceivedCookiesInterceptor(applicationContext))
                     .addNetworkInterceptor(new StethoInterceptor())
                     .build())

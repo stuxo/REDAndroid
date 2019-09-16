@@ -28,10 +28,11 @@ import ch.redacted.injection.ApplicationContext;
 
 	public static final String PREF_LOAD_IMAGES = "pref_load_images";
 
-
 	public static final String PREF_DEFAULT_DOWNLOAD_KEY = "pref_default_download_method";
 	public static final String PREF_WM_SESSION_KEY = "pref_wm_session";
 	public static final String PREF_TOP_TORRENT_LIMIT = "pref_top_torrents";
+
+	public static final String PREF_API_KEY = "pref_api_key";
 
 	private final SharedPreferences mPref;
 	private final SharedPreferences mCookiePreference;
@@ -53,7 +54,7 @@ import ch.redacted.injection.ApplicationContext;
 	}
 
 	public String getAuth() {
-		return mPref.getString(PREF_AUTH_KEY, "");
+		return mPref.getString(PREF_AUTH_KEY, null);
 	}
 
 	public void setUserId(int id) {
@@ -169,6 +170,14 @@ import ch.redacted.injection.ApplicationContext;
 	}
 
 	public String getDefaultDownloadLocation() {
-		return mPref.getString(PREF_DEFAULT_DOWNLOAD_LOCATION, null);
+        return mPref.getString(PREF_DEFAULT_DOWNLOAD_LOCATION, null);
+    }
+
+	public String getApiKey() {
+		return mPref.getString(PREF_API_KEY, "");
+	}
+
+	public void setApiKey(String key) {
+		mPref.edit().putString(PREF_API_KEY, key).apply();
 	}
 }

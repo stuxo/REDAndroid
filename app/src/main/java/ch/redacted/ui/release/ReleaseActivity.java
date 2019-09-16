@@ -84,11 +84,8 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
     @BindView(R.id.toolbar_layout) CollapsingToolbarLayout mToolbarLayout;
     @BindView(R.id.app_bar) AppBarLayout mAppBarLayout;
     @BindView(R.id.read_more_button) Button mReadMore;
-    @BindView(R.id.show_comments) Button mShowComments;
     @BindView(R.id.fab) FloatingActionButton bookmarkFab;
     @BindView(R.id.progressBar) ProgressBar loadingProgress;
-    @BindView(R.id.nested_scroll_view) NestedScrollView nestedScrollView;
-    @BindView(R.id.comments) TextView numComments;
 
     private List<Object> mTorrents;
 
@@ -102,16 +99,6 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
     @OnClick(R.id.fab)
     public void onBookMarkToggle(View v) {
         mReleasePresenter.toggleBookmark(RELEASE_ID, isBookmarked);
-    }
-
-    @OnClick(R.id.show_comments)
-    public void onShowCommentsClicked(View v) {
-        showComments = !showComments;
-        if (showComments) {
-            mShowComments.setText(getString(R.string.hide_comments));
-        } else {
-            mShowComments.setText(getString(R.string.show_comments));
-        }
     }
 
     @OnClick(R.id.read_more_button)
@@ -163,12 +150,9 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
         mTorrentsRecyclerView.setAdapter(mTorrentsAdapter);
         mTorrentsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        LinearLayoutManager lm = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-
         mTorrentsRecyclerView.setNestedScrollingEnabled(false);
 
         mReleasePresenter.loadRelease(RELEASE_ID);
-        mReleasePresenter.fetchComments(RELEASE_ID, 0);
     }
 
     @Override
@@ -318,16 +302,6 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
 
     @Override public void showMessage(String message) {
         Snackbar.make(getCurrentFocus(), message, Snackbar.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void showComments(List<TorrentComments.Comments> comments) {
-        numComments.setText(String.format(Locale.getDefault(),"%d %s", comments.size(), getResources().getQuantityText(R.plurals.comments, comments.size())));
-    }
-
-    @Override
-    public void showCommentsEmpty() {
-        numComments.setVisibility(View.GONE);
     }
 
     @Override
