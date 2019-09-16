@@ -13,8 +13,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-
 import javax.inject.Inject;
 import ch.redacted.app.R;
 import ch.redacted.data.model.Request;
@@ -110,8 +108,7 @@ public class RequestActivity extends BaseActivity implements RequestMvpView {
 
     @Override
     public void showRequest(Request request) {
-        RequestOptions options = new RequestOptions().fitCenter();
-        Glide.with(this).load(request.response.image).apply(options).into(releaseImage);
+        Glide.with(this).load(request.response.image).asBitmap().fitCenter().into(releaseImage);
         final String info = getString(R.string.release_info, request.response.musicInfo.artists.get(0).name, request.response.releaseName, request.response.year, ReleaseTypes.getReleaseType(request.response.releaseType));
         String releaseInfoSimple = getString(R.string.release_info_simple, request.response.year, ReleaseTypes.getReleaseType(request.response.releaseType), 0);
         releaseArtist.setText(request.response.musicInfo.artists.get(0).name);

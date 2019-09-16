@@ -6,13 +6,10 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -31,14 +28,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.DrawableImageViewTarget;
-import com.bumptech.glide.request.transition.Transition;
+
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import ch.redacted.app.BuildConfig;
+import io.reactivex.functions.Consumer;
+import ch.redacted.REDApplication;
 import org.sufficientlysecure.htmltextview.HtmlTextView;
 
 import java.io.File;
@@ -51,8 +51,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import ch.redacted.REDApplication;
-import ch.redacted.app.BuildConfig;
 import ch.redacted.app.R;
 import ch.redacted.data.model.TorrentComments;
 import ch.redacted.data.model.TorrentGroup;
@@ -221,12 +219,12 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
     @Override
     public void showRelease(TorrentGroup torrentGroup) {
         if (REDApplication.get(this).getComponent().dataManager().getPreferencesHelper().getLoadImages()) {
-            RequestOptions options = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE).fitCenter();
-            Glide.with(this).load(torrentGroup.response.group.wikiImage).apply(options).into(new DrawableImageViewTarget(releaseImage) {
+            Glide.with(this).load(torrentGroup.response.group.wikiImage).asBitmap().fitCenter().into(
+                    new BitmapImageViewTarget(releaseImage) {
                 @Override
-                public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
-                    super.onResourceReady(resource, transition);
-                    Palette.from(((BitmapDrawable) resource).getBitmap()).generate(new Palette.PaletteAsyncListener() {
+                public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
+                    super.onResourceReady(bitmap, anim);
+                    Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
                         public void onGenerated(Palette p) {
                             if (p != null) {
                                 bookmarkFab.setBackgroundTintList(ColorStateList.valueOf(p.getVibrantColor(ContextCompat.getColor(ReleaseActivity.this, R.color.accent))));
@@ -237,7 +235,6 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
                     });
                 }
             });
-
         } else {
             releaseImage.setVisibility(View.GONE);
         }

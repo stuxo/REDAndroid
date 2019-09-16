@@ -1,12 +1,7 @@
 package ch.redacted.util;
 
-import android.app.Activity;
-import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 
 import java.lang.reflect.Field;
 
@@ -50,20 +45,5 @@ public class ImageHelper {
 		} catch (IndexOutOfBoundsException e) {
 			return "";
 		}
-	}
-
-	public static void loadImage(Context context, String imageUrl, ImageView imageView, boolean centreCrop, boolean fitCentre) {
-
-		if (centreCrop)  Glide.with(context).load(imageUrl).apply(new RequestOptions().centerCrop()).into(imageView);
-		else if (fitCentre)  Glide.with(context).load(imageUrl).apply(new RequestOptions().fitCenter()).into(imageView);
-		else Glide.with(context).load(imageUrl).into(imageView);
-	}
-
-	public static void loadImageRounded(Context context, String imageUrl, final ImageView imageView) {
-		Glide.with(context).load(imageUrl).apply(new RequestOptions().centerCrop().circleCrop()).into(imageView);
-	}
-
-	public static void loadImageRounded(Context context, int resource, final ImageView imageView) {
-		Glide.with(context).load(resource).apply(new RequestOptions().centerCrop().circleCrop()).into(imageView);
 	}
 }

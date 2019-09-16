@@ -1,11 +1,14 @@
 package ch.redacted.ui.profile;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -17,17 +20,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.sufficientlysecure.htmltextview.HtmlHttpImageGetter;
-import org.sufficientlysecure.htmltextview.HtmlTextView;
-
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
-
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ch.redacted.app.R;
@@ -35,7 +27,15 @@ import ch.redacted.data.model.Recents;
 import ch.redacted.ui.base.BaseActivity;
 import ch.redacted.ui.release.ReleaseActivity;
 import ch.redacted.ui.reply.ReplyActivity;
-import ch.redacted.util.ImageHelper;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
+import javax.inject.Inject;
+import org.sufficientlysecure.htmltextview.HtmlHttpImageGetter;
+import org.sufficientlysecure.htmltextview.HtmlTextView;
 
 import static android.view.View.GONE;
 
@@ -213,12 +213,29 @@ public class ProfileActivity extends BaseActivity
 	 *****/
 
 	@Override public void showAvatar(String avatarUrl) {
-
-		ImageHelper.loadImageRounded(this, avatarUrl, avatar);
+		if (avatarUrl.contains("gif")) {
+			Glide.with(this).load(avatarUrl).asGif().into(avatar);
+		} else {
+			Glide.with(this).load(avatarUrl).asBitmap().centerCrop().into(new BitmapImageViewTarget(avatar) {
+				@Override
+				protected void setResource(Bitmap resource) {
+					RoundedBitmapDrawable circularBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), resource);
+					circularBitmapDrawable.setCircular(true);
+					avatar.setImageDrawable(circularBitmapDrawable);
+				}
+			});
+		}
 	}
 
 	@Override public void showDefaultAvatar() {
-		ImageHelper.loadImageRounded(this, R.drawable.default_avatar, avatar);
+		Glide.with(this).load(R.drawable.default_avatar).asBitmap().centerCrop().into(new BitmapImageViewTarget(avatar) {
+			@Override
+			protected void setResource(Bitmap resource) {
+				RoundedBitmapDrawable circularBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), resource);
+				circularBitmapDrawable.setCircular(true);
+				avatar.setImageDrawable(circularBitmapDrawable);
+			}
+		});
 	}
 
 	@Override

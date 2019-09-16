@@ -10,8 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -58,15 +56,13 @@ public class Top10Adapter extends RecyclerView.Adapter<Top10Adapter.Top10Holder>
     @Override public void onBindViewHolder(final Top10Holder holder, int position) {
         Top10.Results results = mItems.get(position);
         holder.setId(results.groupId);
-        holder.root.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View view) {
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-                    holder.image.setTransitionName("thumbnailTransition");
-                    mCallback.onItemClicked(holder.id, holder.image);
-                }
-                else {
-                    mCallback.onItemClicked(holder.id, null);
-                }
+        holder.root.setOnClickListener(view -> {
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+                holder.image.setTransitionName("thumbnailTransition");
+                mCallback.onItemClicked(holder.id, holder.image);
+            }
+            else {
+                mCallback.onItemClicked(holder.id, null);
             }
         });
 
@@ -78,8 +74,7 @@ public class Top10Adapter extends RecyclerView.Adapter<Top10Adapter.Top10Holder>
         holder.releaseSeeders.setText(String.format(Locale.getDefault(), "%d", results.seeders));
         holder.releaseLeechers.setText(String.format(Locale.getDefault(), "%d", results.leechers));
         if (REDApplication.get(holder.image.getContext()).getComponent().dataManager().getPreferencesHelper().getLoadImages()) {
-            RequestOptions options = new RequestOptions().fitCenter().skipMemoryCache(true);
-            Glide.with(holder.image.getContext()).load(results.wikiImage).apply(options).into(holder.image);
+            Glide.with(holder.image.getContext()).load(results.wikiImage).asBitmap().fitCenter().into(holder.image);
         }
         else {
             holder.image.setVisibility(View.GONE);

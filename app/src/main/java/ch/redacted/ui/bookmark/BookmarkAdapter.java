@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import org.sufficientlysecure.htmltextview.HtmlTextView;
 
 import java.util.ArrayList;
@@ -21,7 +23,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ch.redacted.app.R;
 import ch.redacted.data.model.TorrentBookmark;
-import ch.redacted.util.ImageHelper;
 import ch.redacted.util.ReleaseTypes;
 import ch.redacted.util.Tags;
 
@@ -55,7 +56,8 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.Bookma
         holder.setId(results.id);
         holder.root.setOnClickListener(view -> mCallback.onItemClicked(holder.id));
 
-        ImageHelper.loadImage(holder.image.getContext(), results.image,  holder.image, false, true);
+        Glide.with(holder.image.getContext()).load(results.image).asBitmap().fitCenter().into(holder.image);
+
         holder.releaseName.setHtml(results.name);
         holder.releaseYear.setText(String.format(Locale.getDefault(), "%d", results.year));
         holder.releaseTags.setText(Tags.PrettyTags(3, results.tagList.split(" ")));

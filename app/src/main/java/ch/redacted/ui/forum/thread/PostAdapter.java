@@ -1,7 +1,10 @@
 package ch.redacted.ui.forum.thread;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -10,6 +13,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import ch.redacted.REDApplication;
+import ch.redacted.util.Emoji;
+import ch.redacted.util.ImageHelper;
 import org.sufficientlysecure.htmltextview.HtmlHttpImageGetter;
 import org.sufficientlysecure.htmltextview.HtmlTextView;
 
@@ -23,11 +31,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import ch.redacted.REDApplication;
 import ch.redacted.app.R;
 import ch.redacted.data.model.ForumThread;
-import ch.redacted.util.Emoji;
-import ch.redacted.util.ImageHelper;
 
 /**
  * Created by sxo on 23/12/16.
@@ -74,15 +79,32 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ForumViewHolde
         String body = Emoji.convertEmojis(post.body);
         body = ImageHelper.replaceImageLinks(body);
         if (REDApplication.get(mContext).getComponent().dataManager().getPreferencesHelper().getLoadImages()) {
-
-            if (post.author.avatar.equals("")) {
-                ImageHelper.loadImageRounded(mContext, R.drawable.default_avatar, holder.avatar);
-            } else {
-                ImageHelper.loadImageRounded(mContext, post.author.avatar, holder.avatar);
-
-                holder.postBody.setHtml(body, new HtmlHttpImageGetter(holder.postBody));
+            if (post.author.avatar.contains("gif")) {
+                Glide.with(mContext).load(post.author.avatar).asGif().centerCrop().into(holder.avatar);
             }
-        } else {
+            else if (post.author.avatar.equals(""))
+                    Glide.with(mContext).load(R.drawable.default_avatar).asBitmap().centerCrop().into(new BitmapImageViewTarget(
+                        holder.avatar) {
+                        @Override
+                        protected void setResource(Bitmap resource) {
+                            RoundedBitmapDrawable circularBitmapDrawable = RoundedBitmapDrawableFactory.create(mContext.getResources(), resource);
+                            circularBitmapDrawable.setCircular(true);
+                            holder.avatar.setImageDrawable(circularBitmapDrawable);
+                        }
+                    });
+            else {
+                Glide.with(mContext).load(post.author.avatar).asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.avatar) {
+                    @Override protected void setResource(Bitmap resource) {
+                        RoundedBitmapDrawable circularBitmapDrawable =
+                            RoundedBitmapDrawableFactory.create(mContext.getResources(), resource);
+                        circularBitmapDrawable.setCircular(true);
+                        holder.avatar.setImageDrawable(circularBitmapDrawable);
+                    }
+                });
+            }
+            holder.postBody.setHtml(body, new HtmlHttpImageGetter(holder.postBody));
+        }
+        else {
             holder.avatar.setVisibility(View.GONE);
             holder.postBody.setHtml(body);
         }

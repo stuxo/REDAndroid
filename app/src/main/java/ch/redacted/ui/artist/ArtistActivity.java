@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import org.sufficientlysecure.htmltextview.HtmlTextView;
 
 import java.util.List;
@@ -26,7 +28,6 @@ import ch.redacted.app.R;
 import ch.redacted.data.model.Artist;
 import ch.redacted.ui.base.BaseActivity;
 import ch.redacted.ui.release.ReleaseActivity;
-import ch.redacted.util.ImageHelper;
 import ch.redacted.util.Tags;
 
 public class ArtistActivity extends BaseActivity implements ArtistMvpView, TorrentGroupAdapter.Callback {
@@ -138,7 +139,7 @@ public class ArtistActivity extends BaseActivity implements ArtistMvpView, Torre
 
     @Override
     public void showArtist(final Artist artist) {
-        ImageHelper.loadImage(this, artist.response.image, artistImage, false, true);
+        Glide.with(this).load(artist.response.image).asBitmap().fitCenter().into(artistImage);
         releaseArtist.setText(artist.response.name);
         artistTags.setText(Tags.PrettyArtistTags(3, artist.response.tags));
         isBookmarked = artist.response.notificationsEnabled;
