@@ -16,6 +16,8 @@ import javax.inject.Singleton;
 import ch.redacted.data.local.PreferencesHelper;
 import ch.redacted.data.model.Announcement;
 import ch.redacted.data.model.Artist;
+import ch.redacted.data.model.Collage;
+import ch.redacted.data.model.CollageSearch;
 import ch.redacted.data.model.Conversation;
 import ch.redacted.data.model.Conversations;
 import ch.redacted.data.model.ForumCategory;
@@ -193,6 +195,10 @@ public class DataManager {
         return mApiService.requestSearch(term);
     }
 
+    public Single<CollageSearch> collageSearch(String term) {
+        return mApiService.collageSearch(term);
+    }
+
     //this will only return direct matches
     public Single<Artist> artistsSearch(String name) {
         return mApiService.artist(name, false);
@@ -271,6 +277,10 @@ public class DataManager {
 
     public Single<Request> getRequest(int id) {
         return mApiService.request(id);
+    }
+
+    public Single<Collage> getCollage(int id) {
+        return mApiService.collage(id);
     }
 
     public Single<Recents> getRecents(int id) {

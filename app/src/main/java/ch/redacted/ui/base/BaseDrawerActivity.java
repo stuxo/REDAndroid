@@ -38,14 +38,15 @@ import ch.redacted.ui.drawer.DrawerMvpView;
 import ch.redacted.ui.drawer.DrawerPresenter;
 import ch.redacted.ui.forum.category.CategoryActivity;
 import ch.redacted.ui.inbox.InboxActivity;
+import ch.redacted.ui.profile.ProfileActivity;
 import ch.redacted.ui.search.artist.ArtistSearchActivity;
+import ch.redacted.ui.search.collage.CollageSearchActivity;
 import ch.redacted.ui.search.request.RequestSearchActivity;
 import ch.redacted.ui.search.torrent.TorrentSearchActivity;
 import ch.redacted.ui.search.user.UserSearchActivity;
 import ch.redacted.ui.settings.SettingsActivity;
 import ch.redacted.ui.subscriptions.SubscriptionsActivity;
 import ch.redacted.ui.top10.Top10Activity;
-import ch.redacted.ui.profile.ProfileActivity;
 import ch.redacted.util.Calculator;
 
 public class BaseDrawerActivity extends BaseActivity implements DrawerMvpView {
@@ -158,6 +159,8 @@ public class BaseDrawerActivity extends BaseActivity implements DrawerMvpView {
                     case Subscriptions:
                         pendingIntent = new Intent(BaseDrawerActivity.this, SubscriptionsActivity.class);
                         break;
+                    case Collages:
+                        pendingIntent = new Intent(BaseDrawerActivity.this, CollageSearchActivity.class);
                 }
 
                 mDrawerLayout.closeDrawers();

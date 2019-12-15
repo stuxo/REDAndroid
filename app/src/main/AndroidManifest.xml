@@ -105,6 +105,8 @@
         <activity
             android:name="ch.redacted.ui.search.request.RequestSearchActivity"/>
 
+        <activity android:name="ch.redacted.ui.search.collage.CollageSearchActivity" />
+
         <activity
             android:name="ch.redacted.ui.search.torrent.TorrentSearchActivity"/>
 
@@ -134,6 +136,8 @@
         <activity
             android:name="ch.redacted.ui.request.RequestActivity"
             android:theme="@style/AppNoActionTheme"/>
+
+        <activity android:name="ch.redacted.ui.collage.CollageActivity" />
 
         <activity
             android:name="ch.redacted.ui.inbox.InboxActivity">

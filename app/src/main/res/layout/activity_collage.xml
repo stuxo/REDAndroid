@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar"
+            android:background="?attr/colorPrimary"
+            android:elevation="6dp"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:tabMode="scrollable">
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/collage_covers" />
+
+            <!--            @todo add description, torrent list w/o cover and comments -->
+            <!--            <android.support.design.widget.TabItem-->
+            <!--                android:text="@string/collage_description"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_width="wrap_content"/>-->
+
+            <!--            <android.support.design.widget.TabItem-->
+            <!--                android:text="@string/collage_torrent_list"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_width="wrap_content"/>-->
+
+
+        </android.support.design.widget.TabLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/activity_list" />
+</LinearLayout>
