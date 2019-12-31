@@ -123,6 +123,14 @@ public class CollageSearchActivity extends BaseDrawerActivity implements Collage
 //        mNoContent.setVisibility(View.GONE);
     }
 
+    @Override
+    public void showProgress(boolean show) {
+        mSwipeRefreshContainer.setRefreshing(show);
+        if (show) {
+            animate();
+        }
+    }
+
 
     @Override
     public void onItemClicked(int id) {

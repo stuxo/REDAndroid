@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
@@ -60,6 +61,11 @@ public class CollageAdapter extends RecyclerView.Adapter<CollageAdapter.CollageH
 
         holder.artistName.setHtml(torrentGroup.getArtistName());
         holder.releaseName.setHtml(torrentGroup.name);
+        holder.releaseTags.setText(torrentGroup.tagList);
+        String releaseInfo = "[" + torrentGroup.year.toString() + "]";
+        if (!torrentGroup.recordLabel.equals("") || !torrentGroup.catalogueNumber.equals(""))
+            releaseInfo += " [" + torrentGroup.recordLabel + " - " + torrentGroup.catalogueNumber + "]";
+        holder.releaseInfo.setText(releaseInfo);
 
         if (REDApplication.get(holder.image.getContext()).getComponent().dataManager().getPreferencesHelper().getLoadImages()) {
             Glide.with(holder.image.getContext()).load(torrentGroup.wikiImage).asBitmap().fitCenter().into(holder.image);
@@ -87,12 +93,22 @@ public class CollageAdapter extends RecyclerView.Adapter<CollageAdapter.CollageH
     class CollageHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.top_10_root)
         public LinearLayout root;
+
         @BindView(R.id.album_art)
         public ImageView image;
+
         @BindView(R.id.artist_name)
         public HtmlTextView artistName;
+
         @BindView(R.id.release_name)
         public HtmlTextView releaseName;
+
+        @BindView(R.id.release_tags)
+        public TextView releaseTags;
+
+        @BindView(R.id.release_info)
+        public TextView releaseInfo;
+
         private int id;
 
 

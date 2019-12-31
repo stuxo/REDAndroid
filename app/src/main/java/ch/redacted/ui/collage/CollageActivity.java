@@ -10,6 +10,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +25,7 @@ import ch.redacted.app.R;
 import ch.redacted.data.model.Collage;
 import ch.redacted.ui.base.BaseActivity;
 import ch.redacted.ui.release.ReleaseActivity;
+import ch.redacted.util.ImageHelper;
 
 public class CollageActivity extends BaseActivity implements CollageMvpView, CollageAdapter.Callback {
     @Inject
@@ -54,8 +57,8 @@ public class CollageActivity extends BaseActivity implements CollageMvpView, Col
         activityComponent().inject(this);
         setContentView(R.layout.activity_collage);
         ButterKnife.bind(this);
-        // @todo set title of collage
-        // getSupportActionBar().setTitle(getString(R.string.top10));
+        getSupportActionBar().setTitle("Collage");
+        img = ImageHelper.getRippy(mSwipeRefreshContainer);
 
         mCollagePresenter.attachView(this);
         mCollageAdapter.setCallback(this);
@@ -86,7 +89,12 @@ public class CollageActivity extends BaseActivity implements CollageMvpView, Col
         });
 
         mSwipeRefreshContainer.setColorSchemeResources(R.color.accent);
-        mSwipeRefreshContainer.setOnRefreshListener(() -> mCollagePresenter.loadCollage(collageId));
+        mSwipeRefreshContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mCollagePresenter.loadCollage(collageId);
+            }
+        });
         mCollagePresenter.loadCollage(collageId);
     }
 
@@ -102,6 +110,7 @@ public class CollageActivity extends BaseActivity implements CollageMvpView, Col
         mCollageAdapter.setCollage(collage);
         mCollageAdapter.notifyDataSetChanged();
         mNoContent.setVisibility(View.GONE);
+        getSupportActionBar().setTitle(collage.response.name);
     }
 
     @Override
@@ -117,6 +126,20 @@ public class CollageActivity extends BaseActivity implements CollageMvpView, Col
     @Override
     public void showBookmarked(boolean b) {
 
+    }
+
+    private void animate() {
+        Animation rotation = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        rotation.setRepeatCount(Animation.INFINITE);
+        img.startAnimation(rotation);
+    }
+
+    @Override
+    public void showProgress(boolean show) {
+        mSwipeRefreshContainer.setRefreshing(show);
+        if (show) {
+            animate();
+        }
     }
 
 

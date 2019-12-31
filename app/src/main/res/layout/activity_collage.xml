@@ -26,20 +26,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/collage_covers" />
 
-            <!--            @todo add description, torrent list w/o cover and comments -->
-            <!--            <android.support.design.widget.TabItem-->
-            <!--                android:text="@string/collage_description"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_width="wrap_content"/>-->
-
-            <!--            <android.support.design.widget.TabItem-->
-            <!--                android:text="@string/collage_torrent_list"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_width="wrap_content"/>-->
-
-
         </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    </LinearLayout>
 
     <include layout="@layout/activity_list" />
 </LinearLayout>

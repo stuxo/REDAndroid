@@ -37,7 +37,6 @@ public class CollageSearchAdapter extends RecyclerView.Adapter<CollageSearchAdap
         CollageSearch.Response collageSearch = mCollageSearches.get(position);
         holder.setId(collageSearch.id);
         holder.collageName.setText(collageSearch.name);
-        holder.collageCategoryName.setText(collageSearch.collageCategoryName);
     }
 
     @Override
@@ -62,8 +61,6 @@ public class CollageSearchAdapter extends RecyclerView.Adapter<CollageSearchAdap
 
         @BindView(R.id.collage_name)
         public TextView collageName;
-        @BindView(R.id.collage_category_name)
-        public TextView collageCategoryName;
         private int id;
 
         CollagesViewHolder(View itemView) {

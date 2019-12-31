@@ -13,5 +13,5 @@ public interface CollageMvpView extends MvpView {
 
     void showBookmarked(boolean b);
 
-
+    void showProgress(boolean show);
 }

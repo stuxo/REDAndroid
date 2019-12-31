@@ -21,12 +21,4 @@
         android:layout_marginRight="@dimen/small_gap"
         android:textSize="@dimen/text_body" />
 
-    <TextView
-        android:id="@+id/collage_category_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/small_gap"
-        android:layout_marginRight="@dimen/small_gap"
-        android:textSize="@dimen/text_body" />
-
 </LinearLayout>

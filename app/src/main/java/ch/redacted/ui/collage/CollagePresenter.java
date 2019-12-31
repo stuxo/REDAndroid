@@ -30,16 +30,14 @@ public class CollagePresenter extends BasePresenter<CollageMvpView> {
                 .subscribeWith(new DisposableSingleObserver<Collage>() {
                     @Override
                     public void onSuccess(Collage collage) {
-                        //  @todo Bug: Can throw Null Pointer Exception?
-                        //  Caused by: java.lang.NullPointerException: Attempt to invoke interface method 'void ch.redacted.ui.collage.CollageMvpView.showCollage(ch.redacted.data.model.Collage)' on a null object reference
                         getMvpView().showCollage(collage);
-                        getMvpView().showLoadingProgress(false);
+                        getMvpView().showProgress(false);
                     }
 
                     @Override
                     public void onError(Throwable error) {
                         getMvpView().showError(error.getMessage());
-                        getMvpView().showLoadingProgress(false);
+                        getMvpView().showProgress(false);
                     }
                 }));
 
