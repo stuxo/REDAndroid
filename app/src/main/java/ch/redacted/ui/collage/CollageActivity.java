@@ -34,7 +34,6 @@ public class CollageActivity extends BaseActivity implements CollageMvpView, Col
     @Inject
     CollageAdapter mCollageAdapter;
 
-
     @BindView(R.id.swipe_refresh_container)
     SwipeRefreshLayout mSwipeRefreshContainer;
 

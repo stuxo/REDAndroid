@@ -120,7 +120,6 @@ public class CollageSearchActivity extends BaseDrawerActivity implements Collage
         mCollageSearchRecycler.setAdapter(mCollageSearchAdapter);
         mCollageSearchAdapter.setCollages(results);
         mCollageSearchAdapter.notifyDataSetChanged();
-//        mNoContent.setVisibility(View.GONE);
     }
 
     @Override

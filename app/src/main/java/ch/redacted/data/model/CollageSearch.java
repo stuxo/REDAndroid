@@ -38,7 +38,5 @@ public class CollageSearch {
 
         @SerializedName("tagList")
         public String tagList;
-
-
     }
 }

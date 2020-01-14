@@ -104,14 +104,9 @@ public class Collage {
                 if (musicInfo.artists.size() > 0) {
                     return concatArtistsWithCommas(musicInfo.artists);
                 } else {
-                    return "unknown Artist";
+                    return "Unknown Artist";
                 }
             }
-
-//         we do not need the torrent info here so we do not parse them
-//        @SerializedName("torrents")
-//        public List<Torrent> torrents;
-
         }
 
     }
