@@ -68,22 +68,22 @@ public class DrawerAdapter extends BaseAdapter {
                 holder.icon.setImageDrawable(AppCompatResources.getDrawable(convertView.getContext(), R.drawable.ic_requests_48px));
                 break;
             case 5:
-                holder.icon.setImageDrawable(AppCompatResources.getDrawable(convertView.getContext(), R.drawable.ic_forum_48px));
+                holder.icon.setImageDrawable(AppCompatResources.getDrawable(convertView.getContext(), R.drawable.ic_insert_chart_black_24px));
                 break;
             case 6:
-                holder.icon.setImageDrawable(AppCompatResources.getDrawable(convertView.getContext(), R.drawable.ic_users_48px));
+                holder.icon.setImageDrawable(AppCompatResources.getDrawable(convertView.getContext(), R.drawable.ic_forum_48px));
                 break;
             case 7:
-                holder.icon.setImageDrawable(AppCompatResources.getDrawable(convertView.getContext(), R.drawable.ic_artists_48px));
+                holder.icon.setImageDrawable(AppCompatResources.getDrawable(convertView.getContext(), R.drawable.ic_users_48px));
                 break;
             case 8:
-                holder.icon.setImageDrawable(AppCompatResources.getDrawable(convertView.getContext(), R.drawable.ic_bookmark_24dp));
+                holder.icon.setImageDrawable(AppCompatResources.getDrawable(convertView.getContext(), R.drawable.ic_artists_48px));
                 break;
             case 9:
-                holder.icon.setImageDrawable(AppCompatResources.getDrawable(convertView.getContext(), R.drawable.ic_inbox_48dp));
+                holder.icon.setImageDrawable(AppCompatResources.getDrawable(convertView.getContext(), R.drawable.ic_bookmark_24dp));
                 break;
             case 10:
-                holder.icon.setImageDrawable(AppCompatResources.getDrawable(convertView.getContext(), R.drawable.ic_star_24dp));
+                holder.icon.setImageDrawable(AppCompatResources.getDrawable(convertView.getContext(), R.drawable.ic_inbox_48dp));
                 break;
         }
 

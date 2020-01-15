@@ -6,33 +6,34 @@ import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import ch.redacted.data.model.TorrentComments;
-import ch.redacted.data.remote.interceptors.AddApiKeyInterceptor;
-import io.reactivex.Single;
-
 import java.io.IOException;
 
 import ch.redacted.REDApplication;
 import ch.redacted.app.BuildConfig;
 import ch.redacted.data.model.Announcement;
 import ch.redacted.data.model.Artist;
+import ch.redacted.data.model.Collage;
+import ch.redacted.data.model.CollageSearch;
 import ch.redacted.data.model.Conversation;
+import ch.redacted.data.model.Conversations;
 import ch.redacted.data.model.ForumCategory;
 import ch.redacted.data.model.ForumThread;
 import ch.redacted.data.model.ForumView;
-import ch.redacted.data.model.Conversations;
 import ch.redacted.data.model.Index;
 import ch.redacted.data.model.Profile;
 import ch.redacted.data.model.Recents;
 import ch.redacted.data.model.RequestSearch;
 import ch.redacted.data.model.Subscription;
-import ch.redacted.data.model.TorrentBookmark;
-import ch.redacted.data.model.TorrentGroup;
 import ch.redacted.data.model.Top10;
+import ch.redacted.data.model.TorrentBookmark;
+import ch.redacted.data.model.TorrentComments;
+import ch.redacted.data.model.TorrentGroup;
 import ch.redacted.data.model.TorrentSearch;
 import ch.redacted.data.model.UserSearch;
+import ch.redacted.data.remote.interceptors.AddApiKeyInterceptor;
 import ch.redacted.data.remote.interceptors.AddCookiesInterceptor;
 import ch.redacted.data.remote.interceptors.ReceivedCookiesInterceptor;
+import io.reactivex.Single;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -101,6 +102,9 @@ public interface ApiService {
     @GET("ajax.php?action=requests")
     Single<RequestSearch> requestSearch(@Query("search") String search);
 
+    @GET("ajax.php?action=collages")
+    Single<CollageSearch> collageSearch(@Query("search") String search);
+
     @GET("ajax.php?action=artist")
     Single<Artist> artist(@Query("artistname") String name, @Query("artistrelease") boolean artistReleasesOnly);
 
@@ -122,6 +126,9 @@ public interface ApiService {
 
     @GET("ajax.php?action=request")
     Single<ch.redacted.data.model.Request> request(@Query("id") int id);
+
+    @GET("ajax.php?action=collage")
+    Single<Collage> collage(@Query("id") int id);
 
     @GET("torrents.php?action=download")
     Single<retrofit2.Response<ResponseBody>> file(@Query("id") int id, @Query("authkey") String auth, @Query("torrent_pass") String pass);

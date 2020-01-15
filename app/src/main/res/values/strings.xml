@@ -29,7 +29,6 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="avatar">Avatar</string>
-    <string name="album_art">Album Art</string>
     <string name="header_image">Header Image</string>
     <string name="search">Search</string>
     <string name="search_terms">Search Terms</string>
@@ -243,4 +242,13 @@
     <string name="hide_comments">Hide comments</string>
     <string name="comments">comments</string>
     <string name="apiKey">API Key</string>
+    <string name="collage_search">Collage Search Term</string>
+    <string name="collage_torrent_list">Torrent List</string>
+    <string name="collage_description">Description</string>
+    <string name="collage_covers">Covers</string>
+    <string name="album_art">Album Art</string>
+    <string name="various_artists">Various Artists</string>
+    <string name="the_what_cd">The What CD</string>
+    <string name="_2008_original_release_web_v0_vbr">[2008] - [Original Release/WEB/V0 (VBR)]</string>
+    <string name="alternative_vanity_house_dubstep">alternative, vanity.house, dubstep</string>
 </resources>
