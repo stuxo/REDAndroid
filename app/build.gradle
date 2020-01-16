@@ -9,9 +9,9 @@ android {
         minSdkVersion 16
         targetSdkVersion 29
         testInstrumentationRunner "${applicationId}.runner.RxAndroidJUnitRunner"
-        versionCode 1400
+        versionCode 1500
         // Major -> Millions, Minor -> Thousands, Bugfix -> Hundreds. E.g 1.3.72 == 1,003,072
-        versionName '1.4.0'
+        versionName '1.5.0'
         vectorDrawables.useSupportLibrary = true
         javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
     }
