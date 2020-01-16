@@ -119,7 +119,8 @@ public class ProfilePresenter extends BasePresenter<ProfileMvpView> {
 
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
 
-        if(profile.response.stats.lastAccess.equals("")) getMvpView().showLastSeenParanoid(); else
+
+        if(profile.response.stats.lastAccess == null || profile.response.stats.lastAccess.equals("")) getMvpView().showLastSeenParanoid(); else
             try {
                 getMvpView().showLastSeen(format.parse(profile.response.stats.lastAccess));
             } catch (ParseException e) {
