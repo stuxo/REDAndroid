@@ -99,6 +99,6 @@ public class ArtistSearchActivity extends BaseDrawerActivity implements ArtistSe
 
     @Override
     public void showError() {
-        Snackbar.make(getCurrentFocus(), getString(R.string.error_empty_search), BaseTransientBottomBar.LENGTH_LONG);
+        Snackbar.make(findViewById(android.R.id.content).getRootView(), getString(R.string.error_empty_search), BaseTransientBottomBar.LENGTH_LONG);
     }
 }

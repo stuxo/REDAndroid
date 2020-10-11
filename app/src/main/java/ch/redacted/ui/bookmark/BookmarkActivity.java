@@ -121,6 +121,6 @@ public class BookmarkActivity extends BaseDrawerActivity implements BookmarkMvpV
 
 	@Override
 	public void onDownloadClicked(int id) {
-		Snackbar.make(getCurrentFocus(), "Not implemented yet", Snackbar.LENGTH_LONG).show();
+		Snackbar.make(findViewById(android.R.id.content).getRootView(), "Not implemented yet", Snackbar.LENGTH_LONG).show();
 	}
 }
