@@ -100,7 +100,7 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
 	}
 
 	@Override public void showCookieExpired() {
-		Snackbar.make(getCurrentFocus(), getString(R.string.error_cookie_expired),
+		Snackbar.make(findViewById(android.R.id.content).getRootView(), getString(R.string.error_cookie_expired),
 			Snackbar.LENGTH_LONG).show();
 	}
 
@@ -122,7 +122,7 @@ public class LoginActivity extends BaseActivity implements LoginMvpView {
 	}
 
 	@Override public void showError(String message) {
-		Snackbar.make(getCurrentFocus(), message,
+		Snackbar.make(findViewById(android.R.id.content).getRootView(), message,
 				Snackbar.LENGTH_LONG).show();
 	}
 }

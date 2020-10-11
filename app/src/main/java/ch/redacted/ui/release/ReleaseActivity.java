@@ -175,7 +175,7 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
 
     @Override
     public void showError(String message) {
-        Snackbar.make(getCurrentFocus(), message, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(findViewById(android.R.id.content).getRootView(), message, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -213,7 +213,7 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
 
     @Override
     public void showSendToServerComplete() {
-        Snackbar.make(getCurrentFocus(), "Sent to Server successfully", Snackbar.LENGTH_LONG).show();
+        Snackbar.make(findViewById(android.R.id.content).getRootView(), "Sent to Server successfully", Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -298,7 +298,7 @@ public class ReleaseActivity extends BaseActivity implements ReleaseMvpView, Tor
     }
 
     @Override public void showMessage(String message) {
-        Snackbar.make(getCurrentFocus(), message, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(findViewById(android.R.id.content).getRootView(), message, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
